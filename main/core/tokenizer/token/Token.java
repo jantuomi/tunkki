@@ -148,6 +148,10 @@ public class Token {
 
     @Override
     public String toString() {
+        return String.format(String.format("%s %s", getTokenType(), getText()));
+    }
+
+    public String toFormattedString() {
         String textRepr = text;
         return String.format("%-40s %s", getTokenType(), textRepr);
     }

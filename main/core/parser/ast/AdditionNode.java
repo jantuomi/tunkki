@@ -29,6 +29,8 @@ public class AdditionNode extends ExpressionNode {
 
     @Override
     public DataContainer evaluate() {
-        return null;
+        DataContainer lhs = this.lhs.evaluate();
+        DataContainer rhs = this.rhs.evaluate();
+        return lhs.add(rhs);
     }
 }

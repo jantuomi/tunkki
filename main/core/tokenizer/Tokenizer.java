@@ -20,7 +20,8 @@ public class Tokenizer {
     private List<Token> tokens = new ArrayList<>();
 
     private static SortedMap<Token.Type, String> tokenRegexes = new TreeMap<>();
-    private static final List<Token.Type>illegalTokenTypes = new ArrayList<>();
+    private static final List<Token.Type> discardedTokenTypes = new ArrayList<>();
+    private static final List<Token.Type> erroneousTokenTypes = new ArrayList<>();
 
     private static final Tokenizer instance = new Tokenizer();
 
@@ -51,7 +52,9 @@ public class Tokenizer {
         tokenRegexes.put(Token.Type.IntegerLiteralToken, "^(\\d+)");
         tokenRegexes.put(Token.Type.SymbolToken, "^([a-zA-Z]+\\w*)");
 
-        illegalTokenTypes.add(Token.Type.NotAToken);
+        discardedTokenTypes.add(Token.Type.WhitespaceToken);
+
+        erroneousTokenTypes.add(Token.Type.NotAToken);
     }
 
     public List<Token> tokenize(String string) {
@@ -71,10 +74,12 @@ public class Tokenizer {
                 line++;
             }
 
-            if (!illegalTokenTypes.contains(token.getTokenType())) {
+            if (!discardedTokenTypes.contains(token.getTokenType())) {
                 tokens.add(token);
-            } else {
-                ExceptionManager.raise(InterpreterException.Exception.IllegalTokenException, line, Arrays.asList(token.getText()));
+            }
+
+            if (erroneousTokenTypes.contains(token.getTokenType())) {
+                ExceptionManager.raise(InterpreterException.Exception.IllegalTokenError, line, Arrays.asList(token.getText()));
             }
 
             String tokenRawText = token.getRawText();

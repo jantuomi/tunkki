@@ -2,9 +2,12 @@ package com.jantuomi.interpreter.main.core.parser;
 
 import com.jantuomi.interpreter.main.core.parser.ast.*;
 import com.jantuomi.interpreter.main.core.tokenizer.token.Token;
+import com.jantuomi.interpreter.main.exception.ExceptionManager;
+import com.jantuomi.interpreter.main.exception.InterpreterException;
 import com.jantuomi.interpreter.main.utils.Counter;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -24,6 +27,18 @@ public class Parser {
 
     }
 
+    private Token getTokenAt(Counter c) {
+        if (c.getValue() >= tokens.size()) {
+            return new Token(Token.Type.NotAToken);
+        }
+
+        return tokens.get(c.getValue());
+    }
+
+    private boolean isTooDeep(Counter c) {
+        return c.getRecursionDepth() > tokens.size();
+    }
+
     public List<ASTNode> parse(List<Token> tokens) {
         this.tokens = tokens;
         this.statementSequence = new ArrayList<>();
@@ -40,6 +55,11 @@ public class Parser {
                 statementSequence.add(adn);
                 continue;
             }
+
+            Token failed = tokens.get(c.getValue());
+            ExceptionManager.raise(InterpreterException.Exception.SyntaxError, failed.getLine(),
+                    Arrays.asList(failed.toString()));
+            break;
         }
 
         return statementSequence;
@@ -47,8 +67,13 @@ public class Parser {
 
     public AssignmentNode expectAssignmentRoutine(Counter c) {
         Counter d = c.clone();
+        d.deeper();
 
-        SymbolNode lhs = expectLHS(d);
+        if (isTooDeep(d)) {
+            return null;
+        }
+
+        SymbolNode lhs = expectAssignmentLHS(d);
         if (lhs == null) {
             return null;
         }
@@ -56,58 +81,26 @@ public class Parser {
         if (!isAssign) {
             return null;
         }
-        ExpressionNode rhs = expectRHS(d);
+        ExpressionNode rhs = expectAssignmentRHS(d);
         if (rhs == null) {
             return null;
         }
 
         AssignmentNode an = new AssignmentNode(lhs, rhs);
-        c.setValue(d.getValue());
+        d.shallower();
+        c.assign(d);
         return an;
-    }
-
-    public SymbolNode expectLHS(Counter c) {
-        SymbolNode sn = parseSymbolAndAdvance(c);
-        if (sn != null) {
-            return sn;
-        }
-        return null;
-    }
-
-    public ExpressionNode expectRHS(Counter c) {
-        ExpressionNode en = expectExpression(c);
-        if (en != null) {
-            return en;
-        }
-        return null;
-    }
-
-    private ExpressionNode expectExpression(Counter c) {
-        Counter d = c.clone();
-
-        AdditionNode an = expectAdditionRoutine(d);
-        if (an != null) {
-            c.setValue(d.getValue());
-            return an;
-        }
-        IntegerLiteralNode in = parseIntegerLiteralAndAdvance(d);
-        if (in != null) {
-            c.setValue(d.getValue());
-            return in;
-        }
-        SymbolNode sn = parseSymbolAndAdvance(d);
-        if (sn != null) {
-            c.setValue(d.getValue());
-            return sn;
-        }
-
-        return null;
     }
 
     private AdditionNode expectAdditionRoutine(Counter c) {
         Counter d = c.clone();
+        d.deeper();
 
-        ExpressionNode lhs = expectLHS(d);
+        if (isTooDeep(d)) {
+            return null;
+        }
+
+        ExpressionNode lhs = expectExpression(d);
         if (lhs == null) {
             return null;
         }
@@ -115,18 +108,108 @@ public class Parser {
         if (!isAddition) {
             return null;
         }
-        ExpressionNode rhs = expectRHS(d);
+        ExpressionNode rhs = expectExpression(d);
         if (rhs == null) {
             return null;
         }
 
         AdditionNode an = new AdditionNode(lhs, rhs);
-        c.setValue(d.getValue());
+        d.shallower();
+        c.assign(d);
         return an;
     }
 
+//    private ExpressionNode expectAdditionLHS(Counter c) {
+//        Counter d = c.clone();
+//        d.deeper();
+//
+//        if (isTooDeep(d)) {
+//            return null;
+//        }
+//
+//        IntegerLiteralNode in = parseIntegerLiteralAndAdvance(d);
+//        if (in != null) {
+//            d.shallower();
+//            c.assign(d);
+//            return in;
+//        }
+//        SymbolNode sn = parseSymbolAndAdvance(d);
+//        if (sn != null) {
+//            d.shallower();
+//            c.assign(d);
+//            return sn;
+//        }
+//
+//        return null;
+//    }
+
+
+    public SymbolNode expectAssignmentLHS(Counter c) {
+        Counter d = c.clone();
+        d.deeper();
+
+        if (isTooDeep(d)) {
+            return null;
+        }
+
+        SymbolNode sn = parseSymbolAndAdvance(d);
+        if (sn != null) {
+            d.shallower();
+            c.assign(d);
+            return sn;
+        }
+        return null;
+    }
+
+    public ExpressionNode expectAssignmentRHS(Counter c) {
+        Counter d = c.clone();
+        d.deeper();
+
+        if (isTooDeep(d)) {
+            return null;
+        }
+
+        ExpressionNode en = expectExpression(c);
+        if (en != null) {
+            d.shallower();
+            c.assign(d);
+            return en;
+        }
+        return null;
+    }
+
+    private ExpressionNode expectExpression(Counter c) {
+        Counter d = c.clone();
+        d.deeper();
+
+        if (isTooDeep(d)) {
+            return null;
+        }
+
+        AdditionNode an = expectAdditionRoutine(d);
+        if (an != null) {
+            d.shallower();
+            c.assign(d);
+            return an;
+        }
+        IntegerLiteralNode in = parseIntegerLiteralAndAdvance(d);
+        if (in != null) {
+            d.shallower();
+            c.assign(d);
+            return in;
+        }
+        SymbolNode sn = parseSymbolAndAdvance(d);
+        if (sn != null) {
+            d.shallower();
+            c.assign(d);
+            return sn;
+        }
+
+        return null;
+    }
+
     private boolean expectAdditionAndAdvance(Counter c) {
-        if (tokens.get(c.getValue()).is(Token.Type.AdditionToken)) {
+        if (getTokenAt(c).is(Token.Type.AdditionToken)) {
             c.advance();
             return true;
         } else {
@@ -135,8 +218,8 @@ public class Parser {
     }
 
     private IntegerLiteralNode parseIntegerLiteralAndAdvance(Counter c) {
-        if (tokens.get(c.getValue()).is(Token.Type.IntegerLiteralToken)) {
-            IntegerLiteralNode in = new IntegerLiteralNode(tokens.get(c.getValue()));
+        if (getTokenAt(c).is(Token.Type.IntegerLiteralToken)) {
+            IntegerLiteralNode in = new IntegerLiteralNode(getTokenAt(c));
             c.advance();
             return in;
         } else {
@@ -145,7 +228,7 @@ public class Parser {
     }
 
     public boolean expectAssignmentAndAdvance(Counter c) {
-        if (tokens.get(c.getValue()).is(Token.Type.AssignmentToken)) {
+        if (getTokenAt(c).is(Token.Type.AssignmentToken)) {
             c.advance();
             return true;
         } else {
@@ -154,8 +237,8 @@ public class Parser {
     }
 
     public SymbolNode parseSymbolAndAdvance(Counter c) {
-        if (tokens.get(c.getValue()).is(Token.Type.SymbolToken)) {
-            SymbolNode sn = new SymbolNode(tokens.get(c.getValue()));
+        if (getTokenAt(c).is(Token.Type.SymbolToken)) {
+            SymbolNode sn = new SymbolNode(getTokenAt(c));
             c.advance();
             return sn;
         } else {

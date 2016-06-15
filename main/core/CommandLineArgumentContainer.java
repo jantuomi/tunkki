@@ -18,13 +18,21 @@ public class CommandLineArgumentContainer {
     private static final CommandLineArgumentContainer instance = new CommandLineArgumentContainer();
     private File srcFile;
 
+
     @Option(name="-f", usage="Execute script in file FILE.")
     public void setFile(File file) {
         this.srcFile = file;
     }
 
+    @Option(name="-i", usage="Run in interactive mode.")
+    public boolean interactiveModeActive = false;
+
     public static CommandLineArgumentContainer getInstance() {
         return instance;
+    }
+
+    public boolean isInteractive() {
+        return interactiveModeActive;
     }
 
     public String getSourceFileContents() {

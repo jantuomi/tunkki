@@ -2,9 +2,14 @@ package com.jantuomi.interpreter.main;
 
 import com.jantuomi.interpreter.main.core.CommandLineArgumentContainer;
 import com.jantuomi.interpreter.main.core.parser.Parser;
+import com.jantuomi.interpreter.main.core.parser.ast.ASTNode;
+import com.jantuomi.interpreter.main.core.runtime.Interpreter;
 import com.jantuomi.interpreter.main.core.tokenizer.Tokenizer;
 import org.kohsuke.args4j.CmdLineException;
 import org.kohsuke.args4j.CmdLineParser;
+
+import java.util.List;
+import java.util.Scanner;
 
 public class Main {
 
@@ -14,10 +19,31 @@ public class Main {
             throw new Exception("Argument files could not be parsed successfully.");
         }
 
-        String sourceFileContents = CommandLineArgumentContainer.getInstance().getSourceFileContents();
+        if (CommandLineArgumentContainer.getInstance().isInteractive()) {
+            repl();
+        } else {
+            String sourceFileContents = CommandLineArgumentContainer.getInstance().getSourceFileContents();
+            run(sourceFileContents);
+        }
+    }
+
+    public static void repl() {
+        Scanner scanner = new Scanner(System.in);
+        String input;
+        while (true) {
+            System.out.print(">> ");
+            input = scanner.nextLine();
+
+            run(input);
+        }
+    }
+
+    public static void run(String input) {
         Tokenizer tokenizer = Tokenizer.getInstance();
-        tokenizer.tokenize(sourceFileContents);
-        Parser.getInstance().parse(tokenizer.getTokens());
+        tokenizer.tokenize(input);
+        List<ASTNode> nodes = Parser.getInstance().parse(tokenizer.getTokens());
+        String output = Interpreter.execute(nodes);
+        System.out.println(output);
     }
 
     public static boolean parseArguments(String[] args) {

@@ -14,4 +14,9 @@ abstract public class DataContainer<T> {
     }
 
     private T data;
+
+    @Override
+    abstract public String toString();
+
+    public abstract DataContainer add(DataContainer rhs);
 }

@@ -21,4 +21,10 @@ public class MainTest {
         String[] fileTestArgument = {"-f", "test.file"};
         assertTrue(Main.parseArguments(fileTestArgument));
     }
+
+    @Test
+    public void testWholeProcedure() {
+        String input = "x <- 1 + 2";
+        Main.run(input);
+    }
 }

@@ -1,6 +1,7 @@
 package com.jantuomi.interpreter.main.core.parser.ast;
 
 import com.jantuomi.interpreter.main.core.parser.datatype.DataContainer;
+import com.jantuomi.interpreter.main.core.parser.datatype.IntegerDataContainer;
 import com.jantuomi.interpreter.main.core.tokenizer.token.Token;
 
 import java.util.Arrays;
@@ -25,6 +26,6 @@ public class IntegerLiteralNode extends ExpressionNode {
 
     @Override
     public DataContainer evaluate() {
-        return null;
+        return new IntegerDataContainer(data);
     }
 }
