@@ -6,31 +6,31 @@ import com.jantuomi.interpreter.main.core.tokenizer.token.Token;
 import java.util.Arrays;
 import java.util.List;
 
-
 /**
- * Created by jan on 13.6.2016.
+ * Created by jan on 16.6.2016.
  */
-public class AdditionNode extends ExpressionNode {
+public class AdditionNode extends ASTNode {
 
-    private ExpressionNode lhs;
-    private ExpressionNode rhs;
+    private ASTNode lhs;
+    private ASTNode rhs;
 
-    public AdditionNode(ExpressionNode lhs, ExpressionNode rhs) {
-        super(new Token(Token.Type.AdditionToken));
-
+    public AdditionNode(Token token, ASTNode lhs, ASTNode rhs) {
+        super(token);
         this.lhs = lhs;
         this.rhs = rhs;
     }
 
     @Override
-    public List<ASTNode> getChildren() {
-        return Arrays.asList(lhs, rhs);
-    }
-
-    @Override
     public DataContainer evaluate() {
-        DataContainer lhs = this.lhs.evaluate();
-        DataContainer rhs = this.rhs.evaluate();
-        return lhs.add(rhs);
+        DataContainer operand1 = lhs.evaluate();
+        DataContainer operand2 = rhs.evaluate();
+
+        DataContainer result = operand1.add(operand2);
+        return result;
+
+    }
+    @Override
+    List<ASTNode> getChildren() {
+        return Arrays.asList(lhs, rhs);
     }
 }

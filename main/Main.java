@@ -1,13 +1,17 @@
 package com.jantuomi.interpreter.main;
 
 import com.jantuomi.interpreter.main.core.CommandLineArgumentContainer;
+import com.jantuomi.interpreter.main.core.parser.ASTGenerator;
 import com.jantuomi.interpreter.main.core.parser.Parser;
 import com.jantuomi.interpreter.main.core.parser.ast.ASTNode;
 import com.jantuomi.interpreter.main.core.runtime.Interpreter;
 import com.jantuomi.interpreter.main.core.tokenizer.Tokenizer;
+import com.jantuomi.interpreter.main.core.tokenizer.token.Token;
+import com.jantuomi.interpreter.main.exception.InterpreterException;
 import org.kohsuke.args4j.CmdLineException;
 import org.kohsuke.args4j.CmdLineParser;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
@@ -34,14 +38,22 @@ public class Main {
             System.out.print(">> ");
             input = scanner.nextLine();
 
-            run(input);
+            try {
+                run(input);
+            } catch (InterpreterException e) {
+                e.printStackTrace();
+            }
         }
     }
 
-    public static void run(String input) {
+    public static void run(String input) throws InterpreterException {
         Tokenizer tokenizer = Tokenizer.getInstance();
-        tokenizer.tokenize(input);
-        List<ASTNode> nodes = Parser.getInstance().parse(tokenizer.getTokens());
+        List<Token> sequence = tokenizer.tokenize(input);
+
+        Collections.reverse(sequence);
+
+        List<Token> trees = Parser.getInstance().parse(sequence);
+        List<ASTNode> nodes = ASTGenerator.getInstance().generate(trees);
         String output = Interpreter.execute(nodes);
         System.out.println(output);
     }

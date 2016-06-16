@@ -2,36 +2,45 @@ package com.jantuomi.interpreter.main.exception;
 
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
  * Created by jan on 12.6.2016.
  */
-public class InterpreterException {
+public class InterpreterException extends Exception {
 
-    public enum Exception {
+    public enum ExceptionType {
         IllegalTokenError,
         UnknownOperatorError,
         SyntaxError,
         TypeError
     }
 
-    public static Map<Exception, String> errorTexts = new HashMap<>();
+    public static Map<ExceptionType, String> errorTexts = new HashMap<>();
 
     static {
-        errorTexts.put(Exception.IllegalTokenError, "Illegal token %s found.");
-        errorTexts.put(Exception.UnknownOperatorError, "Unexpected operator %s found.");
-        errorTexts.put(Exception.SyntaxError, "Unexpected %s.");
-        errorTexts.put(Exception.TypeError, "Incompatible types %s and %s.");
+        errorTexts.put(ExceptionType.IllegalTokenError, "Illegal token %s found.");
+        errorTexts.put(ExceptionType.UnknownOperatorError, "Unexpected operator %s found.");
+        errorTexts.put(ExceptionType.SyntaxError, "Unexpected %s.");
+        errorTexts.put(ExceptionType.TypeError, "Incompatible types %s and %s.");
     }
 
-    private Exception exception;
+    private ExceptionType exceptionType;
 
-    public InterpreterException(Exception e) {
-        exception = e;
+    public InterpreterException(ExceptionType exceptionType, int line, List<String> args) {
+        super(formatMessage(exceptionType.toString() + what(exceptionType), line, args));
+        this.exceptionType = exceptionType;
     }
 
-    public String what() {
-        return errorTexts.get(exception);
+    private static String formatMessage(String message, int line, List<String> args) {
+        for (String arg : args) {
+            message = String.format(message, arg);
+        }
+        return String.format("line %d: ", line) + message;
+    }
+
+    public static String what(ExceptionType type) {
+        return errorTexts.get(type);
     }
 }

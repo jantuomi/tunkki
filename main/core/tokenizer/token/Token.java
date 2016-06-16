@@ -1,8 +1,12 @@
 package com.jantuomi.interpreter.main.core.tokenizer.token;
 
+import com.jantuomi.interpreter.main.core.parser.ast.ASTNode;
+import com.jantuomi.interpreter.main.core.tokenizer.token.types.AdditionToken;
+import com.jantuomi.interpreter.main.core.tokenizer.token.types.IntegerLiteralToken;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
+import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -10,7 +14,19 @@ import java.util.regex.Pattern;
 /**
  * Created by jan on 10.6.2016.
  */
-public class Token {
+abstract public class Token {
+
+    public void print(int indent) {
+        for (int i = 0; i < indent; i++) {
+            System.out.print("\t");
+        }
+        System.out.println(toString());
+        for (Token child : getChildren()) {
+            child.print(indent + 1);
+        }
+    }
+
+    abstract public ASTNode generateNode();
 
     /* Token types, ordered by precedence */
     public enum Type {
@@ -39,6 +55,10 @@ public class Token {
         EndFunctionDefineToken,
         NotAToken
     }
+
+    abstract public Token setArguments(List<Token> args);
+
+    abstract public List<Token> getChildren();
 
     public boolean is(Type type) {
         return getTokenType() == type;
@@ -120,10 +140,43 @@ public class Token {
             String text = matcher.group(1);
             String rawText = matcher.group(0);
 
-            return new Token(type, text, rawText);
+            switch (type) {
+                case IntegerLiteralToken:
+                    return new IntegerLiteralToken(text);
+                case AdditionToken:
+                    return new AdditionToken();
+                default:
+                    return null;
+            }
         }
 
         return null;
+    }
+
+    public ArgumentInfo getArgumentInfo() {
+        switch (getTokenType()) {
+
+            case FunctionDefineToken:
+                ArgumentInfo ai = new ArgumentInfo();
+                ai.setVariable(true);
+                return ai;
+            case AdditionToken:
+            case SubtractionToken:
+            case DivisionToken:
+            case MultiplicationToken:
+            case AssignmentToken:
+            case LessThanToken:
+            case GreaterThanToken:
+            case LessOrEqualThanToken:
+            case GreaterOrEqualThanToken:
+            case EqualsToken:
+            case NotEqualsToken:
+                return new ArgumentInfo(2);
+            case DeclarationToken:
+                return new ArgumentInfo(1);
+            default:
+                return new ArgumentInfo(0);
+        }
     }
 
     @Override

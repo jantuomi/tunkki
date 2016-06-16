@@ -18,6 +18,10 @@ abstract public class ASTNode {
         this.source = token;
     }
 
+    public Token.Type tokenType() {
+        return source.getTokenType();
+    }
+
     abstract List<ASTNode> getChildren();
 
     public void print(int indent) {

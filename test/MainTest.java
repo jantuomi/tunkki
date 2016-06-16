@@ -1,6 +1,7 @@
 package com.jantuomi.interpreter.test;
 
 import com.jantuomi.interpreter.main.Main;
+import com.jantuomi.interpreter.main.exception.InterpreterException;
 import org.junit.Test;
 
 import static org.junit.Assert.assertFalse;
@@ -23,7 +24,7 @@ public class MainTest {
     }
 
     @Test
-    public void testWholeProcedure() {
+    public void testWholeProcedure() throws InterpreterException {
         String input = "x <- 1 + 2";
         Main.run(input);
     }

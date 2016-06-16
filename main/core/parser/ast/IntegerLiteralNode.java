@@ -8,24 +8,23 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Created by jan on 13.6.2016.
+ * Created by jan on 16.6.2016.
  */
-public class IntegerLiteralNode extends ExpressionNode {
-
-    private int data;
+public class IntegerLiteralNode extends ASTNode {
+    private IntegerDataContainer value;
 
     public IntegerLiteralNode(Token token) {
         super(token);
-        this.data = Integer.parseInt(token.getText());
+        value = new IntegerDataContainer(Integer.parseInt(token.getText()));
+    }
+
+    @Override
+    public DataContainer evaluate() {
+        return value;
     }
 
     @Override
     List<ASTNode> getChildren() {
         return Arrays.asList();
-    }
-
-    @Override
-    public DataContainer evaluate() {
-        return new IntegerDataContainer(data);
     }
 }

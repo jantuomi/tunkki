@@ -1,10 +1,18 @@
 package com.jantuomi.interpreter.main.core.parser.datatype;
 
-
 /**
  * Created by jan on 11.6.2016.
  */
 abstract public class DataContainer<T> {
+
+    public enum Type {
+        Integer
+    }
+
+    private Type type;
+
+    private T data;
+
     public T getData() {
         return data;
     }
@@ -13,10 +21,8 @@ abstract public class DataContainer<T> {
         this.data = data;
     }
 
-    private T data;
-
     @Override
     abstract public String toString();
 
-    public abstract DataContainer add(DataContainer rhs);
+    abstract public DataContainer<T> add(DataContainer<T> other);
 }

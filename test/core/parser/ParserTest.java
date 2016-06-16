@@ -1,8 +1,9 @@
 package com.jantuomi.interpreter.test.core.parser;
 
 import com.jantuomi.interpreter.main.core.parser.Parser;
-import com.jantuomi.interpreter.main.core.parser.ast.ASTNode;
 import com.jantuomi.interpreter.main.core.tokenizer.token.Token;
+import com.jantuomi.interpreter.main.core.tokenizer.token.types.AdditionToken;
+import com.jantuomi.interpreter.main.core.tokenizer.token.types.IntegerLiteralToken;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -14,21 +15,17 @@ import java.util.List;
 public class ParserTest {
 
     @Test
-    public void parseAssignment() throws Exception {
+    public void testParseAddition() throws Exception {
         List<Token> tokens = Arrays.asList(
-                new Token(Token.Type.SymbolToken, "x"),
-                new Token(Token.Type.AssignmentToken),
-                new Token(Token.Type.SymbolToken, "y"),
-                new Token(Token.Type.AdditionToken),
-                new Token(Token.Type.SymbolToken, "x"),
-                new Token(Token.Type.AdditionToken),
-                new Token(Token.Type.IntegerLiteralToken, "1")
+                new IntegerLiteralToken("1"),
+                new IntegerLiteralToken("2"),
+                new AdditionToken()
         );
 
         Parser parser = Parser.getInstance();
-        List<ASTNode> sequence = parser.parse(tokens);
-        for (ASTNode e : sequence) {
-            parser.printTree(e);
+        List<Token> sequence = parser.parse(tokens);
+        for (Token t : sequence) {
+            parser.printTree(t);
         }
     }
 }

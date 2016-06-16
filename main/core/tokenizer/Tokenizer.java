@@ -57,7 +57,7 @@ public class Tokenizer {
         erroneousTokenTypes.add(Token.Type.NotAToken);
     }
 
-    public List<Token> tokenize(String string) {
+    public List<Token> tokenize(String string) throws InterpreterException {
         sourceString = string;
         tokens.clear();
         int line = 1;
@@ -79,7 +79,7 @@ public class Tokenizer {
             }
 
             if (erroneousTokenTypes.contains(token.getTokenType())) {
-                ExceptionManager.raise(InterpreterException.Exception.IllegalTokenError, line, Arrays.asList(token.getText()));
+                ExceptionManager.raise(InterpreterException.ExceptionType.IllegalTokenError, line, Arrays.asList(token.getText()));
             }
 
             String tokenRawText = token.getRawText();
