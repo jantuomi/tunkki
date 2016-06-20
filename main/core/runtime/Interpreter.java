@@ -2,7 +2,9 @@ package com.jantuomi.interpreter.main.core.runtime;
 
 import com.jantuomi.interpreter.main.core.parser.ast.ASTNode;
 import com.jantuomi.interpreter.main.core.parser.datatype.DataContainer;
+import com.sun.deploy.util.StringUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,17 +21,17 @@ public class Interpreter {
 
     }
     public static String execute(List<ASTNode> sequence) {
-        StringBuilder output = new StringBuilder();
+        List<String> output = new ArrayList<>();
         for (ASTNode node : sequence) {
             DataContainer data = node.evaluate();
 
             if (data != null) {
                 String out = data.toString();
-                output.append(out);
+                output.add(out);
             } else {
                 break;
             }
         }
-        return output.toString();
+        return StringUtils.join(output, " ");
     }
 }

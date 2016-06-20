@@ -1,0 +1,8 @@
+/* kommentti juu jee */
+
+func my_func x y as
+    + x 1
+    - y x
+end
+
+my_func(1 2)

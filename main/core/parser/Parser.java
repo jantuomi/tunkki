@@ -3,9 +3,10 @@ package com.jantuomi.interpreter.main.core.parser;
 import com.jantuomi.interpreter.main.core.parser.ast.ASTNode;
 import com.jantuomi.interpreter.main.core.tokenizer.token.ArgumentInfo;
 import com.jantuomi.interpreter.main.core.tokenizer.token.Token;
+import com.jantuomi.interpreter.main.exception.ExceptionManager;
+import com.jantuomi.interpreter.main.exception.InterpreterException;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Stack;
 
@@ -28,11 +29,11 @@ public class Parser {
 
     private Stack<Token> stack;
 
-    public List<Token> parse(List<Token> tokens) {
+    public List<Token> parse(List<Token> tokens) throws InterpreterException {
         this.tokens = tokens;
         this.stack = new Stack<>();
 
-        List<Token> args = new ArrayList<>();
+        List<Token> args;
         List<Token> output = new ArrayList<>();
         for (Token t : tokens) {
             if (t.getTokenType() == Token.Type.NewlineToken) {
@@ -42,16 +43,48 @@ public class Parser {
                 continue;
             }
 
-            args.clear();
+            args = new ArrayList<>();
             ArgumentInfo argumentInfo = t.getArgumentInfo();
-            if (!argumentInfo.getVarargs()) {
-                for (int i = 0; i < argumentInfo.getCount(); i++) {
+
+            /*
+            This branch is executed if the token has a variable list of arguments
+             */
+            if (argumentInfo.getVarargs()) {
+                while (true) {
+                    if (stack.size() > 0) {
+                        Token arg = stack.pop();
+                        if (arg.getTokenType() != argumentInfo.getTerminator()) {
+                            args.add(arg);
+                        }
+                        else {
+                            args.add(arg);
+                            break;
+                        }
+                    }
+                }
+            }
+            /*
+            If the token has an optional argument type (it is only an argument if
+            it is of certain type)
+             */
+            else if (argumentInfo.getOptionalArgument() != null) {
+                if (stack.size() > 0 && stack.peek().getTokenType() == argumentInfo.getOptionalArgument()) {
                     args.add(stack.pop());
                 }
-            } else {
-                System.err.println("no vararg support yet");
             }
-            Collections.reverse(args);
+            /* Normal cases with a fixed list of arguments */
+            else {
+                for (int i = 0; i < argumentInfo.getCount(); i++) {
+                    if (stack.size() > 0) {
+                        args.add(stack.pop());
+                    } else {
+                        ExceptionManager.raise(InterpreterException.ExceptionType.ArgumentError, t.getLine(),
+                                t.toString(), Integer.toString(argumentInfo.getCount()));
+                        return null;
+                    }
+                }
+            }
+
             Token result = t.setArguments(args);
             stack.push(result);
         }
@@ -62,8 +95,14 @@ public class Parser {
     }
 
     public void printTree(Token e) {
-        System.out.println("### Tree begin ###");
+        System.out.println("### Token Tree begin ###");
         e.print(0);
-        System.out.println("### Tree end ###");
+        System.out.println("### Token Tree end ###");
+    }
+
+    public void printAllTrees(List<Token> trees) {
+        for (Token tree : trees) {
+            printTree(tree);
+        }
     }
 }

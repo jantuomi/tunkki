@@ -9,9 +9,8 @@ import java.util.List;
 /**
  * Created by jan on 16.6.2016.
  */
-public class AdditionNode extends BinaryOperatorNode {
-
-    public AdditionNode(Token token, ASTNode lhs, ASTNode rhs) {
+public class SubtractionNode extends BinaryOperatorNode {
+    public SubtractionNode(Token token, ASTNode lhs, ASTNode rhs) {
         super(token, lhs, rhs);
     }
 
@@ -20,7 +19,7 @@ public class AdditionNode extends BinaryOperatorNode {
         DataContainer operand1 = lhs.evaluate();
         DataContainer operand2 = rhs.evaluate();
 
-        DataContainer result = operand1.add(operand2);
+        DataContainer result = operand1.subtract(operand2);
         return result;
 
     }

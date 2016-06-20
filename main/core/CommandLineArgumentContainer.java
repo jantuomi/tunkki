@@ -27,12 +27,20 @@ public class CommandLineArgumentContainer {
     @Option(name="-i", usage="Run in interactive mode.")
     public boolean interactiveModeActive = false;
 
+
+    @Option(name="-d", usage="Display verbose debug output.")
+    public boolean debugModeActive = false;
+
     public static CommandLineArgumentContainer getInstance() {
         return instance;
     }
 
     public boolean isInteractive() {
         return interactiveModeActive;
+    }
+
+    public boolean isDebugModeActive() {
+        return debugModeActive;
     }
 
     public String getSourceFileContents() {

@@ -25,4 +25,5 @@ abstract public class DataContainer<T> {
     abstract public String toString();
 
     abstract public DataContainer<T> add(DataContainer<T> other);
+    public abstract DataContainer<T> subtract(DataContainer<T> other);
 }

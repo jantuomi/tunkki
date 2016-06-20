@@ -22,4 +22,11 @@ public class IntegerDataContainer extends DataContainer<Integer> {
                 this.value + ((IntegerDataContainer) other).value
         );
     }
+
+    @Override
+    public DataContainer<Integer> subtract(DataContainer<Integer> other) {
+        return new IntegerDataContainer(
+                this.value - ((IntegerDataContainer) other).value
+        );
+    }
 }

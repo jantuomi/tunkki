@@ -2,7 +2,6 @@ package com.jantuomi.interpreter.main.exception;
 
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -14,7 +13,8 @@ public class InterpreterException extends Exception {
         IllegalTokenError,
         UnknownOperatorError,
         SyntaxError,
-        TypeError
+        TypeError,
+        ArgumentError
     }
 
     public static Map<ExceptionType, String> errorTexts = new HashMap<>();
@@ -24,20 +24,20 @@ public class InterpreterException extends Exception {
         errorTexts.put(ExceptionType.UnknownOperatorError, "Unexpected operator %s found.");
         errorTexts.put(ExceptionType.SyntaxError, "Unexpected %s.");
         errorTexts.put(ExceptionType.TypeError, "Incompatible types %s and %s.");
+        errorTexts.put(ExceptionType.ArgumentError, "Function %s requires %s arguments.");
     }
 
     private ExceptionType exceptionType;
 
-    public InterpreterException(ExceptionType exceptionType, int line, List<String> args) {
-        super(formatMessage(exceptionType.toString() + what(exceptionType), line, args));
+    public InterpreterException(ExceptionType exceptionType, int line, String... args) {
+        super(formatMessage(exceptionType.toString() + ": " + what(exceptionType), line, args), null, false, false);
         this.exceptionType = exceptionType;
     }
 
-    private static String formatMessage(String message, int line, List<String> args) {
-        for (String arg : args) {
-            message = String.format(message, arg);
-        }
-        return String.format("line %d: ", line) + message;
+    private static String formatMessage(String message, int line, String... args) {
+
+        message = String.format(message, args);
+        return String.format("\nline %d: ", line) + message;
     }
 
     public static String what(ExceptionType type) {

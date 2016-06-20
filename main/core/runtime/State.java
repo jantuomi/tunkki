@@ -1,8 +1,10 @@
 package com.jantuomi.interpreter.main.core.runtime;
 
+import com.jantuomi.interpreter.main.core.parser.ast.ASTNode;
 import com.jantuomi.interpreter.main.core.parser.datatype.DataContainer;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -27,6 +29,11 @@ public class State {
         } else {
             return null;
         }
+    }
+
+    public DataContainer getSymbolValue(String symbol, List<ASTNode> parameters) {
+        // TODO
+        return null;
     }
 
     public void setSymbolValue(String symbol, DataContainer value) {

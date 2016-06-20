@@ -25,7 +25,7 @@ public class MainTest {
 
     @Test
     public void testWholeProcedure() throws InterpreterException {
-        String input = "x <- 1 + 2";
+        String input = "- + 2 5 1";
         Main.run(input);
     }
 }

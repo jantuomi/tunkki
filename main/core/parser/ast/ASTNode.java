@@ -31,7 +31,9 @@ abstract public class ASTNode {
 
         System.out.println(source.toString());
         for (ASTNode node : getChildren()) {
-            node.print(indent + 1);
+            if (node != null) {
+                node.print(indent + 1);
+            }
         }
     }
 }

@@ -27,4 +27,16 @@ public class ASTGenerator {
 
         return list;
     }
+
+    public void printTree(ASTNode root) {
+        System.out.println("### AST Tree begin ###");
+        root.print(0);
+        System.out.println("### AST Tree end ###");
+    }
+
+    public void printAllTrees(List<ASTNode> trees) {
+        for (ASTNode tree : trees) {
+            printTree(tree);
+        }
+    }
 }

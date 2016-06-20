@@ -5,7 +5,10 @@ import com.jantuomi.interpreter.main.core.tokenizer.token.Token;
 import com.jantuomi.interpreter.main.exception.ExceptionManager;
 import com.jantuomi.interpreter.main.exception.InterpreterException;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by jan on 10.6.2016.
@@ -19,7 +22,7 @@ public class Tokenizer {
 
     private List<Token> tokens = new ArrayList<>();
 
-    private static SortedMap<Token.Type, String> tokenRegexes = new TreeMap<>();
+    private static Map<Token.Type, String> tokenRegexes = new LinkedHashMap<>();
     private static final List<Token.Type> discardedTokenTypes = new ArrayList<>();
     private static final List<Token.Type> erroneousTokenTypes = new ArrayList<>();
 
@@ -47,12 +50,15 @@ public class Tokenizer {
         tokenRegexes.put(Token.Type.NotEqualsToken, "^(\\!\\=)");
         tokenRegexes.put(Token.Type.OpenParenToken, "^(\\()");
         tokenRegexes.put(Token.Type.ClosedParenToken, "^(\\))");
-        tokenRegexes.put(Token.Type.FunctionDefineToken, "^(func)");
-        tokenRegexes.put(Token.Type.DeclarationToken, "^(decl)");
+        tokenRegexes.put(Token.Type.FunctionDefineToken, "^(func)\\b");
+        tokenRegexes.put(Token.Type.FunctionBodyToken, "^(as)\\b");
+        tokenRegexes.put(Token.Type.EndFunctionDefineToken, "^(end)\\b");
+        tokenRegexes.put(Token.Type.DeclarationToken, "^(decl)\\b");
         tokenRegexes.put(Token.Type.IntegerLiteralToken, "^(\\d+)");
         tokenRegexes.put(Token.Type.SymbolToken, "^([a-zA-Z]+\\w*)");
 
         discardedTokenTypes.add(Token.Type.WhitespaceToken);
+        discardedTokenTypes.add(Token.Type.CommentToken);
 
         erroneousTokenTypes.add(Token.Type.NotAToken);
     }
@@ -79,7 +85,7 @@ public class Tokenizer {
             }
 
             if (erroneousTokenTypes.contains(token.getTokenType())) {
-                ExceptionManager.raise(InterpreterException.ExceptionType.IllegalTokenError, line, Arrays.asList(token.getText()));
+                ExceptionManager.raise(InterpreterException.ExceptionType.IllegalTokenError, line, token.getText());
             }
 
             String tokenRawText = token.getRawText();

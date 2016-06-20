@@ -53,9 +53,20 @@ public class Main {
         Collections.reverse(sequence);
 
         List<Token> trees = Parser.getInstance().parse(sequence);
+        if (CommandLineArgumentContainer.getInstance().isDebugModeActive()) {
+            Parser.getInstance().printAllTrees(trees);
+        }
+
         List<ASTNode> nodes = ASTGenerator.getInstance().generate(trees);
+        if (CommandLineArgumentContainer.getInstance().isDebugModeActive()) {
+            ASTGenerator.getInstance().printAllTrees(nodes);
+        }
+
         String output = Interpreter.execute(nodes);
-        System.out.println(output);
+
+        if (output.trim().length() > 0) {
+            System.out.println(output);
+        }
     }
 
     public static boolean parseArguments(String[] args) {
