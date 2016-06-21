@@ -15,6 +15,12 @@ sum(x y)
 decl var
 set var true
 
-if not var then
-    "var on tosi!"
+if var then
+    out("var on tosi!")
 end
+
+if not var then
+    out("var on epatosi!")
+end
+
+"done"

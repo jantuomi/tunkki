@@ -15,6 +15,16 @@ public class Function {
 
     private BlockBodyNode body;
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    private String name;
+
     public Function(List<String> argumentNames, BlockBodyNode body) {
         this.argumentNames = argumentNames;
         this.body = body;

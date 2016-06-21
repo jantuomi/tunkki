@@ -38,6 +38,7 @@ public class FunctionDefineNode extends VarargOperatorNode {
             argumentNames.add(argSym.getName());
         }
         Function function = new Function(argumentNames, (BlockBodyNode) body);
+        function.setName(name);
         State.getInstance().addFunctionToScope(name, function);
 
         return new StringDataContainer("function " + name);

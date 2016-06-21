@@ -1,6 +1,7 @@
 package com.jantuomi.interpreter.main.core.runtime;
 
 import com.jantuomi.interpreter.main.core.parser.datatype.DataContainer;
+import com.jantuomi.interpreter.main.core.runtime.builtins.BuiltinManager;
 import com.jantuomi.interpreter.main.exception.InterpreterException;
 
 import java.util.Arrays;
@@ -21,7 +22,14 @@ public class State {
 
     private State() {
         /* Push global scope onto the stack */
-        scopes.push(new Scope());
+        Scope globalScope = new Scope();
+
+        for (Function builtin : BuiltinManager.getInstance().getBuiltins()) {
+            globalScope.addFunction(builtin.getName(), builtin);
+        }
+
+        scopes.push(globalScope);
+
     }
 
     private DataContainer resolveSymbol(String symbol) throws InterpreterException {
