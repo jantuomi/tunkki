@@ -58,6 +58,7 @@ abstract public class Token {
         EndBlockToken,
         FunctionBodyToken,
         BranchBodyToken,
+        NegationToken,
         NotAToken
     }
 
@@ -185,6 +186,8 @@ abstract public class Token {
                     return new ClosedParenToken();
                 case BranchToken:
                     return new BranchToken();
+                case NegationToken:
+                    return new NegationToken();
                 default:
                     ExceptionManager.raise(InterpreterException.ExceptionType.IllegalTokenError, line,
                             type.toString()
@@ -232,6 +235,7 @@ abstract public class Token {
             case BranchToken:
                 return new ArgumentInfo(2);
             case DeclarationToken:
+            case NegationToken:
                 return new ArgumentInfo(1);
             default:
                 return new ArgumentInfo(0);

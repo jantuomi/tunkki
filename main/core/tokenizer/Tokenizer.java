@@ -54,6 +54,7 @@ public class Tokenizer {
         tokenRegexes.put(Token.Type.FunctionBodyToken, "^(as)\\b");
         tokenRegexes.put(Token.Type.BranchBodyToken, "^(then)\\b");
         tokenRegexes.put(Token.Type.EndBlockToken, "^(end)\\b");
+        tokenRegexes.put(Token.Type.NegationToken, "^(not)\\b");
         tokenRegexes.put(Token.Type.DeclarationToken, "^(decl)\\b");
         tokenRegexes.put(Token.Type.BranchToken, "^(if)\\b");
         tokenRegexes.put(Token.Type.IntegerLiteralToken, "^(\\d+)");
