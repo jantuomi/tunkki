@@ -13,18 +13,14 @@ sum(x y)
 */
 
 decl user_input
-set user_input in("give input: ")
+set user_input in("give integer: ")
 out( concat("your input was: " user_input "!") )
 
-decl var
-set var true
+decl operand set operand 10
 
-if var then
-    out("var on tosi!")
-end
+decl sum
+set sum + as_int(user_input) operand
 
-if not var then
-    out("var on epatosi!")
-end
+out( concat(user_input " + " operand " = " sum) )
 
 "done"
