@@ -155,6 +155,8 @@ abstract public class Token {
 
                 case IntegerLiteralToken:
                     return new IntegerLiteralToken(text);
+                case StringLiteralToken:
+                    return new StringLiteralToken(text, rawText);
                 case AdditionToken:
                     return new AdditionToken();
                 case SubtractionToken:
