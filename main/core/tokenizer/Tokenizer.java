@@ -52,9 +52,12 @@ public class Tokenizer {
         tokenRegexes.put(Token.Type.ClosedParenToken, "^(\\))");
         tokenRegexes.put(Token.Type.FunctionDefineToken, "^(func)\\b");
         tokenRegexes.put(Token.Type.FunctionBodyToken, "^(as)\\b");
+        tokenRegexes.put(Token.Type.BranchBodyToken, "^(then)\\b");
         tokenRegexes.put(Token.Type.EndBlockToken, "^(end)\\b");
         tokenRegexes.put(Token.Type.DeclarationToken, "^(decl)\\b");
+        tokenRegexes.put(Token.Type.BranchToken, "^(if)\\b");
         tokenRegexes.put(Token.Type.IntegerLiteralToken, "^(\\d+)");
+        tokenRegexes.put(Token.Type.BooleanLiteralToken, "^(true|false)\\b");
         tokenRegexes.put(Token.Type.SymbolToken, "^([a-zA-Z]+\\w*)");
 
         discardedTokenTypes.add(Token.Type.WhitespaceToken);

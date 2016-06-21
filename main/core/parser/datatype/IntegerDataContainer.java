@@ -5,28 +5,26 @@ package com.jantuomi.interpreter.main.core.parser.datatype;
  */
 public class IntegerDataContainer extends DataContainer<Integer> {
 
-    private int value;
-
     public IntegerDataContainer(int value) {
-        this.value = value;
+        setData(value);
     }
 
     @Override
     public String toString() {
-        return Integer.toString(value);
+        return Integer.toString(getData());
     }
 
     @Override
     public DataContainer<Integer> add(DataContainer<Integer> other) {
         return new IntegerDataContainer(
-                this.value + ((IntegerDataContainer) other).value
+                this.getData() + other.getData()
         );
     }
 
     @Override
     public DataContainer<Integer> subtract(DataContainer<Integer> other) {
         return new IntegerDataContainer(
-                this.value - ((IntegerDataContainer) other).value
+                this.getData() - other.getData()
         );
     }
 }

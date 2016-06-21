@@ -1,6 +1,6 @@
 /* Test program */
 
-
+/*
 func sum x y as
     + x y
 end
@@ -10,3 +10,10 @@ set x 10
 set y 20
 
 sum(x y)
+*/
+
+decl var set var true
+
+if var then
+    "var on tosi!"
+end

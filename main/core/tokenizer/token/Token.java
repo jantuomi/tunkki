@@ -50,6 +50,7 @@ abstract public class Token {
         DeclarationToken,
         StringLiteralToken,
         IntegerLiteralToken,
+        BooleanLiteralToken,
         WhitespaceToken,
         NewlineToken,
         BranchToken,
@@ -158,6 +159,8 @@ abstract public class Token {
                     return new IntegerLiteralToken(text);
                 case StringLiteralToken:
                     return new StringLiteralToken(text, rawText);
+                case BooleanLiteralToken:
+                    return new BooleanLiteralToken(text);
                 case AdditionToken:
                     return new AdditionToken();
                 case SubtractionToken:

@@ -8,15 +8,14 @@ import com.jantuomi.interpreter.main.exception.InterpreterException;
  */
 public class BooleanDataContainer extends DataContainer<Boolean> {
 
-    private boolean value;
 
     public BooleanDataContainer(boolean value) {
-        this.value = value;
+        setData(value);
     }
 
     @Override
     public String toString() {
-        return Boolean.toString(value);
+        return Boolean.toString(getData());
     }
 
     @Override
