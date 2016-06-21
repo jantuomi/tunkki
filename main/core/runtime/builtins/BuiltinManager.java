@@ -20,6 +20,7 @@ public class BuiltinManager {
     private BuiltinManager() {
         builtins.add(new OutBuiltinFunction());
         builtins.add(new InBuiltinFunction());
+        builtins.add(new ConcatBuiltinFunction());
     }
 
     public List<Function> getBuiltins() {
