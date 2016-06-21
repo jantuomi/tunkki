@@ -41,7 +41,7 @@ public class Tokenizer {
         tokenRegexes.put(Token.Type.SubtractionToken, "^(\\-)");
         tokenRegexes.put(Token.Type.DivisionToken, "^(\\/)");
         tokenRegexes.put(Token.Type.MultiplicationToken, "^(\\*)");
-        tokenRegexes.put(Token.Type.AssignmentToken, "^(\\<\\-)");
+        tokenRegexes.put(Token.Type.AssignmentToken, "^(set)\\b");
         tokenRegexes.put(Token.Type.LessThanToken, "^(\\<)");
         tokenRegexes.put(Token.Type.GreaterThanToken, "^(\\>)");
         tokenRegexes.put(Token.Type.LessOrEqualThanToken, "^(\\<\\=)");

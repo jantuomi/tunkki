@@ -2,6 +2,7 @@ package com.jantuomi.interpreter.main.core.tokenizer.token.types;
 
 import com.jantuomi.interpreter.main.core.parser.ast.ASTNode;
 import com.jantuomi.interpreter.main.core.parser.ast.AdditionNode;
+import com.jantuomi.interpreter.main.exception.InterpreterException;
 
 /**
  * Created by jan on 15.6.2016.
@@ -12,7 +13,7 @@ public class AdditionToken extends BinaryOperatorToken {
     }
 
     @Override
-    public ASTNode generateNode() {
+    public ASTNode generateNode() throws InterpreterException {
         return new AdditionNode(this,
                 lhs.generateNode(),
                 rhs.generateNode()

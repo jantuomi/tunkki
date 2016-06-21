@@ -3,6 +3,7 @@ package com.jantuomi.interpreter.main.core.tokenizer.token.types;
 import com.jantuomi.interpreter.main.core.parser.ast.ASTNode;
 import com.jantuomi.interpreter.main.core.parser.ast.ParameterListNode;
 import com.jantuomi.interpreter.main.core.tokenizer.token.Token;
+import com.jantuomi.interpreter.main.exception.InterpreterException;
 
 /**
  * Created by jan on 19.6.2016.
@@ -13,7 +14,7 @@ public class OpenParenToken extends VarargOperatorToken {
     }
 
     @Override
-    public ASTNode generateNode() {
+    public ASTNode generateNode() throws InterpreterException {
         ParameterListNode node = new ParameterListNode(this);
 
         for (Token token : args) {

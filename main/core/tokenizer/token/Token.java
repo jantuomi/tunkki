@@ -28,7 +28,7 @@ abstract public class Token {
         }
     }
 
-    abstract public ASTNode generateNode();
+    abstract public ASTNode generateNode() throws InterpreterException;
 
     /* Token types, ordered by precedence */
     public enum Type {
@@ -165,6 +165,10 @@ abstract public class Token {
                     return new EndFunctionDefineToken();
                 case FunctionBodyToken:
                     return new FunctionBodyToken();
+                case DeclarationToken:
+                    return new VariableDeclareToken();
+                case AssignmentToken:
+                    return new AssignmentToken();
                 case SymbolToken:
                     return new SymbolToken(text);
                 case OpenParenToken:

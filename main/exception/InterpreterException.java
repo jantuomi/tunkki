@@ -14,7 +14,8 @@ public class InterpreterException extends Exception {
         UnknownOperatorError,
         SyntaxError,
         TypeError,
-        ArgumentError
+        ArgumentError,
+        UndeclaredSymbolError
     }
 
     public static Map<ExceptionType, String> errorTexts = new HashMap<>();
@@ -25,6 +26,7 @@ public class InterpreterException extends Exception {
         errorTexts.put(ExceptionType.SyntaxError, "Unexpected %s.");
         errorTexts.put(ExceptionType.TypeError, "Incompatible types %s and %s.");
         errorTexts.put(ExceptionType.ArgumentError, "Function %s requires %s arguments.");
+        errorTexts.put(ExceptionType.UndeclaredSymbolError, "No symbol %s defined.");
     }
 
     private ExceptionType exceptionType;

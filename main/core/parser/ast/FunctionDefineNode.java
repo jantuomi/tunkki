@@ -1,7 +1,13 @@
 package com.jantuomi.interpreter.main.core.parser.ast;
 
 import com.jantuomi.interpreter.main.core.parser.datatype.DataContainer;
+import com.jantuomi.interpreter.main.core.parser.datatype.StringDataContainer;
+import com.jantuomi.interpreter.main.core.runtime.Function;
+import com.jantuomi.interpreter.main.core.runtime.State;
 import com.jantuomi.interpreter.main.core.tokenizer.token.Token;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by jan on 17.6.2016.
@@ -26,8 +32,15 @@ public class FunctionDefineNode extends VarargOperatorNode {
 
     @Override
     public DataContainer evaluate() {
-        // TODO add function in State
-        return null;
+        List<String> argumentNames = new ArrayList<>();
+        for (ASTNode arg : args) {
+            SymbolNode argSym = (SymbolNode) arg;
+            argumentNames.add(argSym.getName());
+        }
+        Function function = new Function(argumentNames, (FunctionBodyNode) body);
+        State.getInstance().addFunctionToScope(name, function);
+
+        return new StringDataContainer("function " + name);
     }
 
     @Override

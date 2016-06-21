@@ -3,6 +3,7 @@ package com.jantuomi.interpreter.main.core.tokenizer.token.types;
 import com.jantuomi.interpreter.main.core.parser.ast.ASTNode;
 import com.jantuomi.interpreter.main.core.parser.ast.FunctionBodyNode;
 import com.jantuomi.interpreter.main.core.parser.ast.FunctionDefineNode;
+import com.jantuomi.interpreter.main.exception.InterpreterException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +17,7 @@ public class FunctionDefineToken extends VarargOperatorToken {
     }
 
     @Override
-    public ASTNode generateNode() {
+    public ASTNode generateNode() throws InterpreterException {
         FunctionDefineNode node = new FunctionDefineNode(this);
         node.setName(args.get(0).getText());
 

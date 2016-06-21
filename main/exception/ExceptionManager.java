@@ -18,6 +18,4 @@ public class ExceptionManager {
         InterpreterException e = new InterpreterException(ex, line, args);
         throw e;
     }
-
-
 }

@@ -2,6 +2,7 @@ package com.jantuomi.interpreter.main.core.parser;
 
 import com.jantuomi.interpreter.main.core.parser.ast.ASTNode;
 import com.jantuomi.interpreter.main.core.tokenizer.token.Token;
+import com.jantuomi.interpreter.main.exception.InterpreterException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +19,7 @@ public class ASTGenerator {
         return instance;
     }
 
-    public List<ASTNode> generate(List<Token> trees) {
+    public List<ASTNode> generate(List<Token> trees) throws InterpreterException {
         List<ASTNode> list = new ArrayList<>();
 
         for (Token root : trees) {

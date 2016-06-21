@@ -1,11 +1,10 @@
 package com.jantuomi.interpreter.main.core.runtime;
 
-import com.jantuomi.interpreter.main.core.parser.ast.ASTNode;
 import com.jantuomi.interpreter.main.core.parser.datatype.DataContainer;
 
-import java.util.HashMap;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
+import java.util.Stack;
 
 /**
  * Created by jan on 11.6.2016.
@@ -17,26 +16,50 @@ public class State {
         return instance;
     }
 
-    private Map<String, DataContainer> variables = new HashMap<>();
+    private Stack<Scope> scopes = new Stack<>();
 
     private State() {
+        /* Push global scope onto the stack */
+        scopes.push(new Scope());
+    }
 
+    private DataContainer resolveSymbol(String symbol) {
+        return scopes.peek().resolveSymbol(symbol, Arrays.asList());
     }
 
     public DataContainer getSymbolValue(String symbol) {
-        if (variables.keySet().contains(symbol)) {
-            return variables.get(symbol);
+        DataContainer d = resolveSymbol(symbol);
+        return d;
+    }
+
+    public DataContainer getSymbolValue(String symbol, List<DataContainer> parameters) {
+        return scopes.peek().resolveSymbol(symbol, parameters);
+    }
+
+    public Scope createScope() {
+        Scope scope = new Scope();
+        if (scopes.size() > 0) {
+            scope.setParent(scopes.peek());
         } else {
-            return null;
+            scope.setParent(null);
         }
+        scopes.push(scope);
+        return scope;
     }
 
-    public DataContainer getSymbolValue(String symbol, List<ASTNode> parameters) {
-        // TODO
-        return null;
+    public void addSymbolToScope(String symbol) {
+        scopes.peek().addVariable(symbol);
     }
 
-    public void setSymbolValue(String symbol, DataContainer value) {
-        variables.put(symbol, value);
+    public void addFunctionToScope(String symbol, Function func) {
+        scopes.peek().addFunction(symbol, func);
+    }
+
+    public void setSymbolValueToScope(String symbol, DataContainer value) {
+        scopes.peek().setVariableValue(symbol, value);
+    }
+
+    public Scope popScope() {
+        return scopes.pop();
     }
 }

@@ -4,6 +4,7 @@ import com.jantuomi.interpreter.main.core.parser.ast.ASTNode;
 import com.jantuomi.interpreter.main.core.parser.ast.ParameterListNode;
 import com.jantuomi.interpreter.main.core.parser.ast.SymbolNode;
 import com.jantuomi.interpreter.main.core.tokenizer.token.Token;
+import com.jantuomi.interpreter.main.exception.InterpreterException;
 
 import java.util.Arrays;
 import java.util.List;
@@ -24,7 +25,7 @@ public class SymbolToken extends Token {
     }
 
     @Override
-    public ASTNode generateNode() {
+    public ASTNode generateNode() throws InterpreterException {
         SymbolNode node = new SymbolNode(this);
         node.setName(this.getText());
         if (callArgumentList != null) {

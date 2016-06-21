@@ -4,6 +4,7 @@ import com.jantuomi.interpreter.main.core.parser.datatype.DataContainer;
 import com.jantuomi.interpreter.main.core.runtime.State;
 import com.jantuomi.interpreter.main.core.tokenizer.token.Token;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -26,6 +27,10 @@ public class SymbolNode extends ASTNode {
         this.name = name;
     }
 
+    public String getName() {
+        return name;
+    }
+
     private String name;
 
     public SymbolNode(Token token) {
@@ -34,7 +39,13 @@ public class SymbolNode extends ASTNode {
 
     @Override
     public DataContainer evaluate() {
-        return State.getInstance().getSymbolValue(name, parameterListNode.getParameters());
+        List<DataContainer> paramValues = new ArrayList<>();
+        if (parameterListNode != null) {
+            for (ASTNode param : parameterListNode.getChildren()) {
+                paramValues.add(param.evaluate());
+            }
+        }
+        return State.getInstance().getSymbolValue(name, paramValues);
     }
 
     @Override
