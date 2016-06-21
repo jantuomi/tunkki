@@ -33,7 +33,7 @@ public class Tokenizer {
     }
 
     private Tokenizer() {
-        tokenRegexes.put(Token.Type.CommentToken, "^\\/\\*(.*)\\*\\/");
+        tokenRegexes.put(Token.Type.CommentToken, "^\\/\\*(.*?)\\*\\/");
         tokenRegexes.put(Token.Type.StringLiteralToken, "^\"(.*?)\"");
         tokenRegexes.put(Token.Type.WhitespaceToken, "^( |\t)");
         tokenRegexes.put(Token.Type.NewlineToken, "^(\n|\r\n)");

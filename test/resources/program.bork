@@ -1,26 +1,15 @@
-/* Test program */
-
-/*
-func sum x y as
-    + x y
-end
-
-decl x decl y
-set x 10
-set y 20
-
-sum(x y)
-*/
-
+/* get an integer from the user */
 decl user_input
 set user_input in("give integer: ")
 out( concat("your input was: " user_input "!") )
 
+/* add 10 to the integer */
 decl operand set operand 10
 
 decl sum
 set sum + as_int(user_input) operand
 
+/* print the sum */
 out( concat(user_input " + " operand " = " sum) )
 
 "done"
