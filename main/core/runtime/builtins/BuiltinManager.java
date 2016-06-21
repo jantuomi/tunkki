@@ -19,6 +19,7 @@ public class BuiltinManager {
 
     private BuiltinManager() {
         builtins.add(new OutBuiltinFunction());
+        builtins.add(new InBuiltinFunction());
     }
 
     public List<Function> getBuiltins() {

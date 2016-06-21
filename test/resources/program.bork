@@ -12,6 +12,10 @@ set y 20
 sum(x y)
 */
 
+decl user_input
+set user_input in("give input: ")
+out( + + "your input was " user_input "!" )
+
 decl var
 set var true
 
