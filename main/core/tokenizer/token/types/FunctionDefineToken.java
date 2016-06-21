@@ -1,7 +1,7 @@
 package com.jantuomi.interpreter.main.core.tokenizer.token.types;
 
 import com.jantuomi.interpreter.main.core.parser.ast.ASTNode;
-import com.jantuomi.interpreter.main.core.parser.ast.FunctionBodyNode;
+import com.jantuomi.interpreter.main.core.parser.ast.BlockBodyNode;
 import com.jantuomi.interpreter.main.core.parser.ast.FunctionDefineNode;
 import com.jantuomi.interpreter.main.exception.InterpreterException;
 
@@ -27,7 +27,7 @@ public class FunctionDefineToken extends VarargOperatorToken {
         }
         node.setArgs(funcArgs);
 
-        FunctionBodyNode bodyNode = (FunctionBodyNode) args.get(args.size() - 1).generateNode();
+        BlockBodyNode bodyNode = (BlockBodyNode) args.get(args.size() - 1).generateNode();
         node.setBody(bodyNode);
         return node;
     }

@@ -1,6 +1,7 @@
 package com.jantuomi.interpreter.main.core.runtime;
 
 import com.jantuomi.interpreter.main.core.parser.datatype.DataContainer;
+import com.jantuomi.interpreter.main.exception.InterpreterException;
 
 import java.util.HashMap;
 import java.util.List;
@@ -23,7 +24,7 @@ public class Scope {
         variables.replace(symbol, value);
     }
 
-    public DataContainer resolveSymbol(String symbol, List<DataContainer> params) {
+    public DataContainer resolveSymbol(String symbol, List<DataContainer> params) throws InterpreterException {
         if (functions.containsKey(symbol)) {
             return functions.get(symbol).evaluate(params);
         }

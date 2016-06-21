@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class EndFunctionDefineToken extends Token {
     public EndFunctionDefineToken() {
-        super(Type.EndFunctionDefineToken, "end");
+        super(Type.EndBlockToken, "end");
     }
 
     @Override

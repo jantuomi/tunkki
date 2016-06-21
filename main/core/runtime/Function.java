@@ -1,7 +1,8 @@
 package com.jantuomi.interpreter.main.core.runtime;
 
-import com.jantuomi.interpreter.main.core.parser.ast.FunctionBodyNode;
+import com.jantuomi.interpreter.main.core.parser.ast.BlockBodyNode;
 import com.jantuomi.interpreter.main.core.parser.datatype.DataContainer;
+import com.jantuomi.interpreter.main.exception.InterpreterException;
 
 import java.util.List;
 
@@ -12,14 +13,14 @@ public class Function {
 
     private List<String> argumentNames;
 
-    private FunctionBodyNode body;
+    private BlockBodyNode body;
 
-    public Function(List<String> argumentNames, FunctionBodyNode body) {
+    public Function(List<String> argumentNames, BlockBodyNode body) {
         this.argumentNames = argumentNames;
         this.body = body;
     }
 
-    public DataContainer evaluate(List<DataContainer> params) {
+    public DataContainer evaluate(List<DataContainer> params) throws InterpreterException {
         State.getInstance().createScope();
 
         if (params.size() != argumentNames.size()) {

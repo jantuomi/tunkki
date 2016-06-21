@@ -52,10 +52,11 @@ abstract public class Token {
         IntegerLiteralToken,
         WhitespaceToken,
         NewlineToken,
-        EndStatementToken,
+        BranchToken,
         SymbolToken,
-        EndFunctionDefineToken,
+        EndBlockToken,
         FunctionBodyToken,
+        BranchBodyToken,
         NotAToken
     }
 
@@ -163,10 +164,12 @@ abstract public class Token {
                     return new SubtractionToken();
                 case FunctionDefineToken:
                     return new FunctionDefineToken();
-                case EndFunctionDefineToken:
+                case EndBlockToken:
                     return new EndFunctionDefineToken();
                 case FunctionBodyToken:
-                    return new FunctionBodyToken();
+                    return new BlockBodyToken("as");
+                case BranchBodyToken:
+                    return new BlockBodyToken("then");
                 case DeclarationToken:
                     return new VariableDeclareToken();
                 case AssignmentToken:
@@ -177,6 +180,8 @@ abstract public class Token {
                     return new OpenParenToken();
                 case ClosedParenToken:
                     return new ClosedParenToken();
+                case BranchToken:
+                    return new BranchToken();
                 default:
                     ExceptionManager.raise(InterpreterException.ExceptionType.IllegalTokenError, line,
                             type.toString()
@@ -195,10 +200,11 @@ abstract public class Token {
                 fdai.setVariable(true);
                 fdai.setTerminator(Type.FunctionBodyToken);
                 return fdai;
+            case BranchBodyToken:
             case FunctionBodyToken:
                 ArgumentInfo fbai = new ArgumentInfo();
                 fbai.setVariable(true);
-                fbai.setTerminator(Type.EndFunctionDefineToken);
+                fbai.setTerminator(Type.EndBlockToken);
                 return fbai;
             case OpenParenToken:
                 ArgumentInfo opai = new ArgumentInfo();
@@ -220,6 +226,7 @@ abstract public class Token {
             case GreaterOrEqualThanToken:
             case EqualsToken:
             case NotEqualsToken:
+            case BranchToken:
                 return new ArgumentInfo(2);
             case DeclarationToken:
                 return new ArgumentInfo(1);

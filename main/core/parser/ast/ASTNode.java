@@ -2,6 +2,7 @@ package com.jantuomi.interpreter.main.core.parser.ast;
 
 import com.jantuomi.interpreter.main.core.parser.datatype.DataContainer;
 import com.jantuomi.interpreter.main.core.tokenizer.token.Token;
+import com.jantuomi.interpreter.main.exception.InterpreterException;
 
 import java.util.List;
 
@@ -10,7 +11,7 @@ import java.util.List;
  */
 abstract public class ASTNode {
 
-    public abstract DataContainer evaluate();
+    public abstract DataContainer evaluate() throws InterpreterException;
 
     protected Token source;
 

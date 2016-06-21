@@ -2,6 +2,7 @@ package com.jantuomi.interpreter.main.core.runtime;
 
 import com.jantuomi.interpreter.main.core.parser.ast.ASTNode;
 import com.jantuomi.interpreter.main.core.parser.datatype.DataContainer;
+import com.jantuomi.interpreter.main.exception.InterpreterException;
 
 import java.util.List;
 
@@ -18,7 +19,7 @@ public class Interpreter {
     private Interpreter() {
 
     }
-    public static String execute(List<ASTNode> sequence) {
+    public static String execute(List<ASTNode> sequence) throws InterpreterException {
         String output = "";
         for (ASTNode node : sequence) {
             DataContainer data = node.evaluate();

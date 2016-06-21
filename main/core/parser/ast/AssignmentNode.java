@@ -3,6 +3,7 @@ package com.jantuomi.interpreter.main.core.parser.ast;
 import com.jantuomi.interpreter.main.core.parser.datatype.DataContainer;
 import com.jantuomi.interpreter.main.core.runtime.State;
 import com.jantuomi.interpreter.main.core.tokenizer.token.Token;
+import com.jantuomi.interpreter.main.exception.InterpreterException;
 
 import java.util.Arrays;
 import java.util.List;
@@ -16,7 +17,7 @@ public class AssignmentNode extends BinaryOperatorNode {
     }
 
     @Override
-    public DataContainer evaluate() {
+    public DataContainer evaluate() throws InterpreterException {
         SymbolNode symbol = (SymbolNode) lhs;
         DataContainer rValue = rhs.evaluate();
         State.getInstance().setSymbolValueToScope(

@@ -1,6 +1,7 @@
 package com.jantuomi.interpreter.main.core.runtime;
 
 import com.jantuomi.interpreter.main.core.parser.datatype.DataContainer;
+import com.jantuomi.interpreter.main.exception.InterpreterException;
 
 import java.util.Arrays;
 import java.util.List;
@@ -23,16 +24,16 @@ public class State {
         scopes.push(new Scope());
     }
 
-    private DataContainer resolveSymbol(String symbol) {
+    private DataContainer resolveSymbol(String symbol) throws InterpreterException {
         return scopes.peek().resolveSymbol(symbol, Arrays.asList());
     }
 
-    public DataContainer getSymbolValue(String symbol) {
+    public DataContainer getSymbolValue(String symbol) throws InterpreterException {
         DataContainer d = resolveSymbol(symbol);
         return d;
     }
 
-    public DataContainer getSymbolValue(String symbol, List<DataContainer> parameters) {
+    public DataContainer getSymbolValue(String symbol, List<DataContainer> parameters) throws InterpreterException {
         return scopes.peek().resolveSymbol(symbol, parameters);
     }
 

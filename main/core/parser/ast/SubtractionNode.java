@@ -2,6 +2,7 @@ package com.jantuomi.interpreter.main.core.parser.ast;
 
 import com.jantuomi.interpreter.main.core.parser.datatype.DataContainer;
 import com.jantuomi.interpreter.main.core.tokenizer.token.Token;
+import com.jantuomi.interpreter.main.exception.InterpreterException;
 
 import java.util.Arrays;
 import java.util.List;
@@ -15,7 +16,7 @@ public class SubtractionNode extends BinaryOperatorNode {
     }
 
     @Override
-    public DataContainer evaluate() {
+    public DataContainer evaluate() throws InterpreterException {
         DataContainer operand1 = lhs.evaluate();
         DataContainer operand2 = rhs.evaluate();
 
