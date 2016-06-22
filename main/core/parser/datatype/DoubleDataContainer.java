@@ -21,30 +21,66 @@ public class DoubleDataContainer extends DataContainer<Double> {
     }
 
     @Override
-    public DataContainer<Double> add(DataContainer<Double> other) throws InterpreterException {
-        return new DoubleDataContainer(
-                getData() + other.getData()
-        );
+    public DataContainer add(DataContainer other) throws InterpreterException {
+        switch (other.getType()) {
+            case Double:
+                return new DoubleDataContainer(
+                        getData() + ((DoubleDataContainer) other).getData()
+                );
+            case Integer:
+                return new DoubleDataContainer(
+                        getData() + ((IntegerDataContainer) other).getData()
+                );
+            default:
+                return null;
+        }
     }
 
     @Override
-    public DataContainer<Double> subtract(DataContainer<Double> other) throws InterpreterException {
-        return new DoubleDataContainer(
-                getData() - other.getData()
-        );
+    public DataContainer subtract(DataContainer other) throws InterpreterException {
+        switch (other.getType()) {
+            case Double:
+                return new DoubleDataContainer(
+                        getData() - ((DoubleDataContainer) other).getData()
+                );
+            case Integer:
+                return new DoubleDataContainer(
+                        getData() - ((IntegerDataContainer) other).getData()
+                );
+            default:
+                return null;
+        }
     }
 
     @Override
-    public DataContainer<Double> multiply(DataContainer<Double> other) throws InterpreterException {
-        return new DoubleDataContainer(
-                getData() * other.getData()
-        );
+    public DataContainer multiply(DataContainer other) throws InterpreterException {
+        switch (other.getType()) {
+            case Double:
+                return new DoubleDataContainer(
+                        getData() * ((DoubleDataContainer) other).getData()
+                );
+            case Integer:
+                return new DoubleDataContainer(
+                        getData() * ((IntegerDataContainer) other).getData()
+                );
+            default:
+                return null;
+        }
     }
 
     @Override
-    public DataContainer<Double> divide(DataContainer<Double> other) throws InterpreterException {
-        return new DoubleDataContainer(
-                getData() / other.getData()
-        );
+    public DataContainer divide(DataContainer other) throws InterpreterException {
+        switch (other.getType()) {
+            case Double:
+                return new DoubleDataContainer(
+                        getData() / ((DoubleDataContainer) other).getData()
+                );
+            case Integer:
+                return new DoubleDataContainer(
+                        getData() / ((IntegerDataContainer) other).getData()
+                );
+            default:
+                return null;
+        }
     }
 }

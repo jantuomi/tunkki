@@ -11,7 +11,6 @@ public class InterpreterException extends Exception {
 
     public enum ExceptionType {
         IllegalTokenError,
-        UnknownOperatorError,
         SyntaxError,
         TypeError,
         ArgumentError,

@@ -33,32 +33,42 @@ abstract public class Token {
     /* Token types, ordered by precedence */
     public enum Type {
         CommentToken,
+
         AdditionToken,
         SubtractionToken,
         DivisionToken,
         MultiplicationToken,
+
         AssignmentToken,
+
         LessThanToken,
         GreaterThanToken,
         LessOrEqualThanToken,
         GreaterOrEqualThanToken,
         EqualsToken,
         NotEqualsToken,
+
         OpenParenToken,
         ClosedParenToken,
+
         FunctionDefineToken,
         DeclarationToken,
+
         StringLiteralToken,
         IntegerLiteralToken,
         BooleanLiteralToken,
+        DoubleLiteralToken,
+
         WhitespaceToken,
         NewlineToken,
+
         BranchToken,
         SymbolToken,
         EndBlockToken,
         FunctionBodyToken,
         BranchBodyToken,
         NegationToken,
+
         NotAToken
     }
 
@@ -162,10 +172,16 @@ abstract public class Token {
                     return new StringLiteralToken(text, rawText);
                 case BooleanLiteralToken:
                     return new BooleanLiteralToken(text);
+                case DoubleLiteralToken:
+                    return new DoubleLiteralToken(text, rawText);
                 case AdditionToken:
                     return new AdditionToken();
                 case SubtractionToken:
                     return new SubtractionToken();
+                case MultiplicationToken:
+                    return new MultiplicationToken();
+                case DivisionToken:
+                    return new DivisionToken();
                 case FunctionDefineToken:
                     return new FunctionDefineToken();
                 case EndBlockToken:

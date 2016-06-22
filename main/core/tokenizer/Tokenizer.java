@@ -34,7 +34,12 @@ public class Tokenizer {
 
     private Tokenizer() {
         tokenRegexes.put(Token.Type.CommentToken, "^\\/\\*(.*?)\\*\\/");
+
+        tokenRegexes.put(Token.Type.DoubleLiteralToken, "^([-+]?[0-9]*\\.?[0-9]+)f\\b");
+        tokenRegexes.put(Token.Type.IntegerLiteralToken, "^([-+]?\\d+)\\b");
+        tokenRegexes.put(Token.Type.BooleanLiteralToken, "^(true|false)\\b");
         tokenRegexes.put(Token.Type.StringLiteralToken, "^\"(.*?)\"");
+
         tokenRegexes.put(Token.Type.WhitespaceToken, "^( |\t)");
         tokenRegexes.put(Token.Type.NewlineToken, "^(\n|\r\n)");
         tokenRegexes.put(Token.Type.AdditionToken, "^(\\+)");
@@ -57,8 +62,7 @@ public class Tokenizer {
         tokenRegexes.put(Token.Type.NegationToken, "^(not)\\b");
         tokenRegexes.put(Token.Type.DeclarationToken, "^(decl)\\b");
         tokenRegexes.put(Token.Type.BranchToken, "^(if)\\b");
-        tokenRegexes.put(Token.Type.IntegerLiteralToken, "^(\\d+)");
-        tokenRegexes.put(Token.Type.BooleanLiteralToken, "^(true|false)\\b");
+
         tokenRegexes.put(Token.Type.SymbolToken, "^([a-zA-Z]+\\w*)");
 
         discardedTokenTypes.add(Token.Type.WhitespaceToken);
