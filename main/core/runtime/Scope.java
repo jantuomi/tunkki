@@ -26,7 +26,8 @@ public class Scope {
 
     public DataContainer resolveSymbol(String symbol, List<DataContainer> params) throws InterpreterException {
         if (functions.containsKey(symbol)) {
-            return functions.get(symbol).evaluate(params);
+            DataContainer r = functions.get(symbol).evaluate(params);
+            return r;
         }
         if (variables.containsKey(symbol)) {
             return variables.get(symbol);

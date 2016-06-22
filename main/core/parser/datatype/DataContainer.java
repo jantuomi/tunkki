@@ -8,10 +8,14 @@ import com.jantuomi.interpreter.main.exception.InterpreterException;
 abstract public class DataContainer<T> {
 
     public enum Type {
-        Integer
+        Integer,
+        Double,
+        String,
+        Boolean,
+        Void
     }
 
-    private Type type;
+    abstract public Type getType();
 
     private T data;
 
@@ -28,4 +32,6 @@ abstract public class DataContainer<T> {
 
     abstract public DataContainer<T> add(DataContainer<T> other) throws InterpreterException;
     public abstract DataContainer<T> subtract(DataContainer<T> other) throws InterpreterException;
+    public abstract DataContainer<T> multiply(DataContainer<T> other) throws InterpreterException;
+    public abstract DataContainer<T> divide(DataContainer<T> other) throws InterpreterException;
 }

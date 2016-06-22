@@ -5,7 +5,6 @@ import com.jantuomi.interpreter.main.core.parser.datatype.DataContainer;
 import com.jantuomi.interpreter.main.core.parser.datatype.IntegerDataContainer;
 import com.jantuomi.interpreter.main.core.parser.datatype.StringDataContainer;
 import com.jantuomi.interpreter.main.core.runtime.Function;
-import com.jantuomi.interpreter.main.exception.ExceptionManager;
 import com.jantuomi.interpreter.main.exception.InterpreterException;
 
 import java.util.Arrays;
@@ -30,7 +29,7 @@ public class AsIntBuiltinFunction extends Function {
     @Override
     public DataContainer evaluate(List<DataContainer> params) throws InterpreterException {
         if (params.size() != 1) {
-            ExceptionManager.raise(InterpreterException.ExceptionType.SyntaxError, -1, "amount of parameters to as_int");
+            return null;
         }
         DataContainer param = params.get(0);
         int i = 0;
@@ -39,8 +38,6 @@ public class AsIntBuiltinFunction extends Function {
                 i = Integer.parseInt(((StringDataContainer) param).getData());
             }
             catch (NumberFormatException ex) {
-                ExceptionManager.raise(InterpreterException.ExceptionType.SyntaxError, -1,
-                        String.format("parameter %s to as_int", param.toString()));
                 return null;
             }
         }

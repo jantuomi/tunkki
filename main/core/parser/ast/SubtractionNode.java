@@ -2,6 +2,7 @@ package com.jantuomi.interpreter.main.core.parser.ast;
 
 import com.jantuomi.interpreter.main.core.parser.datatype.DataContainer;
 import com.jantuomi.interpreter.main.core.tokenizer.token.Token;
+import com.jantuomi.interpreter.main.exception.ExceptionManager;
 import com.jantuomi.interpreter.main.exception.InterpreterException;
 
 import java.util.Arrays;
@@ -21,7 +22,13 @@ public class SubtractionNode extends BinaryOperatorNode {
         DataContainer operand2 = rhs.evaluate();
 
         DataContainer result = operand1.subtract(operand2);
-        return result;
+        if (result != null) {
+            return result;
+        } else {
+            ExceptionManager.raise(InterpreterException.ExceptionType.TypeError, source.getLine(),
+                    operand1.getType().toString(), operand2.getType().toString());
+            return null;
+        }
 
     }
     @Override

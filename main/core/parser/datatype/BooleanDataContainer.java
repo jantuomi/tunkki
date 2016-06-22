@@ -1,6 +1,5 @@
 package com.jantuomi.interpreter.main.core.parser.datatype;
 
-import com.jantuomi.interpreter.main.exception.ExceptionManager;
 import com.jantuomi.interpreter.main.exception.InterpreterException;
 
 /**
@@ -14,19 +13,32 @@ public class BooleanDataContainer extends DataContainer<Boolean> {
     }
 
     @Override
+    public Type getType() {
+        return Type.Boolean;
+    }
+
+    @Override
     public String toString() {
         return Boolean.toString(getData());
     }
 
     @Override
     public DataContainer<Boolean> add(DataContainer<Boolean> other) throws InterpreterException {
-        ExceptionManager.raise(InterpreterException.ExceptionType.TypeError, -1, "boolean", "boolean");
         return null;
     }
 
     @Override
     public DataContainer<Boolean> subtract(DataContainer<Boolean> other) throws InterpreterException {
-        ExceptionManager.raise(InterpreterException.ExceptionType.TypeError, -1, "boolean", "boolean");
+        return null;
+    }
+
+    @Override
+    public DataContainer<Boolean> multiply(DataContainer<Boolean> other) throws InterpreterException {
+        return null;
+    }
+
+    @Override
+    public DataContainer<Boolean> divide(DataContainer<Boolean> other) throws InterpreterException {
         return null;
     }
 }

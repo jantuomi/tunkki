@@ -1,6 +1,5 @@
 package com.jantuomi.interpreter.main.core.parser.datatype;
 
-import com.jantuomi.interpreter.main.exception.ExceptionManager;
 import com.jantuomi.interpreter.main.exception.InterpreterException;
 
 /**
@@ -11,6 +10,11 @@ public class StringDataContainer extends DataContainer<String> {
 
     public StringDataContainer(String text) {
         setData(text);
+    }
+
+    @Override
+    public Type getType() {
+        return Type.String;
     }
 
     @Override
@@ -27,7 +31,16 @@ public class StringDataContainer extends DataContainer<String> {
 
     @Override
     public DataContainer<String> subtract(DataContainer<String> other) throws InterpreterException {
-        ExceptionManager.raise(InterpreterException.ExceptionType.TypeError, -1, "string", "string");
+        return null;
+    }
+
+    @Override
+    public DataContainer<String> multiply(DataContainer<String> other) throws InterpreterException {
+        return null;
+    }
+
+    @Override
+    public DataContainer<String> divide(DataContainer<String> other) throws InterpreterException {
         return null;
     }
 }

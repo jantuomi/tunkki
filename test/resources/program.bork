@@ -1,15 +1,13 @@
 /* get an integer from the user */
-decl user_input
-set user_input in("give integer: ")
-out( concat("your input was: " user_input "!") )
+decl lhs decl rhs
+set lhs in("give an integer: ")
+set rhs in("give another: ")
 
-/* add 10 to the integer */
-decl operand set operand 10
-
+/* add the inputs together */
 decl sum
-set sum + as_int(user_input) operand
+set sum + as_int(lhs) as_int(rhs)
 
 /* print the sum */
-out( concat(user_input " + " operand " = " sum) )
+out( concat(lhs " + " rhs " = " sum) )
 
 "done"

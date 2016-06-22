@@ -27,7 +27,7 @@ public class NegationNode extends UnaryOperatorNode {
                     ((IntegerDataContainer) d).getData() != 0
             );
         }
-        ExceptionManager.raise(InterpreterException.ExceptionType.TypeError, -1, "not", d.toString());
+        ExceptionManager.raise(InterpreterException.ExceptionType.TypeError, source.getLine(), "not", d.toString());
         return null;
 
     }
