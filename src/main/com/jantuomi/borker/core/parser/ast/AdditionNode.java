@@ -1,0 +1,39 @@
+package com.jantuomi.borker.core.parser.ast;
+
+import com.jantuomi.borker.core.parser.datatype.DataContainer;
+import com.jantuomi.borker.core.tokenizer.token.Token;
+import com.jantuomi.borker.exception.ExceptionManager;
+import com.jantuomi.borker.exception.InterpreterException;
+
+import java.util.Arrays;
+import java.util.List;
+
+/**
+ * Created by jan on 16.6.2016.
+ */
+public class AdditionNode extends BinaryOperatorNode {
+
+    public AdditionNode(Token token, ASTNode lhs, ASTNode rhs) {
+        super(token, lhs, rhs);
+    }
+
+    @Override
+    public DataContainer evaluate() throws InterpreterException {
+        DataContainer operand1 = lhs.evaluate();
+        DataContainer operand2 = rhs.evaluate();
+
+        DataContainer result = operand1.add(operand2);
+        if (result != null) {
+            return result;
+        } else {
+            ExceptionManager.raise(InterpreterException.ExceptionType.TypeError, source.getLine(),
+                    operand1.getType().toString(), operand2.getType().toString());
+            return null;
+        }
+
+    }
+    @Override
+    List<ASTNode> getChildren() {
+        return Arrays.asList(lhs, rhs);
+    }
+}
