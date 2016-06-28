@@ -3,8 +3,8 @@ package com.jantuomi.borker.core.parser.ast;
 import com.jantuomi.borker.core.parser.datatype.DataContainer;
 import com.jantuomi.borker.core.runtime.State;
 import com.jantuomi.borker.core.tokenizer.token.Token;
+import com.jantuomi.borker.exception.BorkError;
 import com.jantuomi.borker.exception.ExceptionManager;
-import com.jantuomi.borker.exception.InterpreterException;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
@@ -42,7 +42,7 @@ public class SymbolNode extends ASTNode {
     }
 
     @Override
-    public DataContainer evaluate() throws InterpreterException {
+    public DataContainer evaluate() throws BorkError {
         List<DataContainer> paramValues = new ArrayList<>();
         if (parameterListNode != null) {
             for (ASTNode param : parameterListNode.getChildren()) {
@@ -53,7 +53,7 @@ public class SymbolNode extends ASTNode {
         if (returnValue != null) {
             return returnValue;
         } else {
-            ExceptionManager.raise(InterpreterException.ExceptionType.UndeclaredSymbolError, source.getLine(), name,
+            ExceptionManager.raise(BorkError.ExceptionType.UndeclaredSymbolError, source.getLine(), name,
                     StringUtils.join(paramValues.stream().map(dataContainer -> dataContainer.toString()).collect(Collectors.toList()), ","));
             return null;
         }

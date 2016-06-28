@@ -4,7 +4,7 @@ import com.jantuomi.borker.core.parser.ast.ASTNode;
 import com.jantuomi.borker.core.parser.ast.BlockBodyNode;
 import com.jantuomi.borker.core.parser.ast.BranchNode;
 import com.jantuomi.borker.core.tokenizer.token.Token;
-import com.jantuomi.borker.exception.InterpreterException;
+import com.jantuomi.borker.exception.BorkError;
 
 import java.util.Arrays;
 import java.util.List;
@@ -22,7 +22,7 @@ public class BranchToken extends VarargOperatorToken {
     }
 
     @Override
-    public ASTNode generateNode() throws InterpreterException {
+    public ASTNode generateNode() throws BorkError {
         return new BranchNode(this,
                 expression.generateNode(),
                 (BlockBodyNode) branch.generateNode()

@@ -3,7 +3,7 @@ package com.jantuomi.borker.core.tokenizer.token.types;
 import com.jantuomi.borker.core.parser.ast.ASTNode;
 import com.jantuomi.borker.core.parser.ast.BlockBodyNode;
 import com.jantuomi.borker.core.tokenizer.token.Token;
-import com.jantuomi.borker.exception.InterpreterException;
+import com.jantuomi.borker.exception.BorkError;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +17,7 @@ public class BlockBodyToken extends VarargOperatorToken {
     }
 
     @Override
-    public ASTNode generateNode() throws InterpreterException {
+    public ASTNode generateNode() throws BorkError {
         BlockBodyNode node = new BlockBodyNode(this);
         List<ASTNode> statements = new ArrayList<>();
         for (int i = 0; i < args.size() - 1; i++) {

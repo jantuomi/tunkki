@@ -5,7 +5,7 @@ import com.jantuomi.borker.core.parser.datatype.DataContainer;
 import com.jantuomi.borker.core.parser.datatype.IntegerDataContainer;
 import com.jantuomi.borker.core.parser.datatype.StringDataContainer;
 import com.jantuomi.borker.core.runtime.Function;
-import com.jantuomi.borker.exception.InterpreterException;
+import com.jantuomi.borker.exception.BorkError;
 
 import java.util.Arrays;
 import java.util.List;
@@ -27,7 +27,7 @@ public class AsIntBuiltinFunction extends Function {
     }
 
     @Override
-    public DataContainer evaluate(List<DataContainer> params) throws InterpreterException {
+    public DataContainer evaluate(List<DataContainer> params) throws BorkError {
         if (params.size() != 1) {
             return null;
         }

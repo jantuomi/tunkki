@@ -1,6 +1,6 @@
 package com.jantuomi.borker.core.parser.datatype;
 
-import com.jantuomi.borker.exception.InterpreterException;
+import com.jantuomi.borker.exception.BorkError;
 
 /**
  * Created by jan on 17.6.2016.
@@ -28,12 +28,12 @@ public class VoidDataContainer extends DataContainer<Integer> {
     }
 
     @Override
-    public DataContainer<Integer> multiply(DataContainer<Integer> other) throws InterpreterException {
+    public DataContainer<Integer> multiply(DataContainer<Integer> other) throws BorkError {
         return null;
     }
 
     @Override
-    public DataContainer<Integer> divide(DataContainer<Integer> other) throws InterpreterException {
+    public DataContainer<Integer> divide(DataContainer<Integer> other) throws BorkError {
         return null;
     }
 }

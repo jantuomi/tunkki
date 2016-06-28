@@ -1,6 +1,6 @@
 package com.jantuomi.borker.core.parser.datatype;
 
-import com.jantuomi.borker.exception.InterpreterException;
+import com.jantuomi.borker.exception.BorkError;
 
 /**
  * Created by jan on 22.6.2016.
@@ -21,7 +21,7 @@ public class DoubleDataContainer extends DataContainer<Double> {
     }
 
     @Override
-    public DataContainer add(DataContainer other) throws InterpreterException {
+    public DataContainer add(DataContainer other) throws BorkError {
         switch (other.getType()) {
             case Double:
                 return new DoubleDataContainer(
@@ -37,7 +37,7 @@ public class DoubleDataContainer extends DataContainer<Double> {
     }
 
     @Override
-    public DataContainer subtract(DataContainer other) throws InterpreterException {
+    public DataContainer subtract(DataContainer other) throws BorkError {
         switch (other.getType()) {
             case Double:
                 return new DoubleDataContainer(
@@ -53,7 +53,7 @@ public class DoubleDataContainer extends DataContainer<Double> {
     }
 
     @Override
-    public DataContainer multiply(DataContainer other) throws InterpreterException {
+    public DataContainer multiply(DataContainer other) throws BorkError {
         switch (other.getType()) {
             case Double:
                 return new DoubleDataContainer(
@@ -69,7 +69,7 @@ public class DoubleDataContainer extends DataContainer<Double> {
     }
 
     @Override
-    public DataContainer divide(DataContainer other) throws InterpreterException {
+    public DataContainer divide(DataContainer other) throws BorkError {
         switch (other.getType()) {
             case Double:
                 return new DoubleDataContainer(

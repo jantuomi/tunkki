@@ -2,7 +2,7 @@ package com.jantuomi.borker.core.tokenizer.token.types;
 
 import com.jantuomi.borker.core.parser.ast.ASTNode;
 import com.jantuomi.borker.core.parser.ast.SubtractionNode;
-import com.jantuomi.borker.exception.InterpreterException;
+import com.jantuomi.borker.exception.BorkError;
 
 /**
  * Created by jan on 16.6.2016.
@@ -13,7 +13,7 @@ public class SubtractionToken extends BinaryOperatorToken {
     }
 
     @Override
-    public ASTNode generateNode() throws InterpreterException {
+    public ASTNode generateNode() throws BorkError {
         return new SubtractionNode(this,
                 lhs.generateNode(),
                 rhs.generateNode()

@@ -1,8 +1,9 @@
 package com.jantuomi.borker.core.runtime.builtins;
 
 import com.jantuomi.borker.core.parser.datatype.DataContainer;
+import com.jantuomi.borker.core.parser.datatype.VoidDataContainer;
 import com.jantuomi.borker.core.runtime.Function;
-import com.jantuomi.borker.exception.InterpreterException;
+import com.jantuomi.borker.exception.BorkError;
 
 import java.util.Arrays;
 import java.util.List;
@@ -24,9 +25,9 @@ public class OutBuiltinFunction extends Function {
     }
 
     @Override
-    public DataContainer evaluate(List<DataContainer> params) throws InterpreterException {
+    public DataContainer evaluate(List<DataContainer> params) throws BorkError {
         DataContainer param = params.get(0);
         System.out.println(param.getData().toString());
-        return param;
+        return new VoidDataContainer();
     }
 }

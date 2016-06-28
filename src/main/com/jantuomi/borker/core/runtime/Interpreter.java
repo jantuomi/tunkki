@@ -2,7 +2,7 @@ package com.jantuomi.borker.core.runtime;
 
 import com.jantuomi.borker.core.parser.ast.ASTNode;
 import com.jantuomi.borker.core.parser.datatype.DataContainer;
-import com.jantuomi.borker.exception.InterpreterException;
+import com.jantuomi.borker.exception.BorkError;
 
 import java.util.List;
 
@@ -19,7 +19,7 @@ public class Interpreter {
     private Interpreter() {
 
     }
-    public static String execute(List<ASTNode> sequence) throws InterpreterException {
+    public static String execute(List<ASTNode> sequence) throws BorkError {
         String output = "";
         for (ASTNode node : sequence) {
             DataContainer data = node.evaluate();

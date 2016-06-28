@@ -2,7 +2,7 @@ package com.jantuomi.borker.core.runtime;
 
 import com.jantuomi.borker.core.parser.ast.BlockBodyNode;
 import com.jantuomi.borker.core.parser.datatype.DataContainer;
-import com.jantuomi.borker.exception.InterpreterException;
+import com.jantuomi.borker.exception.BorkError;
 
 import java.util.List;
 
@@ -30,7 +30,7 @@ public class Function {
         this.body = body;
     }
 
-    public DataContainer evaluate(List<DataContainer> params) throws InterpreterException {
+    public DataContainer evaluate(List<DataContainer> params) throws BorkError {
         State.getInstance().createScope();
 
         if (params.size() != argumentNames.size()) {

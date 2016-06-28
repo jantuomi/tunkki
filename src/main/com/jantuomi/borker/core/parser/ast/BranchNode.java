@@ -3,7 +3,7 @@ package com.jantuomi.borker.core.parser.ast;
 import com.jantuomi.borker.core.parser.datatype.BooleanDataContainer;
 import com.jantuomi.borker.core.parser.datatype.DataContainer;
 import com.jantuomi.borker.core.tokenizer.token.Token;
-import com.jantuomi.borker.exception.InterpreterException;
+import com.jantuomi.borker.exception.BorkError;
 
 import java.util.Arrays;
 import java.util.List;
@@ -23,7 +23,7 @@ public class BranchNode extends ASTNode {
     }
 
     @Override
-    public DataContainer evaluate() throws InterpreterException {
+    public DataContainer evaluate() throws BorkError {
         DataContainer ev = expression.evaluate();
         boolean returnValue = false;
         if (ev instanceof BooleanDataContainer) {

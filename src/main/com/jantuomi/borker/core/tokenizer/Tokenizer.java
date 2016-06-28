@@ -2,8 +2,8 @@ package com.jantuomi.borker.core.tokenizer;
 
 
 import com.jantuomi.borker.core.tokenizer.token.Token;
+import com.jantuomi.borker.exception.BorkError;
 import com.jantuomi.borker.exception.ExceptionManager;
-import com.jantuomi.borker.exception.InterpreterException;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -71,7 +71,7 @@ public class Tokenizer {
         erroneousTokenTypes.add(Token.Type.NotAToken);
     }
 
-    public List<Token> tokenize(String string) throws InterpreterException {
+    public List<Token> tokenize(String string) throws BorkError {
         sourceString = string;
         tokens.clear();
         int line = 1;
@@ -93,7 +93,7 @@ public class Tokenizer {
             }
 
             if (erroneousTokenTypes.contains(token.getTokenType())) {
-                ExceptionManager.raise(InterpreterException.ExceptionType.IllegalTokenError, line, token.getText());
+                ExceptionManager.raise(BorkError.ExceptionType.IllegalTokenError, line, token.getText());
             }
 
             String tokenRawText = token.getRawText();

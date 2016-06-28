@@ -2,7 +2,7 @@ package com.jantuomi.borker.core.tokenizer;
 
 import com.jantuomi.borker.core.tokenizer.token.Token;
 import com.jantuomi.borker.core.tokenizer.token.types.IntegerLiteralToken;
-import com.jantuomi.borker.exception.InterpreterException;
+import com.jantuomi.borker.exception.BorkError;
 import org.junit.Test;
 
 import java.util.List;
@@ -15,7 +15,7 @@ import static org.junit.Assert.assertTrue;
 public class TokenizerTest {
 
     @Test
-    public void testAddition() throws InterpreterException {
+    public void testAddition() throws BorkError {
         String testString = "1 2 +";
         List<Token> list = Tokenizer.getInstance().tokenize(testString);
 

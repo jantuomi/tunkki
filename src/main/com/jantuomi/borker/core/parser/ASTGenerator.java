@@ -2,7 +2,7 @@ package com.jantuomi.borker.core.parser;
 
 import com.jantuomi.borker.core.parser.ast.ASTNode;
 import com.jantuomi.borker.core.tokenizer.token.Token;
-import com.jantuomi.borker.exception.InterpreterException;
+import com.jantuomi.borker.exception.BorkError;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +19,7 @@ public class ASTGenerator {
         return instance;
     }
 
-    public List<ASTNode> generate(List<Token> trees) throws InterpreterException {
+    public List<ASTNode> generate(List<Token> trees) throws BorkError {
         List<ASTNode> list = new ArrayList<>();
 
         for (Token root : trees) {

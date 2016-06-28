@@ -2,7 +2,7 @@ package com.jantuomi.borker.core.runtime;
 
 import com.jantuomi.borker.core.parser.datatype.DataContainer;
 import com.jantuomi.borker.core.runtime.builtins.BuiltinManager;
-import com.jantuomi.borker.exception.InterpreterException;
+import com.jantuomi.borker.exception.BorkError;
 
 import java.util.Arrays;
 import java.util.List;
@@ -32,16 +32,16 @@ public class State {
 
     }
 
-    private DataContainer resolveSymbol(String symbol) throws InterpreterException {
+    private DataContainer resolveSymbol(String symbol) throws BorkError {
         return scopes.peek().resolveSymbol(symbol, Arrays.asList());
     }
 
-    public DataContainer getSymbolValue(String symbol) throws InterpreterException {
+    public DataContainer getSymbolValue(String symbol) throws BorkError {
         DataContainer d = resolveSymbol(symbol);
         return d;
     }
 
-    public DataContainer getSymbolValue(String symbol, List<DataContainer> parameters) throws InterpreterException {
+    public DataContainer getSymbolValue(String symbol, List<DataContainer> parameters) throws BorkError {
         return scopes.peek().resolveSymbol(symbol, parameters);
     }
 

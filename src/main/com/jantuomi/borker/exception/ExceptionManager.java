@@ -14,8 +14,8 @@ public class ExceptionManager {
         return instance;
     }
 
-    public static void raise(InterpreterException.ExceptionType ex, int line, String... args) throws InterpreterException {
-        InterpreterException e = new InterpreterException(ex, line, args);
+    public static void raise(BorkError.ExceptionType ex, int line, String... args) throws BorkError {
+        BorkError e = new BorkError(ex, line, args);
         throw e;
     }
 }

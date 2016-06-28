@@ -3,8 +3,8 @@ package com.jantuomi.borker.core.parser;
 import com.jantuomi.borker.core.parser.ast.ASTNode;
 import com.jantuomi.borker.core.tokenizer.token.ArgumentInfo;
 import com.jantuomi.borker.core.tokenizer.token.Token;
+import com.jantuomi.borker.exception.BorkError;
 import com.jantuomi.borker.exception.ExceptionManager;
-import com.jantuomi.borker.exception.InterpreterException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +29,7 @@ public class Parser {
 
     private Stack<Token> stack;
 
-    public List<Token> parse(List<Token> tokens) throws InterpreterException {
+    public List<Token> parse(List<Token> tokens) throws BorkError {
         this.tokens = tokens;
         this.stack = new Stack<>();
 
@@ -78,7 +78,7 @@ public class Parser {
                     if (stack.size() > 0) {
                         args.add(stack.pop());
                     } else {
-                        ExceptionManager.raise(InterpreterException.ExceptionType.ArgumentError, t.getLine(),
+                        ExceptionManager.raise(BorkError.ExceptionType.ArgumentError, t.getLine(),
                                 t.toString(), Integer.toString(argumentInfo.getCount()));
                         return null;
                     }

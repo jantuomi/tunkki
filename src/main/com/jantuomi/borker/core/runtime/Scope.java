@@ -1,7 +1,7 @@
 package com.jantuomi.borker.core.runtime;
 
 import com.jantuomi.borker.core.parser.datatype.DataContainer;
-import com.jantuomi.borker.exception.InterpreterException;
+import com.jantuomi.borker.exception.BorkError;
 
 import java.util.HashMap;
 import java.util.List;
@@ -24,7 +24,7 @@ public class Scope {
         variables.replace(symbol, value);
     }
 
-    public DataContainer resolveSymbol(String symbol, List<DataContainer> params) throws InterpreterException {
+    public DataContainer resolveSymbol(String symbol, List<DataContainer> params) throws BorkError {
         if (functions.containsKey(symbol)) {
             DataContainer r = functions.get(symbol).evaluate(params);
             return r;

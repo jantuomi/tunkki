@@ -3,7 +3,7 @@ package com.jantuomi.borker.core.runtime.builtins;
 import com.jantuomi.borker.core.parser.datatype.DataContainer;
 import com.jantuomi.borker.core.parser.datatype.StringDataContainer;
 import com.jantuomi.borker.core.runtime.Function;
-import com.jantuomi.borker.exception.InterpreterException;
+import com.jantuomi.borker.exception.BorkError;
 
 import java.util.Arrays;
 import java.util.List;
@@ -26,7 +26,7 @@ public class InBuiltinFunction extends Function {
     }
 
     @Override
-    public DataContainer evaluate(List<DataContainer> params) throws InterpreterException {
+    public DataContainer evaluate(List<DataContainer> params) throws BorkError {
         if (params.size() > 0) {
             DataContainer param = params.get(0);
             System.out.print(param.getData().toString());

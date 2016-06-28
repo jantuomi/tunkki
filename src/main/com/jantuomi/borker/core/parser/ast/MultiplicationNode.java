@@ -2,8 +2,8 @@ package com.jantuomi.borker.core.parser.ast;
 
 import com.jantuomi.borker.core.parser.datatype.DataContainer;
 import com.jantuomi.borker.core.tokenizer.token.Token;
+import com.jantuomi.borker.exception.BorkError;
 import com.jantuomi.borker.exception.ExceptionManager;
-import com.jantuomi.borker.exception.InterpreterException;
 
 import java.util.Arrays;
 import java.util.List;
@@ -18,7 +18,7 @@ public class MultiplicationNode extends BinaryOperatorNode {
     }
 
     @Override
-    public DataContainer evaluate() throws InterpreterException {
+    public DataContainer evaluate() throws BorkError {
         DataContainer operand1 = lhs.evaluate();
         DataContainer operand2 = rhs.evaluate();
 
@@ -26,7 +26,7 @@ public class MultiplicationNode extends BinaryOperatorNode {
         if (result != null) {
             return result;
         } else {
-            ExceptionManager.raise(InterpreterException.ExceptionType.TypeError, source.getLine(),
+            ExceptionManager.raise(BorkError.ExceptionType.TypeError, source.getLine(),
                     operand1.getType().toString(), operand2.getType().toString());
             return null;
         }

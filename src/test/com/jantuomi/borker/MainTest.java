@@ -1,6 +1,6 @@
 package com.jantuomi.borker;
 
-import com.jantuomi.borker.exception.InterpreterException;
+import com.jantuomi.borker.exception.BorkError;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -43,7 +43,7 @@ public class MainTest {
     }
 
     @Test
-    public void testWholeProcedure() throws InterpreterException {
+    public void testWholeProcedure() throws BorkError {
         String input = "- + 2 5 1";
 
         Main.run(input);

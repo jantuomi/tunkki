@@ -7,7 +7,7 @@ import com.jantuomi.borker.core.parser.ast.ASTNode;
 import com.jantuomi.borker.core.runtime.Interpreter;
 import com.jantuomi.borker.core.tokenizer.Tokenizer;
 import com.jantuomi.borker.core.tokenizer.token.Token;
-import com.jantuomi.borker.exception.InterpreterException;
+import com.jantuomi.borker.exception.BorkError;
 import org.kohsuke.args4j.CmdLineException;
 import org.kohsuke.args4j.CmdLineParser;
 
@@ -40,13 +40,13 @@ public class Main {
 
             try {
                 run(input);
-            } catch (InterpreterException e) {
+            } catch (BorkError e) {
                 e.printStackTrace();
             }
         }
     }
 
-    public static void run(String input) throws InterpreterException {
+    public static void run(String input) throws BorkError {
         Tokenizer tokenizer = Tokenizer.getInstance();
         List<Token> sequence = tokenizer.tokenize(input);
 
