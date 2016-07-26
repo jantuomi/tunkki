@@ -2,7 +2,7 @@ package com.jantuomi.tunkki.core.runtime.builtins;
 
 import com.jantuomi.tunkki.core.parser.datatype.DataContainer;
 import com.jantuomi.tunkki.core.parser.datatype.StringDataContainer;
-import com.jantuomi.tunkki.exception.BorkError;
+import com.jantuomi.tunkki.exception.TunkkiError;
 
 import java.util.Arrays;
 import java.util.List;
@@ -24,7 +24,7 @@ public class InputBuiltinFunction extends BuiltinFunction {
     }
 
     @Override
-    public DataContainer evaluate(List<DataContainer> params) throws BorkError {
+    public DataContainer evaluate(List<DataContainer> params) throws TunkkiError {
         if (params.size() > 0) {
             DataContainer param = params.get(0);
             System.out.print(param.getData().toString());

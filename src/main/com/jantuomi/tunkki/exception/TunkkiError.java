@@ -7,7 +7,7 @@ import java.util.Map;
 /**
  * Created by jan on 12.6.2016.
  */
-public class BorkError extends Exception {
+public class TunkkiError extends Exception {
 
     public enum ExceptionType {
         IllegalTokenError,
@@ -34,7 +34,7 @@ public class BorkError extends Exception {
     private ExceptionType exceptionType;
     private String completeMessage;
 
-    public BorkError(ExceptionType exceptionType, int line, String... args) {
+    public TunkkiError(ExceptionType exceptionType, int line, String... args) {
         super(exceptionType.toString(), null, false, false);
         this.exceptionType = exceptionType;
         this.completeMessage = formatMessage(exceptionType.toString() + ": " + what(exceptionType), line, args);

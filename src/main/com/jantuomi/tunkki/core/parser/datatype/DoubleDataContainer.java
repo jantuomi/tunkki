@@ -1,6 +1,6 @@
 package com.jantuomi.tunkki.core.parser.datatype;
 
-import com.jantuomi.tunkki.exception.BorkError;
+import com.jantuomi.tunkki.exception.TunkkiError;
 
 /**
  * Created by jan on 22.6.2016.
@@ -21,7 +21,7 @@ public class DoubleDataContainer extends DataContainer<Double> {
     }
 
     @Override
-    public DataContainer add(DataContainer other) throws BorkError {
+    public DataContainer add(DataContainer other) throws TunkkiError {
         switch (other.getType()) {
             case Double:
                 return new DoubleDataContainer(
@@ -37,7 +37,7 @@ public class DoubleDataContainer extends DataContainer<Double> {
     }
 
     @Override
-    public DataContainer subtract(DataContainer other) throws BorkError {
+    public DataContainer subtract(DataContainer other) throws TunkkiError {
         switch (other.getType()) {
             case Double:
                 return new DoubleDataContainer(
@@ -53,7 +53,7 @@ public class DoubleDataContainer extends DataContainer<Double> {
     }
 
     @Override
-    public DataContainer multiply(DataContainer other) throws BorkError {
+    public DataContainer multiply(DataContainer other) throws TunkkiError {
         switch (other.getType()) {
             case Double:
                 return new DoubleDataContainer(
@@ -69,7 +69,7 @@ public class DoubleDataContainer extends DataContainer<Double> {
     }
 
     @Override
-    public DataContainer divide(DataContainer other) throws BorkError {
+    public DataContainer divide(DataContainer other) throws TunkkiError {
         switch (other.getType()) {
             case Double:
                 return new DoubleDataContainer(

@@ -2,7 +2,7 @@ package com.jantuomi.tunkki.core.runtime;
 
 import com.jantuomi.tunkki.core.parser.ast.BlockBodyNode;
 import com.jantuomi.tunkki.core.parser.datatype.DataContainer;
-import com.jantuomi.tunkki.exception.BorkError;
+import com.jantuomi.tunkki.exception.TunkkiError;
 
 import java.util.List;
 
@@ -30,7 +30,7 @@ public class Function {
         this.body = body;
     }
 
-    public DataContainer evaluate(List<DataContainer> params) throws BorkError {
+    public DataContainer evaluate(List<DataContainer> params) throws TunkkiError {
         State.getInstance().createScope();
 
         if (params.size() != argumentNames.size()) {

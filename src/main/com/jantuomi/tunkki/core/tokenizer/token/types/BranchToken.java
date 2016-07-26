@@ -4,7 +4,7 @@ import com.jantuomi.tunkki.core.parser.ast.ASTNode;
 import com.jantuomi.tunkki.core.parser.ast.BlockBodyNode;
 import com.jantuomi.tunkki.core.parser.ast.BranchNode;
 import com.jantuomi.tunkki.core.tokenizer.token.Token;
-import com.jantuomi.tunkki.exception.BorkError;
+import com.jantuomi.tunkki.exception.TunkkiError;
 
 import java.util.Arrays;
 import java.util.List;
@@ -22,7 +22,7 @@ public class BranchToken extends VarargOperatorToken {
     }
 
     @Override
-    public ASTNode generateNode() throws BorkError {
+    public ASTNode generateNode() throws TunkkiError {
         return new BranchNode(this,
                 expression.generateNode(),
                 (BlockBodyNode) branch.generateNode()

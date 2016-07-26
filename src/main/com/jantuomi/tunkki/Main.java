@@ -7,7 +7,7 @@ import com.jantuomi.tunkki.core.parser.ast.ASTNode;
 import com.jantuomi.tunkki.core.runtime.Interpreter;
 import com.jantuomi.tunkki.core.tokenizer.Tokenizer;
 import com.jantuomi.tunkki.core.tokenizer.token.Token;
-import com.jantuomi.tunkki.exception.BorkError;
+import com.jantuomi.tunkki.exception.TunkkiError;
 import org.kohsuke.args4j.CmdLineException;
 import org.kohsuke.args4j.CmdLineParser;
 
@@ -40,13 +40,13 @@ public class Main {
 
             try {
                 run(input);
-            } catch (BorkError e) {
+            } catch (TunkkiError e) {
                 e.printStackTrace();
             }
         }
     }
 
-    public static void run(String input) throws BorkError {
+    public static void run(String input) throws TunkkiError {
         Tokenizer tokenizer = Tokenizer.getInstance();
         List<Token> sequence = tokenizer.tokenize(input);
 

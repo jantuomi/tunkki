@@ -6,8 +6,8 @@ import com.jantuomi.tunkki.core.CommandLineArgumentContainer;
 import com.jantuomi.tunkki.core.parser.datatype.DataContainer;
 import com.jantuomi.tunkki.core.parser.datatype.StringDataContainer;
 import com.jantuomi.tunkki.core.parser.datatype.VoidDataContainer;
-import com.jantuomi.tunkki.exception.BorkError;
 import com.jantuomi.tunkki.exception.ExceptionManager;
+import com.jantuomi.tunkki.exception.TunkkiError;
 
 import java.util.Arrays;
 import java.util.List;
@@ -24,12 +24,12 @@ public class IncludeBuiltinFunction extends BuiltinFunction {
     }
 
     @Override
-    public DataContainer evaluate(List<DataContainer> params) throws BorkError {
+    public DataContainer evaluate(List<DataContainer> params) throws TunkkiError {
         String filename;
         if (params.size() == 1 && params.get(0).getType() == DataContainer.Type.String) {
             filename = ((StringDataContainer) params.get(0)).getData();
         } else {
-            ExceptionManager.raise(BorkError.ExceptionType.GeneralError, -1, "Include argument must be a valid file name string.");
+            ExceptionManager.raise(TunkkiError.ExceptionType.GeneralError, -1, "Include argument must be a valid file name string.");
             return null;
         }
 
@@ -42,7 +42,7 @@ public class IncludeBuiltinFunction extends BuiltinFunction {
         Pattern pattern = Pattern.compile("include\\s*\\(\\s*\\\"moikka\\\"\\s*\\)", Pattern.DOTALL);
         Matcher matcher = pattern.matcher(contents);
         if (matcher.matches()) {
-            ExceptionManager.raise(BorkError.ExceptionType.GeneralError, -1, "Recursive include detected, aborting.");
+            ExceptionManager.raise(TunkkiError.ExceptionType.GeneralError, -1, "Recursive include detected, aborting.");
             return null;
         }
 

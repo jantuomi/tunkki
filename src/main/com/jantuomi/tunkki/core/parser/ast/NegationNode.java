@@ -4,8 +4,8 @@ import com.jantuomi.tunkki.core.parser.datatype.BooleanDataContainer;
 import com.jantuomi.tunkki.core.parser.datatype.DataContainer;
 import com.jantuomi.tunkki.core.parser.datatype.IntegerDataContainer;
 import com.jantuomi.tunkki.core.tokenizer.token.Token;
-import com.jantuomi.tunkki.exception.BorkError;
 import com.jantuomi.tunkki.exception.ExceptionManager;
+import com.jantuomi.tunkki.exception.TunkkiError;
 
 /**
  * Created by jan on 21.6.2016.
@@ -16,7 +16,7 @@ public class NegationNode extends UnaryOperatorNode {
     }
 
     @Override
-    public DataContainer evaluate() throws BorkError {
+    public DataContainer evaluate() throws TunkkiError {
         DataContainer d = getOperand().evaluate();
 
         if (d instanceof BooleanDataContainer) {
@@ -27,7 +27,7 @@ public class NegationNode extends UnaryOperatorNode {
                     ((IntegerDataContainer) d).getData() != 0
             );
         }
-        ExceptionManager.raise(BorkError.ExceptionType.TypeError, source.getLine(), "not", d.toString());
+        ExceptionManager.raise(TunkkiError.ExceptionType.TypeError, source.getLine(), "not", d.toString());
         return null;
 
     }

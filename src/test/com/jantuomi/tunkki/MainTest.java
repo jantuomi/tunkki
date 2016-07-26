@@ -1,6 +1,6 @@
 package com.jantuomi.tunkki;
 
-import com.jantuomi.tunkki.exception.BorkError;
+import com.jantuomi.tunkki.exception.TunkkiError;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -43,7 +43,7 @@ public class MainTest {
     }
 
     @Test
-    public void testWholeProcedure() throws BorkError {
+    public void testWholeProcedure() throws TunkkiError {
         String input = "- + 2 5 1";
 
         Main.run(input);

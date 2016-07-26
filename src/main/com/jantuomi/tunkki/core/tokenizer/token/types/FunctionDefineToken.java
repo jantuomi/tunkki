@@ -3,7 +3,7 @@ package com.jantuomi.tunkki.core.tokenizer.token.types;
 import com.jantuomi.tunkki.core.parser.ast.ASTNode;
 import com.jantuomi.tunkki.core.parser.ast.BlockBodyNode;
 import com.jantuomi.tunkki.core.parser.ast.FunctionDefineNode;
-import com.jantuomi.tunkki.exception.BorkError;
+import com.jantuomi.tunkki.exception.TunkkiError;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +17,7 @@ public class FunctionDefineToken extends VarargOperatorToken {
     }
 
     @Override
-    public ASTNode generateNode() throws BorkError {
+    public ASTNode generateNode() throws TunkkiError {
         FunctionDefineNode node = new FunctionDefineNode(this);
         node.setName(args.get(0).getText());
 

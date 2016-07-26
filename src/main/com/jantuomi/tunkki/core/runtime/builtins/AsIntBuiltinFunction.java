@@ -4,7 +4,7 @@ import com.jantuomi.tunkki.core.parser.datatype.BooleanDataContainer;
 import com.jantuomi.tunkki.core.parser.datatype.DataContainer;
 import com.jantuomi.tunkki.core.parser.datatype.IntegerDataContainer;
 import com.jantuomi.tunkki.core.parser.datatype.StringDataContainer;
-import com.jantuomi.tunkki.exception.BorkError;
+import com.jantuomi.tunkki.exception.TunkkiError;
 
 import java.util.Arrays;
 import java.util.List;
@@ -25,7 +25,7 @@ public class AsIntBuiltinFunction extends BuiltinFunction {
     }
 
     @Override
-    public DataContainer evaluate(List<DataContainer> params) throws BorkError {
+    public DataContainer evaluate(List<DataContainer> params) throws TunkkiError {
         if (params.size() != 1) {
             return null;
         }

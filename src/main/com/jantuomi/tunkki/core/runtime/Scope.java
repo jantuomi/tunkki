@@ -1,7 +1,7 @@
 package com.jantuomi.tunkki.core.runtime;
 
 import com.jantuomi.tunkki.core.parser.datatype.DataContainer;
-import com.jantuomi.tunkki.exception.BorkError;
+import com.jantuomi.tunkki.exception.TunkkiError;
 
 import java.util.HashMap;
 import java.util.List;
@@ -24,7 +24,7 @@ public class Scope {
         variables.replace(symbol, value);
     }
 
-    public DataContainer resolveSymbol(String symbol, List<DataContainer> params) throws BorkError {
+    public DataContainer resolveSymbol(String symbol, List<DataContainer> params) throws TunkkiError {
         if (functions.containsKey(symbol)) {
             DataContainer r = functions.get(symbol).evaluate(params);
             return r;

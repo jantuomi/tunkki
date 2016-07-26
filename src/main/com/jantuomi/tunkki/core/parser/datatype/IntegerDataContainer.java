@@ -1,6 +1,6 @@
 package com.jantuomi.tunkki.core.parser.datatype;
 
-import com.jantuomi.tunkki.exception.BorkError;
+import com.jantuomi.tunkki.exception.TunkkiError;
 
 /**
  * Created by jan on 16.6.2016.
@@ -56,7 +56,7 @@ public class IntegerDataContainer extends DataContainer<Integer> {
     }
 
     @Override
-    public DataContainer multiply(DataContainer other) throws BorkError {
+    public DataContainer multiply(DataContainer other) throws TunkkiError {
         switch (other.getType()) {
             case Integer:
                 return new IntegerDataContainer(
@@ -73,7 +73,7 @@ public class IntegerDataContainer extends DataContainer<Integer> {
     }
 
     @Override
-    public DataContainer divide(DataContainer other) throws BorkError {
+    public DataContainer divide(DataContainer other) throws TunkkiError {
         switch (other.getType()) {
             case Integer:
                 return new IntegerDataContainer(

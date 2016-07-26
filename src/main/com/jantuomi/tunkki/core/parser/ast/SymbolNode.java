@@ -3,8 +3,8 @@ package com.jantuomi.tunkki.core.parser.ast;
 import com.jantuomi.tunkki.core.parser.datatype.DataContainer;
 import com.jantuomi.tunkki.core.runtime.State;
 import com.jantuomi.tunkki.core.tokenizer.token.Token;
-import com.jantuomi.tunkki.exception.BorkError;
 import com.jantuomi.tunkki.exception.ExceptionManager;
+import com.jantuomi.tunkki.exception.TunkkiError;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
@@ -42,7 +42,7 @@ public class SymbolNode extends ASTNode {
     }
 
     @Override
-    public DataContainer evaluate() throws BorkError {
+    public DataContainer evaluate() throws TunkkiError {
         List<DataContainer> paramValues = new ArrayList<>();
         if (parameterListNode != null) {
             for (ASTNode param : parameterListNode.getChildren()) {
@@ -53,7 +53,7 @@ public class SymbolNode extends ASTNode {
         if (returnValue != null) {
             return returnValue;
         } else {
-            ExceptionManager.raise(BorkError.ExceptionType.UndeclaredSymbolError, source.getLine(), name,
+            ExceptionManager.raise(TunkkiError.ExceptionType.UndeclaredSymbolError, source.getLine(), name,
                     StringUtils.join(paramValues.stream().map(dataContainer -> dataContainer.toString()).collect(Collectors.toList()), ","));
             return null;
         }

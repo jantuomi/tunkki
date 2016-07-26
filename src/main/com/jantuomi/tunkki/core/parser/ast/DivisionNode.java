@@ -2,8 +2,8 @@ package com.jantuomi.tunkki.core.parser.ast;
 
 import com.jantuomi.tunkki.core.parser.datatype.DataContainer;
 import com.jantuomi.tunkki.core.tokenizer.token.Token;
-import com.jantuomi.tunkki.exception.BorkError;
 import com.jantuomi.tunkki.exception.ExceptionManager;
+import com.jantuomi.tunkki.exception.TunkkiError;
 
 import java.util.Arrays;
 import java.util.List;
@@ -18,7 +18,7 @@ public class DivisionNode extends BinaryOperatorNode {
     }
 
     @Override
-    public DataContainer evaluate() throws BorkError {
+    public DataContainer evaluate() throws TunkkiError {
         DataContainer operand1 = lhs.evaluate();
         DataContainer operand2 = rhs.evaluate();
 
@@ -26,7 +26,7 @@ public class DivisionNode extends BinaryOperatorNode {
         if (result != null) {
             return result;
         } else {
-            ExceptionManager.raise(BorkError.ExceptionType.TypeError, source.getLine(),
+            ExceptionManager.raise(TunkkiError.ExceptionType.TypeError, source.getLine(),
                     operand1.getType().toString(), operand2.getType().toString());
             return null;
         }

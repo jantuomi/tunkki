@@ -3,8 +3,8 @@ package com.jantuomi.tunkki.core.parser;
 import com.jantuomi.tunkki.core.parser.ast.ASTNode;
 import com.jantuomi.tunkki.core.tokenizer.token.ArgumentInfo;
 import com.jantuomi.tunkki.core.tokenizer.token.Token;
-import com.jantuomi.tunkki.exception.BorkError;
 import com.jantuomi.tunkki.exception.ExceptionManager;
+import com.jantuomi.tunkki.exception.TunkkiError;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +29,7 @@ public class Parser {
 
     private Stack<Token> stack;
 
-    public List<Token> parse(List<Token> tokens) throws BorkError {
+    public List<Token> parse(List<Token> tokens) throws TunkkiError {
         this.tokens = tokens;
         this.stack = new Stack<>();
 
@@ -78,7 +78,7 @@ public class Parser {
                     if (stack.size() > 0) {
                         args.add(stack.pop());
                     } else {
-                        ExceptionManager.raise(BorkError.ExceptionType.ArgumentError, t.getLine(),
+                        ExceptionManager.raise(TunkkiError.ExceptionType.ArgumentError, t.getLine(),
                                 t.toString(), Integer.toString(argumentInfo.getCount()));
                         return null;
                     }

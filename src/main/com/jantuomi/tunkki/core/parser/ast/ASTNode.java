@@ -2,7 +2,7 @@ package com.jantuomi.tunkki.core.parser.ast;
 
 import com.jantuomi.tunkki.core.parser.datatype.DataContainer;
 import com.jantuomi.tunkki.core.tokenizer.token.Token;
-import com.jantuomi.tunkki.exception.BorkError;
+import com.jantuomi.tunkki.exception.TunkkiError;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ import java.util.List;
  */
 abstract public class ASTNode {
 
-    public abstract DataContainer evaluate() throws BorkError;
+    public abstract DataContainer evaluate() throws TunkkiError;
 
     protected Token source;
 

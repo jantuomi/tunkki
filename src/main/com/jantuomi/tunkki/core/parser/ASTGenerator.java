@@ -2,7 +2,7 @@ package com.jantuomi.tunkki.core.parser;
 
 import com.jantuomi.tunkki.core.parser.ast.ASTNode;
 import com.jantuomi.tunkki.core.tokenizer.token.Token;
-import com.jantuomi.tunkki.exception.BorkError;
+import com.jantuomi.tunkki.exception.TunkkiError;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +19,7 @@ public class ASTGenerator {
         return instance;
     }
 
-    public List<ASTNode> generate(List<Token> trees) throws BorkError {
+    public List<ASTNode> generate(List<Token> trees) throws TunkkiError {
         List<ASTNode> list = new ArrayList<>();
 
         for (Token root : trees) {

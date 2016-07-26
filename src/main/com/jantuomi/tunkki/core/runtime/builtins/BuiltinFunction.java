@@ -2,7 +2,7 @@ package com.jantuomi.tunkki.core.runtime.builtins;
 
 import com.jantuomi.tunkki.core.parser.datatype.DataContainer;
 import com.jantuomi.tunkki.core.runtime.Function;
-import com.jantuomi.tunkki.exception.BorkError;
+import com.jantuomi.tunkki.exception.TunkkiError;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ abstract public class BuiltinFunction extends Function{
     }
 
     @Override
-    abstract public DataContainer evaluate(List<DataContainer> params) throws BorkError;
+    abstract public DataContainer evaluate(List<DataContainer> params) throws TunkkiError;
 
     @Override
     abstract public String getName();

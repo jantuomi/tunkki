@@ -2,7 +2,7 @@ package com.jantuomi.tunkki.core.runtime;
 
 import com.jantuomi.tunkki.core.parser.datatype.DataContainer;
 import com.jantuomi.tunkki.core.runtime.builtins.BuiltinManager;
-import com.jantuomi.tunkki.exception.BorkError;
+import com.jantuomi.tunkki.exception.TunkkiError;
 
 import java.util.Arrays;
 import java.util.List;
@@ -32,16 +32,16 @@ public class State {
 
     }
 
-    private DataContainer resolveSymbol(String symbol) throws BorkError {
+    private DataContainer resolveSymbol(String symbol) throws TunkkiError {
         return scopes.peek().resolveSymbol(symbol, Arrays.asList());
     }
 
-    public DataContainer getSymbolValue(String symbol) throws BorkError {
+    public DataContainer getSymbolValue(String symbol) throws TunkkiError {
         DataContainer d = resolveSymbol(symbol);
         return d;
     }
 
-    public DataContainer getSymbolValue(String symbol, List<DataContainer> parameters) throws BorkError {
+    public DataContainer getSymbolValue(String symbol, List<DataContainer> parameters) throws TunkkiError {
         return scopes.peek().resolveSymbol(symbol, parameters);
     }
 

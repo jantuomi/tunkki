@@ -3,7 +3,7 @@ package com.jantuomi.tunkki.core.tokenizer.token.types;
 import com.jantuomi.tunkki.core.parser.ast.ASTNode;
 import com.jantuomi.tunkki.core.parser.ast.ParameterListNode;
 import com.jantuomi.tunkki.core.tokenizer.token.Token;
-import com.jantuomi.tunkki.exception.BorkError;
+import com.jantuomi.tunkki.exception.TunkkiError;
 
 /**
  * Created by jan on 19.6.2016.
@@ -14,7 +14,7 @@ public class OpenParenToken extends VarargOperatorToken {
     }
 
     @Override
-    public ASTNode generateNode() throws BorkError {
+    public ASTNode generateNode() throws TunkkiError {
         ParameterListNode node = new ParameterListNode(this);
 
         for (Token token : args) {

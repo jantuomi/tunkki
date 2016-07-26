@@ -1,8 +1,8 @@
 package com.jantuomi.tunkki.core.tokenizer.token;
 
 import com.jantuomi.tunkki.core.parser.ast.ASTNode;
-import com.jantuomi.tunkki.exception.BorkError;
 import com.jantuomi.tunkki.exception.ExceptionManager;
+import com.jantuomi.tunkki.exception.TunkkiError;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
@@ -27,7 +27,7 @@ abstract public class Token {
         }
     }
 
-    abstract public ASTNode generateNode() throws BorkError;
+    abstract public ASTNode generateNode() throws TunkkiError;
 
     /* Token types, ordered by precedence */
     public enum Type {
@@ -130,7 +130,7 @@ abstract public class Token {
         initialize(type, text, text);
     }
 
-    public static Token makeToken(String string, Map<Type, String> regexes, int line) throws BorkError {
+    public static Token makeToken(String string, Map<Type, String> regexes, int line) throws TunkkiError {
         Type type = Type.NotAToken;
         String text = Character.toString(string.charAt(0));
 
@@ -147,7 +147,7 @@ abstract public class Token {
         return null;
     }
 
-    public static Token matchToken(String string, Type type, String regex, int line) throws BorkError {
+    public static Token matchToken(String string, Type type, String regex, int line) throws TunkkiError {
         Pattern pattern = Pattern.compile(regex, Pattern.DOTALL);
         Matcher matcher = pattern.matcher(string);
 
@@ -160,7 +160,7 @@ abstract public class Token {
                 token.setLine(line);
             }
             else {
-                ExceptionManager.raise(BorkError.ExceptionType.IllegalTokenError, line,
+                ExceptionManager.raise(TunkkiError.ExceptionType.IllegalTokenError, line,
                         type.toString()
                 );
             }

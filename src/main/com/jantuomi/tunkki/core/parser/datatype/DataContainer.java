@@ -1,6 +1,6 @@
 package com.jantuomi.tunkki.core.parser.datatype;
 
-import com.jantuomi.tunkki.exception.BorkError;
+import com.jantuomi.tunkki.exception.TunkkiError;
 
 /**
  * Created by jan on 11.6.2016.
@@ -30,8 +30,8 @@ abstract public class DataContainer<T> {
     @Override
     abstract public String toString();
 
-    abstract public DataContainer<T> add(DataContainer<T> other) throws BorkError;
-    public abstract DataContainer<T> subtract(DataContainer<T> other) throws BorkError;
-    public abstract DataContainer<T> multiply(DataContainer<T> other) throws BorkError;
-    public abstract DataContainer<T> divide(DataContainer<T> other) throws BorkError;
+    abstract public DataContainer<T> add(DataContainer<T> other) throws TunkkiError;
+    public abstract DataContainer<T> subtract(DataContainer<T> other) throws TunkkiError;
+    public abstract DataContainer<T> multiply(DataContainer<T> other) throws TunkkiError;
+    public abstract DataContainer<T> divide(DataContainer<T> other) throws TunkkiError;
 }

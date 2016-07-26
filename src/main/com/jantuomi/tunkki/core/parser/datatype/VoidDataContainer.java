@@ -1,6 +1,6 @@
 package com.jantuomi.tunkki.core.parser.datatype;
 
-import com.jantuomi.tunkki.exception.BorkError;
+import com.jantuomi.tunkki.exception.TunkkiError;
 
 /**
  * Created by jan on 17.6.2016.
@@ -28,12 +28,12 @@ public class VoidDataContainer extends DataContainer<Integer> {
     }
 
     @Override
-    public DataContainer<Integer> multiply(DataContainer<Integer> other) throws BorkError {
+    public DataContainer<Integer> multiply(DataContainer<Integer> other) throws TunkkiError {
         return null;
     }
 
     @Override
-    public DataContainer<Integer> divide(DataContainer<Integer> other) throws BorkError {
+    public DataContainer<Integer> divide(DataContainer<Integer> other) throws TunkkiError {
         return null;
     }
 }

@@ -3,7 +3,7 @@ package com.jantuomi.tunkki.core.parser.ast;
 import com.jantuomi.tunkki.core.parser.datatype.DataContainer;
 import com.jantuomi.tunkki.core.runtime.State;
 import com.jantuomi.tunkki.core.tokenizer.token.Token;
-import com.jantuomi.tunkki.exception.BorkError;
+import com.jantuomi.tunkki.exception.TunkkiError;
 
 import java.util.Arrays;
 import java.util.List;
@@ -17,7 +17,7 @@ public class AssignmentNode extends BinaryOperatorNode {
     }
 
     @Override
-    public DataContainer evaluate() throws BorkError {
+    public DataContainer evaluate() throws TunkkiError {
         SymbolNode symbol = (SymbolNode) lhs;
         DataContainer rValue = rhs.evaluate();
         State.getInstance().setSymbolValueToScope(

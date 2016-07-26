@@ -3,7 +3,7 @@ package com.jantuomi.tunkki.core.parser.ast;
 import com.jantuomi.tunkki.core.parser.datatype.DataContainer;
 import com.jantuomi.tunkki.core.parser.datatype.VoidDataContainer;
 import com.jantuomi.tunkki.core.tokenizer.token.Token;
-import com.jantuomi.tunkki.exception.BorkError;
+import com.jantuomi.tunkki.exception.TunkkiError;
 
 /**
  * Created by jan on 17.6.2016.
@@ -14,7 +14,7 @@ public class BlockBodyNode extends VarargOperatorNode {
     }
 
     @Override
-    public DataContainer evaluate() throws BorkError {
+    public DataContainer evaluate() throws TunkkiError {
         DataContainer returnValue = new VoidDataContainer();
 
         for (ASTNode node : args) {
