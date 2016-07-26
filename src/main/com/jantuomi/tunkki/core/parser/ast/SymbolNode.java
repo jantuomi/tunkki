@@ -8,7 +8,6 @@ import com.jantuomi.tunkki.exception.TunkkiError;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,15 +16,15 @@ import java.util.stream.Collectors;
  */
 public class SymbolNode extends ASTNode {
 
-    public ParameterListNode getParameterListNode() {
-        return parameterListNode;
+    public List<ASTNode> getParameters() {
+        return parameters;
     }
 
-    public void setParameterListNode(ParameterListNode parameterListNode) {
-        this.parameterListNode = parameterListNode;
+    public void setParameters(List<ASTNode> parameters) {
+        this.parameters = parameters;
     }
 
-    private ParameterListNode parameterListNode;
+    private List<ASTNode> parameters = new ArrayList<>();
 
     public void setName(String name) {
         this.name = name;
@@ -44,11 +43,14 @@ public class SymbolNode extends ASTNode {
     @Override
     public DataContainer evaluate() throws TunkkiError {
         List<DataContainer> paramValues = new ArrayList<>();
-        if (parameterListNode != null) {
-            for (ASTNode param : parameterListNode.getChildren()) {
-                paramValues.add(param.evaluate());
+        for (ASTNode param : parameters) {
+            DataContainer value = param.evaluate();
+            if (value != null) {
+                paramValues.add(value);
             }
+
         }
+
         DataContainer returnValue = State.getInstance().getSymbolValue(name, paramValues);
         if (returnValue != null) {
             return returnValue;
@@ -61,10 +63,6 @@ public class SymbolNode extends ASTNode {
 
     @Override
     List<ASTNode> getChildren() {
-        if (parameterListNode == null) {
-            return Arrays.asList();
-        } else {
-            return Arrays.asList(parameterListNode);
-        }
+        return parameters;
     }
 }

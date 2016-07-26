@@ -50,16 +50,14 @@ public class Parser {
             This branch is executed if the token has a variable list of arguments
              */
             if (argumentInfo.getVarargs()) {
-                while (true) {
-                    if (stack.size() > 0) {
-                        Token arg = stack.pop();
-                        if (arg.getTokenType() != argumentInfo.getTerminator()) {
-                            args.add(arg);
-                        }
-                        else {
-                            args.add(arg);
-                            break;
-                        }
+                while (stack.size() > 0) {
+                    Token arg = stack.pop();
+                    if (arg.getTokenType() != argumentInfo.getTerminator()) {
+                        args.add(arg);
+                    }
+                    else {
+                        args.add(arg);
+                        break;
                     }
                 }
             }

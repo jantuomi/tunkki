@@ -54,7 +54,7 @@ public class Tokenizer {
         tokenRegexes.put(Token.Type.EqualsToken, "^(\\=\\=)");
         tokenRegexes.put(Token.Type.NotEqualsToken, "^(\\!\\=)");
         tokenRegexes.put(Token.Type.OpenParenToken, "^(\\()");
-        tokenRegexes.put(Token.Type.ClosedParenToken, "^(\\))");
+        tokenRegexes.put(Token.Type.CallEndToken, "^(\\!)");
         tokenRegexes.put(Token.Type.FunctionDefineToken, "^(func)\\b");
         tokenRegexes.put(Token.Type.FunctionBodyToken, "^(as)\\b");
         tokenRegexes.put(Token.Type.BranchBodyToken, "^(then)\\b");
@@ -63,7 +63,8 @@ public class Tokenizer {
         tokenRegexes.put(Token.Type.DeclarationToken, "^(decl)\\b");
         tokenRegexes.put(Token.Type.BranchToken, "^(if)\\b");
 
-        tokenRegexes.put(Token.Type.SymbolToken, "^([a-zA-Z]+\\w*)");
+        tokenRegexes.put(Token.Type.CallToken, "^([a-zA-Z]+\\w*)\\?[\\s|\\!]");
+        tokenRegexes.put(Token.Type.SymbolToken, "^([a-zA-Z]+\\w*)\\b");
 
         discardedTokenTypes.add(Token.Type.WhitespaceToken);
         discardedTokenTypes.add(Token.Type.CommentToken);

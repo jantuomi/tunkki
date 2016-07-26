@@ -5,9 +5,9 @@ import com.jantuomi.tunkki.core.parser.ast.ASTNode;
 /**
  * Created by jan on 19.6.2016.
  */
-public class ClosedParenToken extends TerminalToken {
-    public ClosedParenToken() {
-        super(Type.ClosedParenToken);
+public class CallEndToken extends TerminalToken {
+    public CallEndToken() {
+        super(Type.CallEndToken);
     }
 
     @Override

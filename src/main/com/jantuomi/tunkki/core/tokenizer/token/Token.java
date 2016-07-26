@@ -48,7 +48,7 @@ abstract public class Token {
         NotEqualsToken,
 
         OpenParenToken,
-        ClosedParenToken,
+        CallEndToken,
 
         FunctionDefineToken,
         DeclarationToken,
@@ -63,6 +63,8 @@ abstract public class Token {
 
         BranchToken,
         SymbolToken,
+        CallToken,
+
         EndBlockToken,
         FunctionBodyToken,
         BranchBodyToken,

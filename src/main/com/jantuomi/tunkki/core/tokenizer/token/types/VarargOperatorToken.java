@@ -12,6 +12,10 @@ abstract public class VarargOperatorToken extends Token {
 
     protected List<Token> args;
 
+    public VarargOperatorToken(Type type, String text, String rawText) {
+        super(type, text, rawText);
+    }
+
     public VarargOperatorToken(Type type, String text) {
         super(type, text);
     }

@@ -16,7 +16,7 @@ public abstract class OptionalArgumentToken extends Token {
 
     protected Token optionalArgument;
 
-    public void setOptionalArgument(OpenParenToken optionalArgument) {
+    public void setOptionalArgument(Token optionalArgument) {
         this.optionalArgument = optionalArgument;
     }
 
@@ -32,7 +32,7 @@ public abstract class OptionalArgumentToken extends Token {
     @Override
     public Token setArguments(List<Token> args) {
         if (args.size() > 0) {
-            setOptionalArgument((OpenParenToken) args.get(0));
+            setOptionalArgument(args.get(0));
         }
         return this;
     }

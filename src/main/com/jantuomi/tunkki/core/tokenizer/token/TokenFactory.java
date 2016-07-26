@@ -56,10 +56,10 @@ public class TokenFactory {
                 return new AssignmentToken();
             case SymbolToken:
                 return new SymbolToken(text);
-            case OpenParenToken:
-                return new OpenParenToken();
-            case ClosedParenToken:
-                return new ClosedParenToken();
+            case CallToken:
+                return new CallToken(text, rawText);
+            case CallEndToken:
+                return new CallEndToken();
             case BranchToken:
                 return new BranchToken();
             case NegationToken:
