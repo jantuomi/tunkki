@@ -11,8 +11,8 @@ import java.util.Scanner;
 /**
  * Created by jan on 21.6.2016.
  */
-public class InBuiltinFunction extends BuiltinFunction {
-    public InBuiltinFunction() {
+public class InputBuiltinFunction extends BuiltinFunction {
+    public InputBuiltinFunction() {
         super(
                 Arrays.asList("expression")
         );
@@ -20,7 +20,7 @@ public class InBuiltinFunction extends BuiltinFunction {
 
     @Override
     public String getName() {
-        return "in";
+        return "input";
     }
 
     @Override

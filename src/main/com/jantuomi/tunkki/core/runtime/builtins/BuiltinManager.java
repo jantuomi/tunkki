@@ -18,8 +18,8 @@ public class BuiltinManager {
     private List<Function> builtins = new ArrayList<>();
 
     private BuiltinManager() {
-        builtins.add(new OutBuiltinFunction());
-        builtins.add(new InBuiltinFunction());
+        builtins.add(new OutputBuiltinFunction());
+        builtins.add(new InputBuiltinFunction());
         builtins.add(new ConcatBuiltinFunction());
         builtins.add(new AsIntBuiltinFunction());
         builtins.add(new IncludeBuiltinFunction());

@@ -10,8 +10,8 @@ import java.util.List;
 /**
  * Created by jan on 21.6.2016.
  */
-public class OutBuiltinFunction extends BuiltinFunction {
-    public OutBuiltinFunction() {
+public class OutputBuiltinFunction extends BuiltinFunction {
+    public OutputBuiltinFunction() {
         super(
                 Arrays.asList("expression")
         );
@@ -19,7 +19,7 @@ public class OutBuiltinFunction extends BuiltinFunction {
 
     @Override
     public String getName() {
-        return "out";
+        return "output";
     }
 
     @Override
