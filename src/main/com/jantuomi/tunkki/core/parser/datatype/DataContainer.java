@@ -8,6 +8,7 @@ import com.jantuomi.tunkki.exception.TunkkiError;
 abstract public class DataContainer<T> {
 
     public enum Type {
+        List,
         Integer,
         Double,
         String,
