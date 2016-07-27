@@ -23,6 +23,7 @@ public class BuiltinManager {
         builtins.add(new ConcatBuiltinFunction());
         builtins.add(new AsIntBuiltinFunction());
         builtins.add(new IncludeBuiltinFunction());
+        builtins.add(new ListBuiltinFunction());
     }
 
     public List<Function> getBuiltins() {

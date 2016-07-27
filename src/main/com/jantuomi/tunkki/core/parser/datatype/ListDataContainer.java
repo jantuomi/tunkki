@@ -9,26 +9,31 @@ import java.util.stream.Collectors;
 /**
  * Created by jan on 27.7.2016.
  */
-public class ListDataContainer extends DataContainer{
+public class ListDataContainer extends DataContainer<List<DataContainer>> {
+
+    public ListDataContainer(List<DataContainer> elements) {
+        setData(elements);
+    }
+
     @Override
     public Type getType() {
         return Type.List;
     }
 
-    private List<DataContainer> elements = new ArrayList<>();
-
     @Override
     public String toString() {
-        List<String> strings = elements.stream().map( dataContainer -> dataContainer.toString() ).collect(Collectors.toList());
-        return String.join(", ", strings);
+        List<String> strings = getData().stream().map( dataContainer -> dataContainer.toString() ).collect(Collectors.toList());
+        return String.format("[%s]", String.join(", ", strings));
     }
 
     @Override
     public DataContainer add(DataContainer other) throws TunkkiError {
         switch (other.getType()) {
             case List:
-                elements.addAll(((ListDataContainer) other).elements);
-                break;
+                List<DataContainer> newList = new ArrayList<>();
+                newList.addAll(getData());
+                newList.addAll(((ListDataContainer) other).getData());
+                return new ListDataContainer(newList);
         }
         return null;
     }
