@@ -39,7 +39,8 @@ public class IncludeBuiltinFunction extends BuiltinFunction {
             return null;
         }
 
-        Pattern pattern = Pattern.compile("include\\s*\\(\\s*\\\"moikka\\\"\\s*\\)", Pattern.DOTALL);
+        String regex = String.format(".*include\\?\\s+\"\\s?%s\\s?\"\\s?\\!.*", Pattern.quote(filename));
+        Pattern pattern = Pattern.compile(regex, Pattern.DOTALL);
         Matcher matcher = pattern.matcher(contents);
         if (matcher.matches()) {
             ExceptionManager.raise(TunkkiError.ExceptionType.GeneralError, -1, "Recursive include detected, aborting.");
