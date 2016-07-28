@@ -19,11 +19,11 @@ public class ContainsBuiltinFunction extends BuiltinFunction {
     @Override
     public DataContainer evaluate(List<DataContainer> params) throws TunkkiError {
         if (params.size() != 2) {
-            throw new TunkkiError(TunkkiError.ExceptionType.ArgumentError, -1, getName(), DataContainer.toString(params));
+            throw new TunkkiError(TunkkiError.ExceptionType.FunctionArgumentError, -1, getName(), DataContainer.toString(params));
         }
 
         if (params.get(0).getType() != DataContainer.Type.List) {
-            throw new TunkkiError(TunkkiError.ExceptionType.ArgumentError, -1, getName(), DataContainer.toString(params));
+            throw new TunkkiError(TunkkiError.ExceptionType.FunctionArgumentError, -1, getName(), DataContainer.toString(params));
         }
 
         ListDataContainer list = (ListDataContainer) params.get(0);

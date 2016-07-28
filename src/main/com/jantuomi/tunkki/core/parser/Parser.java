@@ -76,7 +76,7 @@ public class Parser {
                     if (stack.size() > 0) {
                         args.add(stack.pop());
                     } else {
-                        ExceptionManager.raise(TunkkiError.ExceptionType.ArgumentError, t.getLine(),
+                        ExceptionManager.raise(TunkkiError.ExceptionType.FunctionArgumentError, t.getLine(),
                                 t.toString(), Integer.toString(argumentInfo.getCount()));
                         return null;
                     }

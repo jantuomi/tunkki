@@ -5,6 +5,7 @@ import com.jantuomi.tunkki.core.parser.datatype.StringDataContainer;
 import com.jantuomi.tunkki.core.runtime.Function;
 import com.jantuomi.tunkki.core.runtime.State;
 import com.jantuomi.tunkki.core.tokenizer.token.Token;
+import com.jantuomi.tunkki.exception.TunkkiError;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,11 +32,16 @@ public class FunctionDefineNode extends VarargOperatorNode {
     }
 
     @Override
-    public DataContainer evaluate() {
+    public DataContainer evaluate() throws TunkkiError {
         List<String> argumentNames = new ArrayList<>();
-        for (ASTNode arg : args) {
-            SymbolNode argSym = (SymbolNode) arg;
-            argumentNames.add(argSym.getName());
+        try {
+            for (ASTNode arg : args) {
+                SymbolNode argSym = (SymbolNode) arg;
+                argumentNames.add(argSym.getName());
+            }
+        }
+        catch (Exception ex) {
+            throw new TunkkiError(TunkkiError.ExceptionType.ExpectedTokenError, getLine(), getText());
         }
         Function function = new Function(argumentNames, (BlockBodyNode) body);
         function.setName(name);
@@ -57,7 +63,7 @@ public class FunctionDefineNode extends VarargOperatorNode {
             System.out.print("\t");
         }
 
-        System.out.println(String.format("Arguments: "));
+        System.out.println("Arguments: ");
 
         for (ASTNode node : args) {
             node.print(indent + 2);
@@ -67,7 +73,7 @@ public class FunctionDefineNode extends VarargOperatorNode {
             System.out.print("\t");
         }
 
-        System.out.println(String.format("Body statements: "));
+        System.out.println("Body statements: ");
         body.print(indent + 2);
     }
 }

@@ -13,19 +13,21 @@ public class TunkkiError extends Exception {
         IllegalTokenError,
         SyntaxError,
         TypeError,
-        ArgumentError,
+        FunctionArgumentError,
+        ExpectedTokenError,
         UndeclaredSymbolError,
         IncludeError,
         GeneralError
     }
 
-    public static Map<ExceptionType, String> errorTexts = new HashMap<>();
+    private static Map<ExceptionType, String> errorTexts = new HashMap<>();
 
     static {
         errorTexts.put(ExceptionType.IllegalTokenError, "Unknown or illegal token %s found.");
         errorTexts.put(ExceptionType.SyntaxError, "Unexpected %s.");
         errorTexts.put(ExceptionType.TypeError, "Incompatible types %s and %s.");
-        errorTexts.put(ExceptionType.ArgumentError, "The parameter list given to function %s is either of wrong length or the parameters are of wrong type. Actual: %s");
+        errorTexts.put(ExceptionType.ExpectedTokenError, "Token '%s' expects a different token stack.");
+        errorTexts.put(ExceptionType.FunctionArgumentError, "The parameter list given to function %s is either of wrong length or the parameters are of wrong type. Actual: %s");
         errorTexts.put(ExceptionType.UndeclaredSymbolError, "No symbol %s defined, parameters: [%s].");
         errorTexts.put(ExceptionType.IncludeError, "File %s could not be included.");
         errorTexts.put(ExceptionType.GeneralError, "%s");
@@ -40,9 +42,9 @@ public class TunkkiError extends Exception {
         this.completeMessage = formatMessage(exceptionType.toString() + ": " + what(exceptionType), line, args);
     }
 
-    private static String formatMessage(String message, int line, String... args) {
+    private static String formatMessage(String message, int line, String... parameters) {
 
-        message = String.format(message, args);
+        message = String.format(message, parameters);
         if (line == -1) {
             return "\n" + message;
         } else {

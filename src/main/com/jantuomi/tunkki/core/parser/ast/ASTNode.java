@@ -19,6 +19,22 @@ abstract public class ASTNode {
         this.source = token;
     }
 
+    public String getText() {
+        if (source != null) {
+            return source.getText();
+        } else {
+            return "unknown node";
+        }
+    }
+
+    public int getLine() {
+        if (source != null) {
+            return source.getLine();
+        } else {
+            return -1;
+        }
+    }
+
     public Token.Type tokenType() {
         return source.getTokenType();
     }
