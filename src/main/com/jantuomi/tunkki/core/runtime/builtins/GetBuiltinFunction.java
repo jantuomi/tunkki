@@ -20,15 +20,15 @@ public class GetBuiltinFunction extends BuiltinFunction {
     @Override
     public DataContainer evaluate(List<DataContainer> params) throws TunkkiError {
         if (params.size() != 2) {
-            throw new TunkkiError(TunkkiError.ExceptionType.ArgumentError, -1, "Function 'get' expects two arguments.");
+            throw new TunkkiError(TunkkiError.ExceptionType.ArgumentError, -1, getName(), params.toString());
         }
 
         if (params.get(0).getType() != DataContainer.Type.List) {
-            throw new TunkkiError(TunkkiError.ExceptionType.ArgumentError, -1, "Function 'get' expects a list as its first argument.");
+            throw new TunkkiError(TunkkiError.ExceptionType.ArgumentError, -1, getName(), DataContainer.toString(params));
         }
 
         if (params.get(1).getType() != DataContainer.Type.Integer) {
-            throw new TunkkiError(TunkkiError.ExceptionType.ArgumentError, -1, "Function 'get' expects an integer as its second argument.");
+            throw new TunkkiError(TunkkiError.ExceptionType.ArgumentError, -1, getName(), DataContainer.toString(params));
         }
 
         ListDataContainer list = (ListDataContainer) params.get(0);

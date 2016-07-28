@@ -12,6 +12,7 @@ import java.util.List;
 abstract public class BuiltinFunction extends Function{
     public BuiltinFunction(List<String> argumentNames) {
         super(argumentNames, null);
+        BuiltinManager.getInstance().addBuiltin(this);
     }
 
     @Override

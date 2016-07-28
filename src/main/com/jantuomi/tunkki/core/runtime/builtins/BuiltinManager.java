@@ -15,20 +15,26 @@ public class BuiltinManager {
         return instance;
     }
 
-    private List<Function> builtins = new ArrayList<>();
+    private List<BuiltinFunction> builtins;
 
     private BuiltinManager() {
-        builtins.add(new OutputBuiltinFunction());
-        builtins.add(new InputBuiltinFunction());
-        builtins.add(new ConcatBuiltinFunction());
-        builtins.add(new AsIntBuiltinFunction());
-        builtins.add(new IncludeBuiltinFunction());
-        builtins.add(new ListBuiltinFunction());
-        builtins.add(new ContainsBuiltinFunction());
-        builtins.add(new GetBuiltinFunction());
+        instance = this;
+        builtins = new ArrayList<>();
+        new OutputBuiltinFunction();
+        new InputBuiltinFunction();
+        new ConcatBuiltinFunction();
+        new AsIntBuiltinFunction();
+        new IncludeBuiltinFunction();
+        new ListBuiltinFunction();
+        new ContainsBuiltinFunction();
+        new GetBuiltinFunction();
     }
 
-    public List<Function> getBuiltins() {
+    public void addBuiltin(BuiltinFunction func) {
+        builtins.add(func);
+    }
+
+    public List<BuiltinFunction> getBuiltins() {
         return builtins;
     }
 }
