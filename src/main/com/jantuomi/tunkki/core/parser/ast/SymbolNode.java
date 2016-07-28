@@ -51,12 +51,22 @@ public class SymbolNode extends ASTNode {
 
         }
 
-        DataContainer returnValue = State.getInstance().getSymbolValue(name, paramValues);
+
+        DataContainer returnValue;
+        try {
+             returnValue = State.getInstance().getSymbolValue(name, paramValues);
+        }
+        /* If a TunkkiError is caught, pass it on with line information */
+        catch (TunkkiError ex) {
+            throw new TunkkiError(ex.getType(), getLine(),
+                    ex.getArguments().toArray(new String[ex.getArguments().size()]));
+        }
+
         if (returnValue != null) {
             return returnValue;
         } else {
-            ExceptionManager.raise(TunkkiError.ExceptionType.UndeclaredSymbolError, source.getLine(), name,
-                    StringUtils.join(paramValues.stream().map(dataContainer -> dataContainer.toString()).collect(Collectors.toList()), ","));
+            ExceptionManager.raise(TunkkiError.ExceptionType.UndeclaredSymbolError, getLine(), name,
+                    StringUtils.join(paramValues.stream().map(DataContainer::toString).collect(Collectors.toList()), ","));
             return null;
         }
     }

@@ -1,7 +1,9 @@
 package com.jantuomi.tunkki.exception;
 
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -35,10 +37,12 @@ public class TunkkiError extends Exception {
 
     private ExceptionType exceptionType;
     private String completeMessage;
+    private List<String> arguments;
 
     public TunkkiError(ExceptionType exceptionType, int line, String... args) {
         super(exceptionType.toString(), null, false, false);
         this.exceptionType = exceptionType;
+        this.arguments = Arrays.asList(args);
         this.completeMessage = formatMessage(exceptionType.toString() + ": " + what(exceptionType), line, args);
     }
 
@@ -59,5 +63,13 @@ public class TunkkiError extends Exception {
     @Override
     public void printStackTrace() {
         System.err.println(completeMessage);
+    }
+
+    public ExceptionType getType() {
+        return exceptionType;
+    }
+
+    public List<String> getArguments() {
+        return this.arguments;
     }
 }
