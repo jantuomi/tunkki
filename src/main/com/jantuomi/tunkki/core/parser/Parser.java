@@ -86,6 +86,7 @@ public class Parser {
             Token result = t.setArguments(args);
             stack.push(result);
         }
+
         while (stack.size() > 0) {
             output.add(stack.pop());
         }
