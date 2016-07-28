@@ -25,6 +25,7 @@ public class BuiltinManager {
         builtins.add(new IncludeBuiltinFunction());
         builtins.add(new ListBuiltinFunction());
         builtins.add(new ContainsBuiltinFunction());
+        builtins.add(new GetBuiltinFunction());
     }
 
     public List<Function> getBuiltins() {
