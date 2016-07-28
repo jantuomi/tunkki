@@ -76,8 +76,8 @@ public class Parser {
                     if (stack.size() > 0) {
                         args.add(stack.pop());
                     } else {
-                        ExceptionManager.raise(TunkkiError.ExceptionType.FunctionArgumentError, t.getLine(),
-                                t.toString(), Integer.toString(argumentInfo.getCount()));
+                        ExceptionManager.raise(TunkkiError.ExceptionType.ExpectedDifferentTokenError, t.getLine(),
+                                t.getText());
                         return null;
                     }
                 }

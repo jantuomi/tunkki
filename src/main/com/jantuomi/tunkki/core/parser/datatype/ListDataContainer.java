@@ -22,8 +22,7 @@ public class ListDataContainer extends DataContainer<List<DataContainer>> {
 
     @Override
     public String toString() {
-        List<String> strings = getData().stream().map( dataContainer -> dataContainer.toString() ).collect(Collectors.toList());
-        return String.format("[%s]", String.join(", ", strings));
+        return DataContainer.toString(getData());
     }
 
     @Override

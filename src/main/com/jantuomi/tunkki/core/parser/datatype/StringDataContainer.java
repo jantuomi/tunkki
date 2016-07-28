@@ -19,7 +19,7 @@ public class StringDataContainer extends DataContainer<String> {
 
     @Override
     public String toString() {
-        return getData();
+        return String.format("\"%s\"", getData());
     }
 
     @Override
