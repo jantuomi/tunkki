@@ -16,7 +16,7 @@ public class TunkkiError extends Exception {
         SyntaxError,
         TypeError,
         FunctionArgumentError,
-        ExpectedTokenError,
+        ExpectedDifferentTokenError,
         UndeclaredSymbolError,
         IncludeError,
         GeneralError
@@ -28,7 +28,7 @@ public class TunkkiError extends Exception {
         errorTexts.put(ExceptionType.IllegalTokenError, "Unknown or illegal token %s found.");
         errorTexts.put(ExceptionType.SyntaxError, "Unexpected %s.");
         errorTexts.put(ExceptionType.TypeError, "Incompatible types %s and %s.");
-        errorTexts.put(ExceptionType.ExpectedTokenError, "Token '%s' expects a different token stack.");
+        errorTexts.put(ExceptionType.ExpectedDifferentTokenError, "Token '%s' expects a different token stack.");
         errorTexts.put(ExceptionType.FunctionArgumentError, "The parameter list given to function %s is either of wrong length or the parameters are of wrong type. Actual: %s");
         errorTexts.put(ExceptionType.UndeclaredSymbolError, "No symbol %s defined, parameters: [%s].");
         errorTexts.put(ExceptionType.IncludeError, "File %s could not be included.");
@@ -52,7 +52,7 @@ public class TunkkiError extends Exception {
         if (line == -1) {
             return "\n" + message;
         } else {
-            return String.format("\nline %d: ", line) + message;
+            return String.format("\nLine #%d: ", line) + message;
         }
     }
 

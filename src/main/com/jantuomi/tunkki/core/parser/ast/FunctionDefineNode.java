@@ -41,7 +41,7 @@ public class FunctionDefineNode extends VarargOperatorNode {
             }
         }
         catch (Exception ex) {
-            throw new TunkkiError(TunkkiError.ExceptionType.ExpectedTokenError, getLine(), getText());
+            throw new TunkkiError(TunkkiError.ExceptionType.ExpectedDifferentTokenError, getLine(), getText());
         }
         Function function = new Function(argumentNames, (BlockBodyNode) body);
         function.setName(name);

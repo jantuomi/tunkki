@@ -48,9 +48,7 @@ public class SymbolNode extends ASTNode {
             if (value != null) {
                 paramValues.add(value);
             }
-
         }
-
 
         DataContainer returnValue;
         try {

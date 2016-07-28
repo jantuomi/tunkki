@@ -21,7 +21,7 @@ public class FunctionDefineToken extends VarargOperatorToken {
         FunctionDefineNode node = new FunctionDefineNode(this);
 
         if (args.size() == 0) {
-            throw new TunkkiError(TunkkiError.ExceptionType.ExpectedTokenError, -1, getText(), getText());
+            throw new TunkkiError(TunkkiError.ExceptionType.ExpectedDifferentTokenError, getLine(), getText());
         }
 
         node.setName(args.get(0).getText());
@@ -37,7 +37,7 @@ public class FunctionDefineToken extends VarargOperatorToken {
             bodyNode = (BlockBodyNode) args.get(args.size() - 1).generateNode();
         }
         catch (Exception ex) {
-            throw new TunkkiError(TunkkiError.ExceptionType.ExpectedTokenError, -1, getText());
+            throw new TunkkiError(TunkkiError.ExceptionType.ExpectedDifferentTokenError, getLine(), getText());
         }
         node.setBody(bodyNode);
         return node;
