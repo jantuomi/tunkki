@@ -1,6 +1,7 @@
 package com.jantuomi.tunkki.core.runtime;
 
 import com.jantuomi.tunkki.core.parser.datatype.Datatype;
+import com.jantuomi.tunkki.core.parser.datatype.NadaDatatype;
 import com.jantuomi.tunkki.core.runtime.builtins.BuiltinManager;
 import com.jantuomi.tunkki.exception.TunkkiError;
 
@@ -28,8 +29,11 @@ public class State {
             globalScope.addFunction(builtin.getName(), builtin);
         }
 
-        scopes.push(globalScope);
+        /* Add nada to the scope */
+        globalScope.addVariable("nada");
+        globalScope.setVariableValue("nada", new NadaDatatype());
 
+        scopes.push(globalScope);
     }
 
     private Datatype resolveSymbol(String symbol) throws TunkkiError {

@@ -19,7 +19,8 @@ public class TunkkiError extends Exception {
         ExpectedDifferentTokenError,
         UndeclaredSymbolError,
         IncludeError,
-        GeneralError
+        GeneralError,
+        NadaError
     }
 
     private static Map<ExceptionType, String> errorTexts = new HashMap<>();
@@ -33,6 +34,7 @@ public class TunkkiError extends Exception {
         errorTexts.put(ExceptionType.UndeclaredSymbolError, "No symbol %s defined, parameters: [%s].");
         errorTexts.put(ExceptionType.IncludeError, "File %s could not be included.");
         errorTexts.put(ExceptionType.GeneralError, "%s");
+        errorTexts.put(ExceptionType.NadaError, "Can't do operation with a nada value.");
     }
 
     private ExceptionType exceptionType;
