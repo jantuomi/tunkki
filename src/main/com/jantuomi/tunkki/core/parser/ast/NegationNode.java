@@ -1,8 +1,8 @@
 package com.jantuomi.tunkki.core.parser.ast;
 
-import com.jantuomi.tunkki.core.parser.datatype.BooleanDataContainer;
-import com.jantuomi.tunkki.core.parser.datatype.DataContainer;
-import com.jantuomi.tunkki.core.parser.datatype.IntegerDataContainer;
+import com.jantuomi.tunkki.core.parser.datatype.BooleanDatatype;
+import com.jantuomi.tunkki.core.parser.datatype.Datatype;
+import com.jantuomi.tunkki.core.parser.datatype.IntegerDatatype;
 import com.jantuomi.tunkki.core.tokenizer.token.Token;
 import com.jantuomi.tunkki.exception.ExceptionManager;
 import com.jantuomi.tunkki.exception.TunkkiError;
@@ -16,15 +16,15 @@ public class NegationNode extends UnaryOperatorNode {
     }
 
     @Override
-    public DataContainer evaluate() throws TunkkiError {
-        DataContainer d = getOperand().evaluate();
+    public Datatype evaluate() throws TunkkiError {
+        Datatype d = getOperand().evaluate();
 
-        if (d instanceof BooleanDataContainer) {
-            return new BooleanDataContainer(!((BooleanDataContainer) d).getData());
+        if (d instanceof BooleanDatatype) {
+            return new BooleanDatatype(!((BooleanDatatype) d).getData());
         }
-        else if (d instanceof IntegerDataContainer) {
-            return new BooleanDataContainer(
-                    ((IntegerDataContainer) d).getData() != 0
+        else if (d instanceof IntegerDatatype) {
+            return new BooleanDatatype(
+                    ((IntegerDatatype) d).getData() != 0
             );
         }
         ExceptionManager.raise(TunkkiError.ExceptionType.TypeError, source.getLine(), "not", d.toString());

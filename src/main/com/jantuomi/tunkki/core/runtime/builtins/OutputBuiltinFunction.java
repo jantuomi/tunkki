@@ -1,7 +1,7 @@
 package com.jantuomi.tunkki.core.runtime.builtins;
 
-import com.jantuomi.tunkki.core.parser.datatype.DataContainer;
-import com.jantuomi.tunkki.core.parser.datatype.VoidDataContainer;
+import com.jantuomi.tunkki.core.parser.datatype.Datatype;
+import com.jantuomi.tunkki.core.parser.datatype.VoidDatatype;
 import com.jantuomi.tunkki.exception.TunkkiError;
 
 import java.util.Arrays;
@@ -23,9 +23,9 @@ public class OutputBuiltinFunction extends BuiltinFunction {
     }
 
     @Override
-    public DataContainer evaluate(List<DataContainer> params) throws TunkkiError {
-        DataContainer param = params.get(0);
+    public Datatype evaluate(List<Datatype> params) throws TunkkiError {
+        Datatype param = params.get(0);
         System.out.println(param.getData().toString());
-        return new VoidDataContainer();
+        return new VoidDatatype();
     }
 }

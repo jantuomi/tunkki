@@ -1,7 +1,7 @@
 package com.jantuomi.tunkki.core.parser.ast;
 
-import com.jantuomi.tunkki.core.parser.datatype.DataContainer;
-import com.jantuomi.tunkki.core.parser.datatype.StringDataContainer;
+import com.jantuomi.tunkki.core.parser.datatype.Datatype;
+import com.jantuomi.tunkki.core.parser.datatype.StringDatatype;
 import com.jantuomi.tunkki.core.tokenizer.token.Token;
 
 import java.util.Arrays;
@@ -12,8 +12,8 @@ import java.util.List;
  */
 public class StringLiteralNode extends ASTNode {
     @Override
-    public DataContainer evaluate() {
-        return new StringDataContainer(source.getText());
+    public Datatype evaluate() {
+        return new StringDatatype(source.getText());
     }
 
     public StringLiteralNode(Token source) {

@@ -1,6 +1,6 @@
 package com.jantuomi.tunkki.core.parser.ast;
 
-import com.jantuomi.tunkki.core.parser.datatype.DataContainer;
+import com.jantuomi.tunkki.core.parser.datatype.Datatype;
 import com.jantuomi.tunkki.core.runtime.State;
 import com.jantuomi.tunkki.core.tokenizer.token.Token;
 import com.jantuomi.tunkki.exception.TunkkiError;
@@ -17,9 +17,9 @@ public class AssignmentNode extends BinaryOperatorNode {
     }
 
     @Override
-    public DataContainer evaluate() throws TunkkiError {
+    public Datatype evaluate() throws TunkkiError {
         SymbolNode symbol = (SymbolNode) lhs;
-        DataContainer rValue = rhs.evaluate();
+        Datatype rValue = rhs.evaluate();
         State.getInstance().setSymbolValueToScope(
                 symbol.getName(),
                 rValue

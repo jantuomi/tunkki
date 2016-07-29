@@ -1,6 +1,6 @@
 package com.jantuomi.tunkki.core.parser.ast;
 
-import com.jantuomi.tunkki.core.parser.datatype.DataContainer;
+import com.jantuomi.tunkki.core.parser.datatype.Datatype;
 import com.jantuomi.tunkki.core.tokenizer.token.Token;
 import com.jantuomi.tunkki.exception.ExceptionManager;
 import com.jantuomi.tunkki.exception.TunkkiError;
@@ -17,11 +17,11 @@ public class SubtractionNode extends BinaryOperatorNode {
     }
 
     @Override
-    public DataContainer evaluate() throws TunkkiError {
-        DataContainer operand1 = lhs.evaluate();
-        DataContainer operand2 = rhs.evaluate();
+    public Datatype evaluate() throws TunkkiError {
+        Datatype operand1 = lhs.evaluate();
+        Datatype operand2 = rhs.evaluate();
 
-        DataContainer result = operand1.subtract(operand2);
+        Datatype result = operand1.subtract(operand2);
         if (result != null) {
             return result;
         } else {

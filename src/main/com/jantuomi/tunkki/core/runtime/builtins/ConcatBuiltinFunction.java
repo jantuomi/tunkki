@@ -1,7 +1,7 @@
 package com.jantuomi.tunkki.core.runtime.builtins;
 
-import com.jantuomi.tunkki.core.parser.datatype.DataContainer;
-import com.jantuomi.tunkki.core.parser.datatype.StringDataContainer;
+import com.jantuomi.tunkki.core.parser.datatype.Datatype;
+import com.jantuomi.tunkki.core.parser.datatype.StringDatatype;
 import com.jantuomi.tunkki.exception.TunkkiError;
 
 import java.util.Arrays;
@@ -23,13 +23,13 @@ public class ConcatBuiltinFunction extends BuiltinFunction {
     }
 
     @Override
-    public DataContainer evaluate(List<DataContainer> params) throws TunkkiError {
+    public Datatype evaluate(List<Datatype> params) throws TunkkiError {
         StringBuilder sb = new StringBuilder();
-        for (DataContainer d : params) {
+        for (Datatype d : params) {
             sb.append(d.getData());
         }
 
-        return new StringDataContainer(
+        return new StringDatatype(
                 sb.toString()
         );
     }

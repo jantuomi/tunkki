@@ -1,7 +1,7 @@
 package com.jantuomi.tunkki.core.parser.ast;
 
-import com.jantuomi.tunkki.core.parser.datatype.DataContainer;
-import com.jantuomi.tunkki.core.parser.datatype.StringDataContainer;
+import com.jantuomi.tunkki.core.parser.datatype.Datatype;
+import com.jantuomi.tunkki.core.parser.datatype.StringDatatype;
 import com.jantuomi.tunkki.core.runtime.Function;
 import com.jantuomi.tunkki.core.runtime.State;
 import com.jantuomi.tunkki.core.tokenizer.token.Token;
@@ -32,7 +32,7 @@ public class FunctionDefineNode extends VarargOperatorNode {
     }
 
     @Override
-    public DataContainer evaluate() throws TunkkiError {
+    public Datatype evaluate() throws TunkkiError {
         List<String> argumentNames = new ArrayList<>();
         try {
             for (ASTNode arg : args) {
@@ -47,7 +47,7 @@ public class FunctionDefineNode extends VarargOperatorNode {
         function.setName(name);
         State.getInstance().addFunctionToScope(name, function);
 
-        return new StringDataContainer("function " + name);
+        return new StringDatatype("function " + name);
     }
 
     @Override

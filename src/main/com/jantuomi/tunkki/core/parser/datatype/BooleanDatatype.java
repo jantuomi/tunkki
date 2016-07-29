@@ -5,10 +5,10 @@ import com.jantuomi.tunkki.exception.TunkkiError;
 /**
  * Created by jan on 16.6.2016.
  */
-public class BooleanDataContainer extends DataContainer<Boolean> {
+public class BooleanDatatype extends Datatype<Boolean> {
 
 
-    public BooleanDataContainer(boolean value) {
+    public BooleanDatatype(boolean value) {
         setData(value);
     }
 
@@ -23,22 +23,22 @@ public class BooleanDataContainer extends DataContainer<Boolean> {
     }
 
     @Override
-    public DataContainer<Boolean> add(DataContainer<Boolean> other) throws TunkkiError {
+    public Datatype<Boolean> add(Datatype<Boolean> other) throws TunkkiError {
         return null;
     }
 
     @Override
-    public DataContainer<Boolean> subtract(DataContainer<Boolean> other) throws TunkkiError {
+    public Datatype<Boolean> subtract(Datatype<Boolean> other) throws TunkkiError {
         return null;
     }
 
     @Override
-    public DataContainer<Boolean> multiply(DataContainer<Boolean> other) throws TunkkiError {
+    public Datatype<Boolean> multiply(Datatype<Boolean> other) throws TunkkiError {
         return null;
     }
 
     @Override
-    public DataContainer<Boolean> divide(DataContainer<Boolean> other) throws TunkkiError {
+    public Datatype<Boolean> divide(Datatype<Boolean> other) throws TunkkiError {
         return null;
     }
 }

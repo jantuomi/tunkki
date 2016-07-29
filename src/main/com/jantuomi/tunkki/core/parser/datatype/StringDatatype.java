@@ -5,10 +5,10 @@ import com.jantuomi.tunkki.exception.TunkkiError;
 /**
  * Created by jan on 16.6.2016.
  */
-public class StringDataContainer extends DataContainer<String> {
+public class StringDatatype extends Datatype<String> {
 
 
-    public StringDataContainer(String text) {
+    public StringDatatype(String text) {
         setData(text);
     }
 
@@ -23,24 +23,24 @@ public class StringDataContainer extends DataContainer<String> {
     }
 
     @Override
-    public DataContainer<String> add(DataContainer<String> other) {
-        return new StringDataContainer(
+    public Datatype<String> add(Datatype<String> other) {
+        return new StringDatatype(
                 getData() + other.getData()
         );
     }
 
     @Override
-    public DataContainer<String> subtract(DataContainer<String> other) throws TunkkiError {
+    public Datatype<String> subtract(Datatype<String> other) throws TunkkiError {
         return null;
     }
 
     @Override
-    public DataContainer<String> multiply(DataContainer<String> other) throws TunkkiError {
+    public Datatype<String> multiply(Datatype<String> other) throws TunkkiError {
         return null;
     }
 
     @Override
-    public DataContainer<String> divide(DataContainer<String> other) throws TunkkiError {
+    public Datatype<String> divide(Datatype<String> other) throws TunkkiError {
         return null;
     }
 }

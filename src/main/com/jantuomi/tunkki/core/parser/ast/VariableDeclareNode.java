@@ -1,7 +1,7 @@
 package com.jantuomi.tunkki.core.parser.ast;
 
-import com.jantuomi.tunkki.core.parser.datatype.DataContainer;
-import com.jantuomi.tunkki.core.parser.datatype.StringDataContainer;
+import com.jantuomi.tunkki.core.parser.datatype.Datatype;
+import com.jantuomi.tunkki.core.parser.datatype.StringDatatype;
 import com.jantuomi.tunkki.core.runtime.State;
 import com.jantuomi.tunkki.core.tokenizer.token.Token;
 
@@ -20,9 +20,9 @@ public class VariableDeclareNode extends ASTNode {
     }
 
     @Override
-    public DataContainer evaluate() {
+    public Datatype evaluate() {
         State.getInstance().addSymbolToScope(variable.getName());
-        return new StringDataContainer(variable.getName());
+        return new StringDatatype(variable.getName());
     }
 
     @Override

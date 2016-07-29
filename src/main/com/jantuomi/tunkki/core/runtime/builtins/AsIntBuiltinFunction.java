@@ -1,9 +1,9 @@
 package com.jantuomi.tunkki.core.runtime.builtins;
 
-import com.jantuomi.tunkki.core.parser.datatype.BooleanDataContainer;
-import com.jantuomi.tunkki.core.parser.datatype.DataContainer;
-import com.jantuomi.tunkki.core.parser.datatype.IntegerDataContainer;
-import com.jantuomi.tunkki.core.parser.datatype.StringDataContainer;
+import com.jantuomi.tunkki.core.parser.datatype.BooleanDatatype;
+import com.jantuomi.tunkki.core.parser.datatype.Datatype;
+import com.jantuomi.tunkki.core.parser.datatype.IntegerDatatype;
+import com.jantuomi.tunkki.core.parser.datatype.StringDatatype;
 import com.jantuomi.tunkki.exception.TunkkiError;
 
 import java.util.Arrays;
@@ -25,26 +25,26 @@ public class AsIntBuiltinFunction extends BuiltinFunction {
     }
 
     @Override
-    public DataContainer evaluate(List<DataContainer> params) throws TunkkiError {
+    public Datatype evaluate(List<Datatype> params) throws TunkkiError {
         if (params.size() != 1) {
             return null;
         }
-        DataContainer param = params.get(0);
+        Datatype param = params.get(0);
         int i = 0;
-        if (param instanceof StringDataContainer) {
+        if (param instanceof StringDatatype) {
             try {
-                i = Integer.parseInt(((StringDataContainer) param).getData());
+                i = Integer.parseInt(((StringDatatype) param).getData());
             }
             catch (NumberFormatException ex) {
                 return null;
             }
         }
-        else if (param instanceof IntegerDataContainer) {
-            i = ((IntegerDataContainer) param).getData();
+        else if (param instanceof IntegerDatatype) {
+            i = ((IntegerDatatype) param).getData();
         }
-        else if (param instanceof BooleanDataContainer) {
-            i = ((BooleanDataContainer) param).getData() ? 1 : 0;
+        else if (param instanceof BooleanDatatype) {
+            i = ((BooleanDatatype) param).getData() ? 1 : 0;
         }
-        return new IntegerDataContainer(i);
+        return new IntegerDatatype(i);
     }
 }

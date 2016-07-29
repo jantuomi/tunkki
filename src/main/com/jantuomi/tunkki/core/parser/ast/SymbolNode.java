@@ -1,6 +1,6 @@
 package com.jantuomi.tunkki.core.parser.ast;
 
-import com.jantuomi.tunkki.core.parser.datatype.DataContainer;
+import com.jantuomi.tunkki.core.parser.datatype.Datatype;
 import com.jantuomi.tunkki.core.runtime.State;
 import com.jantuomi.tunkki.core.tokenizer.token.Token;
 import com.jantuomi.tunkki.exception.ExceptionManager;
@@ -41,16 +41,16 @@ public class SymbolNode extends ASTNode {
     }
 
     @Override
-    public DataContainer evaluate() throws TunkkiError {
-        List<DataContainer> paramValues = new ArrayList<>();
+    public Datatype evaluate() throws TunkkiError {
+        List<Datatype> paramValues = new ArrayList<>();
         for (ASTNode param : parameters) {
-            DataContainer value = param.evaluate();
+            Datatype value = param.evaluate();
             if (value != null) {
                 paramValues.add(value);
             }
         }
 
-        DataContainer returnValue;
+        Datatype returnValue;
         try {
              returnValue = State.getInstance().getSymbolValue(name, paramValues);
         }
@@ -64,7 +64,7 @@ public class SymbolNode extends ASTNode {
             return returnValue;
         } else {
             ExceptionManager.raise(TunkkiError.ExceptionType.UndeclaredSymbolError, getLine(), name,
-                    StringUtils.join(paramValues.stream().map(DataContainer::toString).collect(Collectors.toList()), ","));
+                    StringUtils.join(paramValues.stream().map(Datatype::toString).collect(Collectors.toList()), ","));
             return null;
         }
     }

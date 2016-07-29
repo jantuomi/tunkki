@@ -5,7 +5,7 @@ import com.jantuomi.tunkki.exception.TunkkiError;
 /**
  * Created by jan on 17.6.2016.
  */
-public class VoidDataContainer extends DataContainer<Integer> {
+public class VoidDatatype extends Datatype<Integer> {
 
     @Override
     public Type getType() {
@@ -18,22 +18,22 @@ public class VoidDataContainer extends DataContainer<Integer> {
     }
 
     @Override
-    public DataContainer<Integer> add(DataContainer<Integer> other) {
+    public Datatype<Integer> add(Datatype<Integer> other) {
         return null;
     }
 
     @Override
-    public DataContainer<Integer> subtract(DataContainer<Integer> other) {
+    public Datatype<Integer> subtract(Datatype<Integer> other) {
         return null;
     }
 
     @Override
-    public DataContainer<Integer> multiply(DataContainer<Integer> other) throws TunkkiError {
+    public Datatype<Integer> multiply(Datatype<Integer> other) throws TunkkiError {
         return null;
     }
 
     @Override
-    public DataContainer<Integer> divide(DataContainer<Integer> other) throws TunkkiError {
+    public Datatype<Integer> divide(Datatype<Integer> other) throws TunkkiError {
         return null;
     }
 }

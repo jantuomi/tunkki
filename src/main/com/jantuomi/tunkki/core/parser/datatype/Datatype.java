@@ -2,14 +2,13 @@ package com.jantuomi.tunkki.core.parser.datatype;
 
 import com.jantuomi.tunkki.exception.TunkkiError;
 
-import javax.xml.crypto.Data;
 import java.util.List;
 import java.util.stream.Collectors;
 
 /**
  * Created by jan on 11.6.2016.
  */
-abstract public class DataContainer<T> {
+abstract public class Datatype<T> {
 
     public enum Type {
         List,
@@ -35,14 +34,14 @@ abstract public class DataContainer<T> {
     @Override
     abstract public String toString();
 
-    abstract public DataContainer<T> add(DataContainer<T> other) throws TunkkiError;
-    public abstract DataContainer<T> subtract(DataContainer<T> other) throws TunkkiError;
-    public abstract DataContainer<T> multiply(DataContainer<T> other) throws TunkkiError;
-    public abstract DataContainer<T> divide(DataContainer<T> other) throws TunkkiError;
+    abstract public Datatype<T> add(Datatype<T> other) throws TunkkiError;
+    public abstract Datatype<T> subtract(Datatype<T> other) throws TunkkiError;
+    public abstract Datatype<T> multiply(Datatype<T> other) throws TunkkiError;
+    public abstract Datatype<T> divide(Datatype<T> other) throws TunkkiError;
 
-    public static String toString(List<DataContainer> variables) {
+    public static String toString(List<Datatype> variables) {
         String result = "[";
-        List<String> strings = variables.stream().map(DataContainer::toString).collect(Collectors.toList());
+        List<String> strings = variables.stream().map(Datatype::toString).collect(Collectors.toList());
         result += String.join(", ", strings);
         result += "]";
         return result;

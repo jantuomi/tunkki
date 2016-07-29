@@ -1,6 +1,6 @@
 package com.jantuomi.tunkki.core.runtime;
 
-import com.jantuomi.tunkki.core.parser.datatype.DataContainer;
+import com.jantuomi.tunkki.core.parser.datatype.Datatype;
 import com.jantuomi.tunkki.exception.TunkkiError;
 
 import java.util.HashMap;
@@ -13,20 +13,20 @@ import java.util.Map;
 public class Scope {
     private Scope parent = null;
 
-    private Map<String, DataContainer> variables = new HashMap<>();
+    private Map<String, Datatype> variables = new HashMap<>();
     private Map<String, Function> functions = new HashMap<>();
 
     public void addVariable(String symbol) {
         variables.put(symbol, null);
     }
 
-    public void setVariableValue(String symbol, DataContainer value) {
+    public void setVariableValue(String symbol, Datatype value) {
         variables.replace(symbol, value);
     }
 
-    public DataContainer resolveSymbol(String symbol, List<DataContainer> params) throws TunkkiError {
+    public Datatype resolveSymbol(String symbol, List<Datatype> params) throws TunkkiError {
         if (functions.containsKey(symbol)) {
-            DataContainer r = functions.get(symbol).evaluate(params);
+            Datatype r = functions.get(symbol).evaluate(params);
             return r;
         }
         if (variables.containsKey(symbol)) {

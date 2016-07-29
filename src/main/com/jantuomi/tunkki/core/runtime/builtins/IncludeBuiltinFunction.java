@@ -3,9 +3,9 @@ package com.jantuomi.tunkki.core.runtime.builtins;
 
 import com.jantuomi.tunkki.Main;
 import com.jantuomi.tunkki.core.CommandLineArgumentContainer;
-import com.jantuomi.tunkki.core.parser.datatype.DataContainer;
-import com.jantuomi.tunkki.core.parser.datatype.StringDataContainer;
-import com.jantuomi.tunkki.core.parser.datatype.VoidDataContainer;
+import com.jantuomi.tunkki.core.parser.datatype.Datatype;
+import com.jantuomi.tunkki.core.parser.datatype.StringDatatype;
+import com.jantuomi.tunkki.core.parser.datatype.VoidDatatype;
 import com.jantuomi.tunkki.exception.ExceptionManager;
 import com.jantuomi.tunkki.exception.TunkkiError;
 
@@ -24,10 +24,10 @@ public class IncludeBuiltinFunction extends BuiltinFunction {
     }
 
     @Override
-    public DataContainer evaluate(List<DataContainer> params) throws TunkkiError {
+    public Datatype evaluate(List<Datatype> params) throws TunkkiError {
         String filename;
-        if (params.size() == 1 && params.get(0).getType() == DataContainer.Type.String) {
-            filename = ((StringDataContainer) params.get(0)).getData();
+        if (params.size() == 1 && params.get(0).getType() == Datatype.Type.String) {
+            filename = ((StringDatatype) params.get(0)).getData();
         } else {
             ExceptionManager.raise(TunkkiError.ExceptionType.GeneralError, -1, "Include argument must be a valid file name string.");
             return null;
@@ -48,7 +48,7 @@ public class IncludeBuiltinFunction extends BuiltinFunction {
         }
 
         Main.run(contents);
-        return new VoidDataContainer();
+        return new VoidDatatype();
     }
 
     @Override

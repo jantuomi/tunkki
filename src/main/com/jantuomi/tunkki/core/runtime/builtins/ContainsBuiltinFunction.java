@@ -1,8 +1,8 @@
 package com.jantuomi.tunkki.core.runtime.builtins;
 
-import com.jantuomi.tunkki.core.parser.datatype.BooleanDataContainer;
-import com.jantuomi.tunkki.core.parser.datatype.DataContainer;
-import com.jantuomi.tunkki.core.parser.datatype.ListDataContainer;
+import com.jantuomi.tunkki.core.parser.datatype.BooleanDatatype;
+import com.jantuomi.tunkki.core.parser.datatype.Datatype;
+import com.jantuomi.tunkki.core.parser.datatype.ListDatatype;
 import com.jantuomi.tunkki.exception.TunkkiError;
 
 import java.util.Arrays;
@@ -17,24 +17,24 @@ public class ContainsBuiltinFunction extends BuiltinFunction {
     }
 
     @Override
-    public DataContainer evaluate(List<DataContainer> params) throws TunkkiError {
+    public Datatype evaluate(List<Datatype> params) throws TunkkiError {
         if (params.size() != 2) {
-            throw new TunkkiError(TunkkiError.ExceptionType.FunctionArgumentError, -1, getName(), DataContainer.toString(params));
+            throw new TunkkiError(TunkkiError.ExceptionType.FunctionArgumentError, -1, getName(), Datatype.toString(params));
         }
 
-        if (params.get(0).getType() != DataContainer.Type.List) {
-            throw new TunkkiError(TunkkiError.ExceptionType.FunctionArgumentError, -1, getName(), DataContainer.toString(params));
+        if (params.get(0).getType() != Datatype.Type.List) {
+            throw new TunkkiError(TunkkiError.ExceptionType.FunctionArgumentError, -1, getName(), Datatype.toString(params));
         }
 
-        ListDataContainer list = (ListDataContainer) params.get(0);
-        DataContainer comp = params.get(1);
+        ListDatatype list = (ListDatatype) params.get(0);
+        Datatype comp = params.get(1);
 
-        for (DataContainer elem : list.getData()) {
+        for (Datatype elem : list.getData()) {
             if (elem.equals(comp)) {
-                return new BooleanDataContainer(true);
+                return new BooleanDatatype(true);
             }
         }
-        return new BooleanDataContainer(false);
+        return new BooleanDatatype(false);
     }
 
     @Override

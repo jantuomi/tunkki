@@ -1,7 +1,7 @@
 package com.jantuomi.tunkki.core.parser.ast;
 
-import com.jantuomi.tunkki.core.parser.datatype.BooleanDataContainer;
-import com.jantuomi.tunkki.core.parser.datatype.DataContainer;
+import com.jantuomi.tunkki.core.parser.datatype.BooleanDatatype;
+import com.jantuomi.tunkki.core.parser.datatype.Datatype;
 import com.jantuomi.tunkki.core.tokenizer.token.Token;
 import com.jantuomi.tunkki.exception.TunkkiError;
 
@@ -23,16 +23,16 @@ public class BranchNode extends ASTNode {
     }
 
     @Override
-    public DataContainer evaluate() throws TunkkiError {
-        DataContainer ev = expression.evaluate();
+    public Datatype evaluate() throws TunkkiError {
+        Datatype ev = expression.evaluate();
         boolean returnValue = false;
-        if (ev instanceof BooleanDataContainer) {
-            returnValue = ((BooleanDataContainer) ev).getData();
+        if (ev instanceof BooleanDatatype) {
+            returnValue = ((BooleanDatatype) ev).getData();
             if (returnValue) {
                 branch.evaluate();
             }
         }
-        return new BooleanDataContainer(returnValue);
+        return new BooleanDatatype(returnValue);
     }
 
     @Override

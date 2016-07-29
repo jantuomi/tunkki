@@ -1,7 +1,7 @@
 package com.jantuomi.tunkki.core.parser.ast;
 
-import com.jantuomi.tunkki.core.parser.datatype.DataContainer;
-import com.jantuomi.tunkki.core.parser.datatype.VoidDataContainer;
+import com.jantuomi.tunkki.core.parser.datatype.Datatype;
+import com.jantuomi.tunkki.core.parser.datatype.VoidDatatype;
 import com.jantuomi.tunkki.core.tokenizer.token.Token;
 
 import java.util.Arrays;
@@ -16,8 +16,8 @@ public class EmptyNode extends ASTNode {
     }
 
     @Override
-    public DataContainer evaluate() {
-        return new VoidDataContainer();
+    public Datatype evaluate() {
+        return new VoidDatatype();
     }
 
     @Override
