@@ -10,6 +10,8 @@ public class DoubleDatatype extends Datatype<Double> {
         setData(value);
     }
 
+    private final static double EPSILON = 0.00001;
+
     @Override
     public Type getType() {
         return Type.Double;
@@ -18,6 +20,19 @@ public class DoubleDatatype extends Datatype<Double> {
     @Override
     public String toString() {
         return getData().toString();
+    }
+
+    @Override
+    public BooleanDatatype equals(Datatype<Double> other) throws TunkkiError {
+        switch (other.getType()) {
+            case Double:
+                return new BooleanDatatype(
+                    Math.abs(getData() - other.getData()) < EPSILON
+                );
+            case Nada:
+                return new BooleanDatatype(false);
+        }
+        return null;
     }
 
     @Override

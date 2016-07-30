@@ -40,6 +40,7 @@ abstract public class Datatype<T> {
     public abstract Datatype<T> subtract(Datatype<T> other) throws TunkkiError;
     public abstract Datatype<T> multiply(Datatype<T> other) throws TunkkiError;
     public abstract Datatype<T> divide(Datatype<T> other) throws TunkkiError;
+    public abstract BooleanDatatype equals(Datatype<T> other) throws TunkkiError;
 
     public static String toString(List<Datatype> variables) {
         String result = "[";

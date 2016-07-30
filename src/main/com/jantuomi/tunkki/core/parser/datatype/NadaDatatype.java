@@ -40,6 +40,14 @@ public class NadaDatatype extends Datatype<Integer> {
         return null;
     }
 
+    @Override
+    public BooleanDatatype equals(Datatype<Integer> other) throws TunkkiError {
+        if (other.getType() == Type.Nada) {
+            return new BooleanDatatype(true);
+        }
+        return new BooleanDatatype(false);
+    }
+
     private void doOperation() throws TunkkiError {
         throw new TunkkiError(TunkkiError.ExceptionType.NadaError, -1);
     }

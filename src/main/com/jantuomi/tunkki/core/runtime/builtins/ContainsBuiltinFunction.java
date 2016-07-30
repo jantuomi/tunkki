@@ -30,7 +30,7 @@ public class ContainsBuiltinFunction extends BuiltinFunction {
         Datatype comp = params.get(1);
 
         for (Datatype elem : list.getData()) {
-            if (elem.equals(comp)) {
+            if (elem.equals(comp).getData()) {
                 return new BooleanDatatype(true);
             }
         }

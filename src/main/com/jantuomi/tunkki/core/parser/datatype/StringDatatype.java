@@ -43,4 +43,15 @@ public class StringDatatype extends Datatype<String> {
     public Datatype<String> divide(Datatype<String> other) throws TunkkiError {
         return null;
     }
+
+    @Override
+    public BooleanDatatype equals(Datatype<String> other) throws TunkkiError {
+        switch (other.getType()) {
+            case String:
+                return new BooleanDatatype(getData().equals(other.getData()));
+            case Nada:
+                return new BooleanDatatype(false);
+        }
+        return null;
+    }
 }

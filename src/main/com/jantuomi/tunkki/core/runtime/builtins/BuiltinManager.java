@@ -28,6 +28,7 @@ public class BuiltinManager {
         new ListBuiltinFunction();
         new ContainsBuiltinFunction();
         new GetBuiltinFunction();
+        new EqualsBuiltinFunction();
     }
 
     public void addBuiltin(BuiltinFunction func) {

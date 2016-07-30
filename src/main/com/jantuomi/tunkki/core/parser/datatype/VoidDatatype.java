@@ -36,4 +36,9 @@ public class VoidDatatype extends Datatype<Integer> {
     public Datatype<Integer> divide(Datatype<Integer> other) throws TunkkiError {
         return null;
     }
+
+    @Override
+    public BooleanDatatype equals(Datatype<Integer> other) throws TunkkiError {
+        return new BooleanDatatype(false);
+    }
 }

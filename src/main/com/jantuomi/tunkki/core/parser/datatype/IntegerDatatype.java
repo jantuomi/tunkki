@@ -22,6 +22,21 @@ public class IntegerDatatype extends Datatype<Integer> {
     }
 
     @Override
+    public BooleanDatatype equals(Datatype other) throws TunkkiError {
+        switch (other.getType()) {
+            case Integer:
+                return new BooleanDatatype(getData().equals(other.getData()));
+            case Double:
+                return new BooleanDatatype(
+                        new DoubleDatatype(getData()).equals(
+                                ((DoubleDatatype) other).getData()));
+            case Nada:
+                return new BooleanDatatype(false);
+        }
+        return null;
+    }
+
+    @Override
     public Datatype add(Datatype other) {
         switch (other.getType()) {
             case Integer:

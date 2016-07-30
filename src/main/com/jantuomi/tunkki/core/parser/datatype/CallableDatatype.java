@@ -43,4 +43,13 @@ public class CallableDatatype extends Datatype<Function> {
     public Datatype<Function> divide(Datatype<Function> other) throws TunkkiError {
         return null;
     }
+
+    @Override
+    public BooleanDatatype equals(Datatype<Function> other) throws TunkkiError {
+        switch (other.getType()) {
+            case Nada:
+                return new BooleanDatatype(false);
+        }
+        return null;
+    }
 }
