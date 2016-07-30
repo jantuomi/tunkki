@@ -31,7 +31,7 @@ public class Main {
         }
     }
 
-    public static void repl() {
+    public static void repl() throws InterruptedException {
         Scanner scanner = new Scanner(System.in);
         String input;
         while (true) {
@@ -42,6 +42,7 @@ public class Main {
                 run(input);
             } catch (TunkkiError e) {
                 e.printStackTrace();
+                Thread.sleep(50);
             }
         }
     }
