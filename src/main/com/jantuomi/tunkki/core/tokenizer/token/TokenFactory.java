@@ -55,7 +55,7 @@ public class TokenFactory {
             case AssignmentToken:
                 return new AssignmentToken();
             case DeclareAssignToken:
-                return new DeclareAssignToken();
+                return new DeclareAssignToken("dset");
             case SymbolToken:
                 return new SymbolToken(text);
             case CallToken:

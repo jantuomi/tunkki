@@ -11,8 +11,8 @@ import com.jantuomi.tunkki.exception.TunkkiError;
  * Created by jan on 28.7.2016.
  */
 public class DeclareAssignToken extends BinaryOperatorToken {
-    public DeclareAssignToken() {
-        super(Type.DeclareAssignToken, "dset");
+    public DeclareAssignToken(String text) {
+        super(Type.DeclareAssignToken, text);
     }
 
     @Override

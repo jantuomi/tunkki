@@ -70,7 +70,8 @@ abstract public class Token {
         BranchBodyToken,
         NegationToken,
 
-        DeclareAssignToken, NotAToken
+        DeclareAssignToken,
+        NotAToken
     }
 
     abstract public Token setArguments(List<Token> args);
