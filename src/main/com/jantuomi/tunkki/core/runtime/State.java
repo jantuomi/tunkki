@@ -40,13 +40,17 @@ public class State {
         return scopes.peek().resolveSymbol(symbol, Arrays.asList());
     }
 
-    public Datatype getSymbolValue(String symbol) throws TunkkiError {
+    public Datatype evaluateSymbol(String symbol) throws TunkkiError {
         Datatype d = resolveSymbol(symbol);
         return d;
     }
 
-    public Datatype getSymbolValue(String symbol, List<Datatype> parameters) throws TunkkiError {
+    public Datatype evaluateSymbol(String symbol, List<Datatype> parameters) throws TunkkiError {
         return scopes.peek().resolveSymbol(symbol, parameters);
+    }
+
+    public boolean isFunction(String symbol) {
+        return scopes.peek().isFunction(symbol);
     }
 
     public Scope createScope() {
@@ -74,5 +78,9 @@ public class State {
 
     public Scope popScope() {
         return scopes.pop();
+    }
+
+    public Datatype makeFunctionReference(String name) {
+        return scopes.peek().getCallable(name);
     }
 }

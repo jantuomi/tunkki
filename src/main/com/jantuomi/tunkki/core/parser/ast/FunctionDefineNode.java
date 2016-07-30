@@ -1,7 +1,7 @@
 package com.jantuomi.tunkki.core.parser.ast;
 
+import com.jantuomi.tunkki.core.parser.datatype.CallableDatatype;
 import com.jantuomi.tunkki.core.parser.datatype.Datatype;
-import com.jantuomi.tunkki.core.parser.datatype.StringDatatype;
 import com.jantuomi.tunkki.core.runtime.Function;
 import com.jantuomi.tunkki.core.runtime.State;
 import com.jantuomi.tunkki.core.tokenizer.token.Token;
@@ -47,7 +47,9 @@ public class FunctionDefineNode extends VarargOperatorNode {
         function.setName(name);
         State.getInstance().addFunctionToScope(name, function);
 
-        return new StringDatatype("function " + name);
+        CallableDatatype c = new CallableDatatype();
+        c.setData(function);
+        return c;
     }
 
     @Override

@@ -16,7 +16,9 @@ abstract public class Datatype<T> {
         Double,
         String,
         Boolean,
-        Nada, Void
+        Nada,
+        Void,
+        Callable
     }
 
     abstract public Type getType();

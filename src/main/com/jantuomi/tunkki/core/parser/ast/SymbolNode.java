@@ -5,11 +5,9 @@ import com.jantuomi.tunkki.core.runtime.State;
 import com.jantuomi.tunkki.core.tokenizer.token.Token;
 import com.jantuomi.tunkki.exception.ExceptionManager;
 import com.jantuomi.tunkki.exception.TunkkiError;
-import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Created by jan on 17.6.2016.
@@ -42,17 +40,17 @@ public class SymbolNode extends ASTNode {
 
     @Override
     public Datatype evaluate() throws TunkkiError {
-        List<Datatype> paramValues = new ArrayList<>();
-        for (ASTNode param : parameters) {
-            Datatype value = param.evaluate();
-            if (value != null) {
-                paramValues.add(value);
-            }
-        }
+
 
         Datatype returnValue;
         try {
-             returnValue = State.getInstance().getSymbolValue(name, paramValues);
+            if (State.getInstance().isFunction(name)) {
+                returnValue = State.getInstance().makeFunctionReference(name);
+            } else {
+                List<Datatype> paramValues = evaluateParameters();
+                returnValue = State.getInstance().evaluateSymbol(name, paramValues);
+            }
+
         }
         /* If a TunkkiError is caught, pass it on with line information */
         catch (TunkkiError ex) {
@@ -63,10 +61,20 @@ public class SymbolNode extends ASTNode {
         if (returnValue != null) {
             return returnValue;
         } else {
-            ExceptionManager.raise(TunkkiError.ExceptionType.UndeclaredSymbolError, getLine(), name,
-                    StringUtils.join(paramValues.stream().map(Datatype::toString).collect(Collectors.toList()), ","));
+            ExceptionManager.raise(TunkkiError.ExceptionType.UndeclaredSymbolError, getLine(), name);
             return null;
         }
+    }
+
+    public List<Datatype> evaluateParameters() throws TunkkiError {
+        List<Datatype> paramValues = new ArrayList<>();
+        for (ASTNode param : parameters) {
+            Datatype value = param.evaluate();
+            if (value != null) {
+                paramValues.add(value);
+            }
+        }
+        return paramValues;
     }
 
     @Override

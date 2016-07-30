@@ -1,5 +1,6 @@
 package com.jantuomi.tunkki.core.runtime;
 
+import com.jantuomi.tunkki.core.parser.datatype.CallableDatatype;
 import com.jantuomi.tunkki.core.parser.datatype.Datatype;
 import com.jantuomi.tunkki.exception.TunkkiError;
 
@@ -40,11 +41,30 @@ public class Scope {
         }
     }
 
+    public CallableDatatype getCallable(String symbol) {
+        if (functions.containsKey(symbol)) {
+            Function f = functions.get(symbol);
+            CallableDatatype c = new CallableDatatype();
+            c.setData(f);
+            return c;
+        }
+        else if (parent != null) {
+            return parent.getCallable(symbol);
+        }
+        else {
+            return null;
+        }
+    }
+
     public void setParent(Scope parent) {
         this.parent = parent;
     }
 
     public void addFunction(String symbol, Function func) {
         functions.put(symbol, func);
+    }
+
+    public boolean isFunction(String symbol) {
+        return functions.containsKey(symbol);
     }
 }

@@ -1,7 +1,7 @@
 package com.jantuomi.tunkki.core.tokenizer.token.types;
 
 import com.jantuomi.tunkki.core.parser.ast.ASTNode;
-import com.jantuomi.tunkki.core.parser.ast.SymbolNode;
+import com.jantuomi.tunkki.core.parser.ast.CallNode;
 import com.jantuomi.tunkki.core.tokenizer.token.Token;
 import com.jantuomi.tunkki.exception.TunkkiError;
 
@@ -18,7 +18,7 @@ public class CallToken extends VarargOperatorToken {
 
     @Override
     public ASTNode generateNode() throws TunkkiError {
-        SymbolNode node = new SymbolNode(this);
+        CallNode node = new CallNode(this);
         node.setName(this.getText());
 
         List<ASTNode> arguments = new ArrayList<>();
