@@ -33,20 +33,20 @@ public class MainTest {
     @Test
     public void testParseArguments1() {
         String[] notAnArgument = {"--not-an-argument"};
-        assertFalse(Main.parseArguments(notAnArgument));
+        assertFalse(Tunkki.getInstance().parseArguments(notAnArgument));
     }
 
     @Test
     public void testParseArguments2() {
         String[] fileTestArgument = {"-f", "test.file"};
-        assertTrue(Main.parseArguments(fileTestArgument));
+        assertTrue(Tunkki.getInstance().parseArguments(fileTestArgument));
     }
 
     @Test
     public void testWholeProcedure() throws TunkkiError {
         String input = "- + 2 5 1";
 
-        Main.run(input);
+        Tunkki.getInstance().run(input);
         assertTrue(out.toString().contains("6"));
     }
 }
