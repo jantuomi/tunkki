@@ -1,4 +1,4 @@
-package com.jantuomi.tunkki.core.runtime.builtins;
+package com.jantuomi.tunkki.core.runtime.builtins.globals;
 
 import com.jantuomi.tunkki.core.parser.datatype.BooleanDatatype;
 import com.jantuomi.tunkki.core.parser.datatype.Datatype;

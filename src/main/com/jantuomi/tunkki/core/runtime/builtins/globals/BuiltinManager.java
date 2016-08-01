@@ -1,6 +1,4 @@
-package com.jantuomi.tunkki.core.runtime.builtins;
-
-import com.jantuomi.tunkki.core.runtime.Function;
+package com.jantuomi.tunkki.core.runtime.builtins.globals;
 
 import java.util.ArrayList;
 import java.util.List;

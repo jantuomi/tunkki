@@ -1,7 +1,6 @@
-package com.jantuomi.tunkki.core.runtime.builtins;
+package com.jantuomi.tunkki.core.runtime.builtins.globals;
 
 
-import com.jantuomi.tunkki.Main;
 import com.jantuomi.tunkki.Tunkki;
 import com.jantuomi.tunkki.core.CommandLineArgumentContainer;
 import com.jantuomi.tunkki.core.parser.datatype.Datatype;
