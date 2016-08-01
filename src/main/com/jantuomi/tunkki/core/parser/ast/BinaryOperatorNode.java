@@ -1,6 +1,6 @@
 package com.jantuomi.tunkki.core.parser.ast;
 
-import com.jantuomi.tunkki.core.tokenizer.token.Token;
+import com.jantuomi.tunkki.core.parser.tokenizer.token.Token;
 
 /**
  * Created by jan on 16.6.2016.

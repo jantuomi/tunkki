@@ -4,7 +4,7 @@ import com.jantuomi.tunkki.core.parser.datatype.CallableDatatype;
 import com.jantuomi.tunkki.core.parser.datatype.Datatype;
 import com.jantuomi.tunkki.core.runtime.Function;
 import com.jantuomi.tunkki.core.runtime.State;
-import com.jantuomi.tunkki.core.tokenizer.token.Token;
+import com.jantuomi.tunkki.core.parser.tokenizer.token.Token;
 import com.jantuomi.tunkki.exception.TunkkiError;
 
 import java.util.ArrayList;

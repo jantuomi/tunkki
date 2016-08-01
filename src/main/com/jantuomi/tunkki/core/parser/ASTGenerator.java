@@ -1,7 +1,7 @@
 package com.jantuomi.tunkki.core.parser;
 
 import com.jantuomi.tunkki.core.parser.ast.ASTNode;
-import com.jantuomi.tunkki.core.tokenizer.token.Token;
+import com.jantuomi.tunkki.core.parser.tokenizer.token.Token;
 import com.jantuomi.tunkki.exception.TunkkiError;
 
 import java.util.ArrayList;

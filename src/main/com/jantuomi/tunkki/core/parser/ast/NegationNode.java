@@ -3,7 +3,7 @@ package com.jantuomi.tunkki.core.parser.ast;
 import com.jantuomi.tunkki.core.parser.datatype.BooleanDatatype;
 import com.jantuomi.tunkki.core.parser.datatype.Datatype;
 import com.jantuomi.tunkki.core.parser.datatype.IntegerDatatype;
-import com.jantuomi.tunkki.core.tokenizer.token.Token;
+import com.jantuomi.tunkki.core.parser.tokenizer.token.Token;
 import com.jantuomi.tunkki.exception.ExceptionManager;
 import com.jantuomi.tunkki.exception.TunkkiError;
 

@@ -2,7 +2,7 @@ package com.jantuomi.tunkki.core.parser.ast;
 
 import com.jantuomi.tunkki.core.parser.datatype.Datatype;
 import com.jantuomi.tunkki.core.parser.datatype.DoubleDatatype;
-import com.jantuomi.tunkki.core.tokenizer.token.Token;
+import com.jantuomi.tunkki.core.parser.tokenizer.token.Token;
 
 import java.util.Arrays;
 import java.util.List;

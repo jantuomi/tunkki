@@ -1,8 +1,8 @@
 package com.jantuomi.tunkki.core.parser;
 
-import com.jantuomi.tunkki.core.tokenizer.token.Token;
-import com.jantuomi.tunkki.core.tokenizer.token.types.AdditionToken;
-import com.jantuomi.tunkki.core.tokenizer.token.types.IntegerLiteralToken;
+import com.jantuomi.tunkki.core.parser.tokenizer.token.Token;
+import com.jantuomi.tunkki.core.parser.tokenizer.token.types.AdditionToken;
+import com.jantuomi.tunkki.core.parser.tokenizer.token.types.IntegerLiteralToken;
 import org.junit.Test;
 
 import java.util.Arrays;
