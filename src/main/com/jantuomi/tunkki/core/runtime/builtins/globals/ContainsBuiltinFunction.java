@@ -3,6 +3,7 @@ package com.jantuomi.tunkki.core.runtime.builtins.globals;
 import com.jantuomi.tunkki.core.parser.datatype.BooleanDatatype;
 import com.jantuomi.tunkki.core.parser.datatype.Datatype;
 import com.jantuomi.tunkki.core.parser.datatype.ListDatatype;
+import com.jantuomi.tunkki.core.parser.datatype.StringDatatype;
 import com.jantuomi.tunkki.exception.TunkkiError;
 
 import java.util.Arrays;
@@ -22,10 +23,16 @@ public class ContainsBuiltinFunction extends BuiltinFunction {
             throw new TunkkiError(TunkkiError.ExceptionType.FunctionArgumentError, -1, getName(), Datatype.toString(params));
         }
 
-        if (params.get(0).getType() != Datatype.Type.List) {
-            throw new TunkkiError(TunkkiError.ExceptionType.FunctionArgumentError, -1, getName(), Datatype.toString(params));
+        if (params.get(0).getType() == Datatype.Type.List) {
+            return evaluateOnList(params);
         }
+        else if (params.get(0).getType() == Datatype.Type.String) {
+            return evaluateOnString(params);
+        }
+        throw new TunkkiError(TunkkiError.ExceptionType.FunctionArgumentError, -1, getName(), Datatype.toString(params));
+    }
 
+    private Datatype evaluateOnList(List<Datatype> params) throws TunkkiError {
         ListDatatype list = (ListDatatype) params.get(0);
         Datatype comp = params.get(1);
 
@@ -35,6 +42,19 @@ public class ContainsBuiltinFunction extends BuiltinFunction {
             }
         }
         return new BooleanDatatype(false);
+    }
+
+    private Datatype evaluateOnString(List<Datatype> params) throws TunkkiError {
+        if (params.get(1).getType() != Datatype.Type.String) {
+            throw new TunkkiError(TunkkiError.ExceptionType.FunctionArgumentError, -1, getName(), Datatype.toString(params));
+        }
+
+        StringDatatype string = (StringDatatype) params.get(0);
+        StringDatatype comp = (StringDatatype) params.get(1);
+
+        return new BooleanDatatype(
+                string.getData().contains(comp.getData())
+        );
     }
 
     @Override
