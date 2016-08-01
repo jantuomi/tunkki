@@ -28,9 +28,8 @@ public class CommandLineArgumentContainer {
     @Option(name="-i", usage="Run in interactive mode.")
     public boolean interactiveModeActive = false;
 
-
-    @Option(name="-d", usage="Display verbose debug output.")
-    public boolean debugModeActive = false;
+    @Option(name="-d", usage="Display AST output (for debugging purposes).")
+    public boolean astModeActive = false;
 
     public static CommandLineArgumentContainer getInstance() {
         return instance;
@@ -40,8 +39,8 @@ public class CommandLineArgumentContainer {
         return interactiveModeActive;
     }
 
-    public boolean isDebugModeActive() {
-        return debugModeActive;
+    public boolean isAstModeActive() {
+        return astModeActive;
     }
 
     public String getSourceFileContents() {

@@ -11,12 +11,10 @@ import com.jantuomi.tunkki.exception.TunkkiError;
 import com.jantuomi.tunkki.repl.Repl;
 import org.kohsuke.args4j.CmdLineException;
 import org.kohsuke.args4j.CmdLineParser;
-import sun.awt.X11.XToolkit;
 
 import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
-import java.util.Scanner;
 
 public class Tunkki {
 
@@ -42,12 +40,12 @@ public class Tunkki {
         Collections.reverse(sequence);
 
         List<Token> trees = Parser.getInstance().parse(sequence);
-        if (CommandLineArgumentContainer.getInstance().isDebugModeActive()) {
+        if (CommandLineArgumentContainer.getInstance().isAstModeActive()) {
             Parser.getInstance().printAllTrees(trees);
         }
 
         List<ASTNode> nodes = ASTGenerator.getInstance().generate(trees);
-        if (CommandLineArgumentContainer.getInstance().isDebugModeActive()) {
+        if (CommandLineArgumentContainer.getInstance().isAstModeActive()) {
             ASTGenerator.getInstance().printAllTrees(nodes);
         }
 
