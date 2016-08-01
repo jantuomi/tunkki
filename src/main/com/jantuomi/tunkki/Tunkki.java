@@ -9,6 +9,7 @@ import com.jantuomi.tunkki.core.tokenizer.Tokenizer;
 import com.jantuomi.tunkki.core.tokenizer.token.Token;
 import com.jantuomi.tunkki.exception.TunkkiError;
 import com.jantuomi.tunkki.repl.Repl;
+import com.jantuomi.tunkki.utils.Utilities;
 import org.kohsuke.args4j.CmdLineException;
 import org.kohsuke.args4j.CmdLineParser;
 
@@ -76,6 +77,6 @@ public class Tunkki {
     }
 
     public String versionString() {
-        return "ALPHA";
+        return Utilities.getVersionFromFile();
     }
 }
