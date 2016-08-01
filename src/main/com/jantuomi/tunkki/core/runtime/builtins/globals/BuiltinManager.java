@@ -1,5 +1,8 @@
 package com.jantuomi.tunkki.core.runtime.builtins.globals;
 
+import com.jantuomi.tunkki.core.runtime.builtins.globals.cast.AsBooleanBuiltinFunction;
+import com.jantuomi.tunkki.core.runtime.builtins.globals.cast.AsIntBuiltinFunction;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +25,7 @@ public class BuiltinManager {
         new InputBuiltinFunction();
         new ConcatBuiltinFunction();
         new AsIntBuiltinFunction();
+        new AsBooleanBuiltinFunction();
         new IncludeBuiltinFunction();
         new ListBuiltinFunction();
         new ContainsBuiltinFunction();
