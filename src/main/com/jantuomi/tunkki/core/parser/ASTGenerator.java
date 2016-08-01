@@ -29,13 +29,18 @@ public class ASTGenerator {
         return list;
     }
 
-    public void printTree(ASTNode root) {
+    public void printTree(ASTNode root) throws TunkkiError {
         System.out.println("### AST Tree begin ###");
-        root.print(0);
+        try {
+            root.print(0);
+        } catch (NullPointerException ex) {
+            throw new TunkkiError(TunkkiError.ExceptionType.GeneralError, -1, "Malformed syntax tree.");
+        }
+
         System.out.println("### AST Tree end ###");
     }
 
-    public void printAllTrees(List<ASTNode> trees) {
+    public void printAllTrees(List<ASTNode> trees) throws TunkkiError {
         for (ASTNode tree : trees) {
             printTree(tree);
         }

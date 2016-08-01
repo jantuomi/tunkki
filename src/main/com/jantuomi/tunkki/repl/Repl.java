@@ -1,6 +1,7 @@
 package com.jantuomi.tunkki.repl;
 
 import com.jantuomi.tunkki.Tunkki;
+import com.jantuomi.tunkki.core.parser.datatype.IntegerDatatype;
 import com.jantuomi.tunkki.exception.TunkkiError;
 import jline.console.*;
 
@@ -23,17 +24,33 @@ public class Repl {
 
         ConsoleReader reader = new ConsoleReader();
         reader.setBellEnabled(false);
+        reader.setExpandEvents(false);
 
         String line;
+        String command = "";
         PrintWriter out = new PrintWriter(System.out);
-
-        while ((line = readLine(reader, "")) != null) {
-            try {
-                tunkki.run(line);
+        boolean isMultilineInput = false;
+        while (true)  {
+            if (isMultilineInput) {
+                line = readLine(reader, "... ");
+            } else {
+                line = readLine(reader, "tunkki> ");
             }
-            catch (TunkkiError ex) {
-                ex.printStackTrace();
-                Thread.sleep(50);
+
+            if (line.endsWith("\\")) {
+                isMultilineInput = true;
+                command += line.substring(0, line.length() - 1) + " ";
+            } else {
+                try {
+                    isMultilineInput = false;
+                    command += line;
+                    tunkki.run(command);
+                } catch (TunkkiError ex) {
+                    ex.printStackTrace();
+                    Thread.sleep(50);
+                } finally {
+                    command = "";
+                }
             }
 
             out.flush();
@@ -42,11 +59,13 @@ public class Repl {
 
     private String readLine(ConsoleReader reader, String promptMessage)
             throws IOException {
-        String line = reader.readLine(promptMessage + "\ntunkki> ");
+        System.out.print(promptMessage);
+        String line = reader.readLine();
         return line.trim();
     }
 
     private void showWelcomeText() {
         System.out.println(String.format("tunkki REPL version %s", tunkki.versionString()));
+        System.out.println("Copyright: Jan Tuomi 2016");
     }
 }

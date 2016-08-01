@@ -21,8 +21,14 @@ public class Interpreter {
     }
     public static String execute(List<ASTNode> sequence) throws TunkkiError {
         String output = "";
+        Datatype data;
         for (ASTNode node : sequence) {
-            Datatype data = node.evaluate();
+            try {
+                 data = node.evaluate();
+            }
+            catch (NullPointerException ex) {
+                throw new TunkkiError(TunkkiError.ExceptionType.GeneralError, -1, "Malformed input.");
+            }
 
             if (data != null) {
                 output = data.toString();
