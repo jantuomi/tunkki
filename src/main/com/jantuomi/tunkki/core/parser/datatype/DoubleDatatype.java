@@ -23,11 +23,13 @@ public class DoubleDatatype extends Datatype<Double> {
     }
 
     @Override
-    public BooleanDatatype equals(Datatype<Double> other) throws TunkkiError {
+    public BooleanDatatype equals(Datatype other) throws TunkkiError {
         switch (other.getType()) {
+            case Integer:
+                return new DoubleDatatype(((IntegerDatatype) other).getData()).equals(this);
             case Double:
                 return new BooleanDatatype(
-                    Math.abs(getData() - other.getData()) < EPSILON
+                    Math.abs(getData() - ((DoubleDatatype) other).getData()) < EPSILON
                 );
             case Nada:
                 return new BooleanDatatype(false);

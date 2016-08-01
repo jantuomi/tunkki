@@ -27,7 +27,8 @@ public class Interpreter {
                  data = node.evaluate();
             }
             catch (NullPointerException ex) {
-                throw new TunkkiError(TunkkiError.ExceptionType.GeneralError, -1, "Malformed input.");
+                continue;
+                //throw new TunkkiError(TunkkiError.ExceptionType.GeneralError, -1, "Malformed input.");
             }
 
             if (data != null) {

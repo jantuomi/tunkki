@@ -21,9 +21,15 @@ public class EqualsBuiltinFunction extends BuiltinFunction {
             throw new TunkkiError(TunkkiError.ExceptionType.FunctionArgumentError, -1, getName(), Datatype.toString(params));
         }
 
-        return new BooleanDatatype(
-            params.get(0).equals(params.get(1)).getData()
-        );
+        Datatype lhs = params.get(0);
+        Datatype rhs = params.get(1);
+
+        BooleanDatatype isEqual = lhs.equals(rhs);
+        if (isEqual != null) {
+            return isEqual;
+        } else {
+            throw new TunkkiError(TunkkiError.ExceptionType.TypeError, -1, lhs.getType().toString(), rhs.getType().toString());
+        }
     }
 
     @Override

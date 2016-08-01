@@ -35,8 +35,8 @@ public class Tokenizer {
     private Tokenizer() {
         tokenRegexes.put(Token.Type.CommentToken, "^\\/\\*(.*?)\\*\\/");
 
-        tokenRegexes.put(Token.Type.DoubleLiteralToken, "^([-+]?[0-9]*\\.?[0-9]+)f\\b");
-        tokenRegexes.put(Token.Type.IntegerLiteralToken, "^([-+]?\\d+)\\b");
+        tokenRegexes.put(Token.Type.DoubleLiteralToken, "^([-+]?[0-9]*\\.?[0-9]?)f\\b");
+        tokenRegexes.put(Token.Type.IntegerLiteralToken, "^([-+]?[0-9]+)\\b");
         tokenRegexes.put(Token.Type.BooleanLiteralToken, "^(true|false)\\b");
         tokenRegexes.put(Token.Type.StringLiteralToken, "^\"(.*?)\"");
 
