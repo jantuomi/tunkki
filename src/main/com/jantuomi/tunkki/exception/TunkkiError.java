@@ -32,7 +32,7 @@ public class TunkkiError extends Exception {
         errorTexts.put(ExceptionType.ExpectedDifferentTokenError, "Token '%s' expects a different token stack.");
         errorTexts.put(ExceptionType.FunctionArgumentError, "The parameter list given to function %s is either of wrong length or the parameters are of wrong type. Actual: %s");
         errorTexts.put(ExceptionType.UndeclaredSymbolError, "No symbol %s defined in the current scope.");
-        errorTexts.put(ExceptionType.IncludeError, "File %s could not be included.");
+        errorTexts.put(ExceptionType.IncludeError, "File or module %s could not be included.");
         errorTexts.put(ExceptionType.GeneralError, "%s");
         errorTexts.put(ExceptionType.NadaError, "Can't do operation with a nada value.");
         errorTexts.put(ExceptionType.CastError, "Illegal cast to type %s from value %s.");

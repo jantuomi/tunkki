@@ -103,4 +103,8 @@ public class IntegerDatatype extends Datatype<Integer> {
 
         }
     }
+
+    public DoubleDatatype asDouble() {
+        return new DoubleDatatype(getData().doubleValue());
+    }
 }

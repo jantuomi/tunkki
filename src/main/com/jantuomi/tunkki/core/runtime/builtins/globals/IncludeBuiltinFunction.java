@@ -6,6 +6,9 @@ import com.jantuomi.tunkki.core.CommandLineArgumentContainer;
 import com.jantuomi.tunkki.core.parser.datatype.Datatype;
 import com.jantuomi.tunkki.core.parser.datatype.StringDatatype;
 import com.jantuomi.tunkki.core.parser.datatype.VoidDatatype;
+import com.jantuomi.tunkki.core.runtime.Function;
+import com.jantuomi.tunkki.core.runtime.State;
+import com.jantuomi.tunkki.core.runtime.builtins.BuiltinManager;
 import com.jantuomi.tunkki.exception.ExceptionManager;
 import com.jantuomi.tunkki.exception.TunkkiError;
 
@@ -13,6 +16,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 /**
  * Created by jan on 28.6.2016.
@@ -33,21 +37,30 @@ public class IncludeBuiltinFunction extends BuiltinFunction {
             return null;
         }
 
-        String contents = CommandLineArgumentContainer.getInstance().readFileContents(filename);
+        if (BuiltinManager.getInstance().BUILTIN_MODULES.contains(filename)) {
 
-        if (contents == null) {
-            return null;
+            BuiltinManager.getInstance().getFunctionsFromModule(filename).stream()
+                    .forEach( f -> State.getInstance().addFunctionToScope(f.getName(), f) );
+
+        }
+        else {
+            String contents = CommandLineArgumentContainer.getInstance().readFileContents(filename);
+
+            if (contents == null) {
+                return null;
+            }
+
+            String regex = String.format(".*include\\?\\s+\"\\s?%s\\s?\"\\s?\\!.*", Pattern.quote(filename));
+            Pattern pattern = Pattern.compile(regex, Pattern.DOTALL);
+            Matcher matcher = pattern.matcher(contents);
+            if (matcher.matches()) {
+                ExceptionManager.raise(TunkkiError.ExceptionType.GeneralError, -1, "Recursive include detected, aborting.");
+                return null;
+            }
+
+            Tunkki.getInstance().run(contents);
         }
 
-        String regex = String.format(".*include\\?\\s+\"\\s?%s\\s?\"\\s?\\!.*", Pattern.quote(filename));
-        Pattern pattern = Pattern.compile(regex, Pattern.DOTALL);
-        Matcher matcher = pattern.matcher(contents);
-        if (matcher.matches()) {
-            ExceptionManager.raise(TunkkiError.ExceptionType.GeneralError, -1, "Recursive include detected, aborting.");
-            return null;
-        }
-
-        Tunkki.getInstance().run(contents);
         return new VoidDatatype();
     }
 
