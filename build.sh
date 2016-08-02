@@ -32,11 +32,14 @@ mkdir "$RELEASE/bin"
 
 echo "Copying JAR to installation directory..."
 cp "$JARNAME" "$RELEASE/share/tunkki.jar"
+cp "../VERSION" "$RELEASE/share/"
 cd "$RELEASE"
 
 echo "Creating launcher script..."
 echo "#!/bin/bash" > "bin/tunkki"
-echo 'java -jar ../share/tunkki.jar $@' >> "bin/tunkki"
+echo 'DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"' >> "bin/tunkki"
+echo 'cd $DIR/../share' >> "bin/tunkki"
+echo 'java -jar tunkki.jar $@' >> "bin/tunkki"
 
 chmod +x "bin/tunkki"
 
