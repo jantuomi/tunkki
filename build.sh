@@ -43,11 +43,13 @@ echo 'java -jar tunkki.jar $@' >> "bin/tunkki"
 
 chmod +x "bin/tunkki"
 
+# Create tarball
+TARBALL="$RELEASE.tar.gz"
 cd ..
 echo "Creating tarball..."
-tar cvf "$RELEASE.tar" "$RELEASE"
+tar zcvf "$TARBALL" "$RELEASE"
 
 echo "Done."
 echo "Installation directory: $TARGET/$RELEASE"
-echo "Installation package: $TARGET/$RELEASE.tar"
+echo "Installation package: $TARGET/$TARBALL"
 cd ..
