@@ -20,7 +20,9 @@ public class TunkkiError extends Exception {
         UndeclaredSymbolError,
         IncludeError,
         GeneralError,
-        CastError, NadaError
+        CastError,
+        DivisionByZeroError,
+        NadaError
     }
 
     private static Map<ExceptionType, String> errorTexts = new HashMap<>();
@@ -36,6 +38,7 @@ public class TunkkiError extends Exception {
         errorTexts.put(ExceptionType.GeneralError, "%s");
         errorTexts.put(ExceptionType.NadaError, "Can't do operation with a nada value.");
         errorTexts.put(ExceptionType.CastError, "Illegal cast to type %s from value %s.");
+        errorTexts.put(ExceptionType.DivisionByZeroError, "Division by zero.");
     }
 
     private ExceptionType exceptionType;

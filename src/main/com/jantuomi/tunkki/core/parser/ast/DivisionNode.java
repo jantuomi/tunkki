@@ -22,7 +22,14 @@ public class DivisionNode extends BinaryOperatorNode {
         Datatype operand1 = lhs.evaluate();
         Datatype operand2 = rhs.evaluate();
 
-        Datatype result = operand1.divide(operand2);
+        Datatype result;
+        try {
+            result = operand1.divide(operand2);
+        }
+        catch (ArithmeticException ex) {
+            throw new TunkkiError(TunkkiError.ExceptionType.DivisionByZeroError, getLine());
+        }
+
         if (result != null) {
             return result;
         } else {
