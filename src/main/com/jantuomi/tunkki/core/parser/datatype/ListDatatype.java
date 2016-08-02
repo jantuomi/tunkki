@@ -1,6 +1,6 @@
 package com.jantuomi.tunkki.core.parser.datatype;
 
-import com.jantuomi.tunkki.exception.TunkkiError;
+import com.jantuomi.tunkki.exception.types.TunkkiError;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,8 +1,7 @@
 package com.jantuomi.tunkki.repl;
 
 import com.jantuomi.tunkki.Tunkki;
-import com.jantuomi.tunkki.core.parser.datatype.IntegerDatatype;
-import com.jantuomi.tunkki.exception.TunkkiError;
+import com.jantuomi.tunkki.exception.types.TunkkiError;
 import jline.console.*;
 
 import java.io.IOException;

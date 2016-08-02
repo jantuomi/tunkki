@@ -2,7 +2,8 @@ package com.jantuomi.tunkki.core.parser.tokenizer.token;
 
 import com.jantuomi.tunkki.core.parser.ast.ASTNode;
 import com.jantuomi.tunkki.exception.ExceptionManager;
-import com.jantuomi.tunkki.exception.TunkkiError;
+import com.jantuomi.tunkki.exception.types.IllegalTokenTunkkiError;
+import com.jantuomi.tunkki.exception.types.TunkkiError;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
@@ -163,9 +164,7 @@ abstract public class Token {
                 token.setLine(line);
             }
             else {
-                ExceptionManager.raise(TunkkiError.ExceptionType.IllegalTokenError, line,
-                        type.toString()
-                );
+                throw new IllegalTokenTunkkiError(line, type.toString());
             }
 
             return token;

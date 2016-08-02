@@ -4,7 +4,8 @@ import com.jantuomi.tunkki.core.parser.datatype.Datatype;
 import com.jantuomi.tunkki.core.runtime.State;
 import com.jantuomi.tunkki.core.parser.tokenizer.token.Token;
 import com.jantuomi.tunkki.exception.ExceptionManager;
-import com.jantuomi.tunkki.exception.TunkkiError;
+import com.jantuomi.tunkki.exception.types.TunkkiError;
+import com.jantuomi.tunkki.exception.types.UndeclaredSymbolTunkkiError;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,15 +55,14 @@ public class SymbolNode extends ASTNode {
         }
         /* If a TunkkiError is caught, pass it on with line information */
         catch (TunkkiError ex) {
-            throw new TunkkiError(ex.getType(), getLine(),
-                    ex.getArguments().toArray(new String[ex.getArguments().size()]));
+            ex.setLine(getLine());
+            throw ex;
         }
 
         if (returnValue != null) {
             return returnValue;
         } else {
-            ExceptionManager.raise(TunkkiError.ExceptionType.UndeclaredSymbolError, getLine(), name);
-            return null;
+            throw new UndeclaredSymbolTunkkiError(getLine(), name);
         }
     }
 

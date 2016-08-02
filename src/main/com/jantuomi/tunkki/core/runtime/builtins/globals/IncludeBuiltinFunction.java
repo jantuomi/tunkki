@@ -6,17 +6,16 @@ import com.jantuomi.tunkki.core.CommandLineArgumentContainer;
 import com.jantuomi.tunkki.core.parser.datatype.Datatype;
 import com.jantuomi.tunkki.core.parser.datatype.StringDatatype;
 import com.jantuomi.tunkki.core.parser.datatype.VoidDatatype;
-import com.jantuomi.tunkki.core.runtime.Function;
 import com.jantuomi.tunkki.core.runtime.State;
 import com.jantuomi.tunkki.core.runtime.builtins.BuiltinManager;
 import com.jantuomi.tunkki.exception.ExceptionManager;
-import com.jantuomi.tunkki.exception.TunkkiError;
+import com.jantuomi.tunkki.exception.types.GeneralTunkkiError;
+import com.jantuomi.tunkki.exception.types.TunkkiError;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 /**
  * Created by jan on 28.6.2016.
@@ -33,13 +32,12 @@ public class IncludeBuiltinFunction extends BuiltinFunction {
         if (params.size() == 1 && params.get(0).getType() == Datatype.Type.String) {
             filename = ((StringDatatype) params.get(0)).getData();
         } else {
-            ExceptionManager.raise(TunkkiError.ExceptionType.GeneralError, -1, "Include argument must be a valid file name string.");
-            return null;
+            throw new GeneralTunkkiError(-1, "Include argument must be a valid file name string.");
         }
 
         if (BuiltinManager.getInstance().BUILTIN_MODULES.contains(filename)) {
 
-            BuiltinManager.getInstance().getFunctionsFromModule(filename).stream()
+            BuiltinManager.getInstance().getFunctionsFromModule(filename)
                     .forEach( f -> State.getInstance().addFunctionToScope(f.getName(), f) );
 
         }
@@ -54,8 +52,7 @@ public class IncludeBuiltinFunction extends BuiltinFunction {
             Pattern pattern = Pattern.compile(regex, Pattern.DOTALL);
             Matcher matcher = pattern.matcher(contents);
             if (matcher.matches()) {
-                ExceptionManager.raise(TunkkiError.ExceptionType.GeneralError, -1, "Recursive include detected, aborting.");
-                return null;
+                throw new GeneralTunkkiError(-1, "Recursive include detected, aborting.");
             }
 
             Tunkki.getInstance().run(contents);

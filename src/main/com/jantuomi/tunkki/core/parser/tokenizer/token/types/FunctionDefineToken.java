@@ -3,7 +3,8 @@ package com.jantuomi.tunkki.core.parser.tokenizer.token.types;
 import com.jantuomi.tunkki.core.parser.ast.ASTNode;
 import com.jantuomi.tunkki.core.parser.ast.BlockBodyNode;
 import com.jantuomi.tunkki.core.parser.ast.FunctionDefineNode;
-import com.jantuomi.tunkki.exception.TunkkiError;
+import com.jantuomi.tunkki.exception.types.ExpectedDifferentTokenTunkkiError;
+import com.jantuomi.tunkki.exception.types.TunkkiError;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +22,7 @@ public class FunctionDefineToken extends VarargOperatorToken {
         FunctionDefineNode node = new FunctionDefineNode(this);
 
         if (args.size() == 0) {
-            throw new TunkkiError(TunkkiError.ExceptionType.ExpectedDifferentTokenError, getLine(), getText());
+            throw new ExpectedDifferentTokenTunkkiError(getLine(), getText());
         }
 
         node.setName(args.get(0).getText());
@@ -37,7 +38,7 @@ public class FunctionDefineToken extends VarargOperatorToken {
             bodyNode = (BlockBodyNode) args.get(args.size() - 1).generateNode();
         }
         catch (Exception ex) {
-            throw new TunkkiError(TunkkiError.ExceptionType.ExpectedDifferentTokenError, getLine(), getText());
+            throw new ExpectedDifferentTokenTunkkiError(getLine(), getText());
         }
         node.setBody(bodyNode);
         return node;

@@ -1,6 +1,7 @@
 package com.jantuomi.tunkki.core.parser.datatype;
 
-import com.jantuomi.tunkki.exception.TunkkiError;
+import com.jantuomi.tunkki.exception.types.NadaTunkkiError;
+import com.jantuomi.tunkki.exception.types.TunkkiError;
 
 /**
  * Created by jan on 29.7.2016.
@@ -49,6 +50,6 @@ public class NadaDatatype extends Datatype<Integer> {
     }
 
     private void doOperation() throws TunkkiError {
-        throw new TunkkiError(TunkkiError.ExceptionType.NadaError, -1);
+        throw new NadaTunkkiError(-1);
     }
 }

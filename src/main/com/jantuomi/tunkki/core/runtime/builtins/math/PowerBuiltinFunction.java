@@ -4,7 +4,8 @@ import com.jantuomi.tunkki.core.parser.datatype.Datatype;
 import com.jantuomi.tunkki.core.parser.datatype.DoubleDatatype;
 import com.jantuomi.tunkki.core.parser.datatype.IntegerDatatype;
 import com.jantuomi.tunkki.core.runtime.builtins.globals.BuiltinFunction;
-import com.jantuomi.tunkki.exception.TunkkiError;
+import com.jantuomi.tunkki.exception.types.FunctionArgumentTunkkiError;
+import com.jantuomi.tunkki.exception.types.TunkkiError;
 
 import java.util.Arrays;
 import java.util.List;
@@ -20,7 +21,7 @@ public class PowerBuiltinFunction extends BuiltinFunction {
     @Override
     public Datatype evaluate(List<Datatype> params) throws TunkkiError {
         if (params.size() != 2) {
-            throw new TunkkiError(TunkkiError.ExceptionType.FunctionArgumentError, -1, getName(), Datatype.toString(params));
+            throw new FunctionArgumentTunkkiError(-1, getName(), Datatype.toString(params));
         }
 
         Datatype lhs = params.get(0);
@@ -34,7 +35,7 @@ public class PowerBuiltinFunction extends BuiltinFunction {
             return new DoubleDatatype(result);
         }
         catch (Exception ex) {
-            throw new TunkkiError(TunkkiError.ExceptionType.FunctionArgumentError, -1, getName(), Datatype.toString(params));
+            throw new FunctionArgumentTunkkiError(-1, getName(), Datatype.toString(params));
         }
     }
 
@@ -46,7 +47,7 @@ public class PowerBuiltinFunction extends BuiltinFunction {
             number = ((DoubleDatatype) dt).getData();
         }
         else {
-            throw new TunkkiError(TunkkiError.ExceptionType.FunctionArgumentError, -1, getName(), Datatype.toString(params));
+            throw new FunctionArgumentTunkkiError(-1, getName(), Datatype.toString(params));
         }
         return number;
     }

@@ -5,7 +5,8 @@ import com.jantuomi.tunkki.core.parser.datatype.Datatype;
 import com.jantuomi.tunkki.core.parser.datatype.IntegerDatatype;
 import com.jantuomi.tunkki.core.parser.tokenizer.token.Token;
 import com.jantuomi.tunkki.exception.ExceptionManager;
-import com.jantuomi.tunkki.exception.TunkkiError;
+import com.jantuomi.tunkki.exception.types.TunkkiError;
+import com.jantuomi.tunkki.exception.types.TypeTunkkiError;
 
 /**
  * Created by jan on 21.6.2016.
@@ -27,8 +28,7 @@ public class NegationNode extends UnaryOperatorNode {
                     ((IntegerDatatype) d).getData() != 0
             );
         }
-        ExceptionManager.raise(TunkkiError.ExceptionType.TypeError, source.getLine(), "not", d.toString());
-        return null;
+        throw new TypeTunkkiError(source.getLine(), "not", d.toString());
 
     }
 }

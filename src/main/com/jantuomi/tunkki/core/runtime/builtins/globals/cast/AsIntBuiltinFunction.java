@@ -2,7 +2,8 @@ package com.jantuomi.tunkki.core.runtime.builtins.globals.cast;
 
 import com.jantuomi.tunkki.core.parser.datatype.*;
 import com.jantuomi.tunkki.core.runtime.builtins.globals.BuiltinFunction;
-import com.jantuomi.tunkki.exception.TunkkiError;
+import com.jantuomi.tunkki.exception.types.CastTunkkiError;
+import com.jantuomi.tunkki.exception.types.TunkkiError;
 
 import java.util.Arrays;
 import java.util.List;
@@ -35,7 +36,7 @@ public class AsIntBuiltinFunction extends BuiltinFunction {
                     i = Integer.parseInt(((StringDatatype) param).getData());
                 }
                 catch (NumberFormatException ex) {
-                    throw new TunkkiError(TunkkiError.ExceptionType.CastError, -1, "Integer", ((StringDatatype) param).getData());
+                    throw new CastTunkkiError(-1, "Integer", ((StringDatatype) param).getData());
                 }
                 return new IntegerDatatype(i);
             case Integer:
@@ -45,7 +46,7 @@ public class AsIntBuiltinFunction extends BuiltinFunction {
             case Double:
                 return new IntegerDatatype((int) Math.round(((DoubleDatatype) param).getData()));
             default:
-                throw new TunkkiError(TunkkiError.ExceptionType.CastError, -1, "Integer", param.toString());
+                throw new CastTunkkiError(-1, "Integer", param.toString());
         }
 
     }

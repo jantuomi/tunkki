@@ -4,7 +4,8 @@ import com.jantuomi.tunkki.core.parser.ast.ASTNode;
 import com.jantuomi.tunkki.core.parser.ast.DeclareAssignNode;
 import com.jantuomi.tunkki.core.parser.ast.SymbolNode;
 import com.jantuomi.tunkki.exception.ExceptionManager;
-import com.jantuomi.tunkki.exception.TunkkiError;
+import com.jantuomi.tunkki.exception.types.SyntaxTunkkiError;
+import com.jantuomi.tunkki.exception.types.TunkkiError;
 
 /**
  * Created by jan on 28.7.2016.
@@ -19,8 +20,7 @@ public class DeclareAssignToken extends BinaryOperatorToken {
         ASTNode lhsNode = lhs.generateNode();
 
         if (!(lhsNode instanceof SymbolNode)) {
-            ExceptionManager.raise(TunkkiError.ExceptionType.SyntaxError, getLine(), "non-symbol " + toString());
-            return null;
+            throw new SyntaxTunkkiError(getLine(), "non-symbol " + toString());
         }
 
         DeclareAssignNode node = new DeclareAssignNode(this,

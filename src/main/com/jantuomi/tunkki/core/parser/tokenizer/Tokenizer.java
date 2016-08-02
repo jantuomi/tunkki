@@ -3,7 +3,8 @@ package com.jantuomi.tunkki.core.parser.tokenizer;
 
 import com.jantuomi.tunkki.core.parser.tokenizer.token.Token;
 import com.jantuomi.tunkki.exception.ExceptionManager;
-import com.jantuomi.tunkki.exception.TunkkiError;
+import com.jantuomi.tunkki.exception.types.IllegalTokenTunkkiError;
+import com.jantuomi.tunkki.exception.types.TunkkiError;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -95,7 +96,7 @@ public class Tokenizer {
             }
 
             if (erroneousTokenTypes.contains(token.getTokenType())) {
-                ExceptionManager.raise(TunkkiError.ExceptionType.IllegalTokenError, line, token.getText());
+                throw new IllegalTokenTunkkiError(line, token.getText());
             }
 
             String tokenRawText = token.getRawText();

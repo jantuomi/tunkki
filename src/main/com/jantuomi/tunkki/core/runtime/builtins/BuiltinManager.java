@@ -5,7 +5,8 @@ import com.jantuomi.tunkki.core.runtime.builtins.globals.*;
 import com.jantuomi.tunkki.core.runtime.builtins.globals.cast.AsBooleanBuiltinFunction;
 import com.jantuomi.tunkki.core.runtime.builtins.globals.cast.AsIntBuiltinFunction;
 import com.jantuomi.tunkki.core.runtime.builtins.math.PowerBuiltinFunction;
-import com.jantuomi.tunkki.exception.TunkkiError;
+import com.jantuomi.tunkki.exception.types.IncludeTunkkiError;
+import com.jantuomi.tunkki.exception.types.TunkkiError;
 
 import java.util.*;
 
@@ -53,7 +54,7 @@ public class BuiltinManager {
             return getFunctionsFromMathModule();
         }
         else {
-            throw new TunkkiError(TunkkiError.ExceptionType.IncludeError, -1, name);
+            throw new IncludeTunkkiError(-1, name);
         }
     }
 

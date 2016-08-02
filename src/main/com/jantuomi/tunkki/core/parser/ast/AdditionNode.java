@@ -3,7 +3,8 @@ package com.jantuomi.tunkki.core.parser.ast;
 import com.jantuomi.tunkki.core.parser.datatype.Datatype;
 import com.jantuomi.tunkki.core.parser.tokenizer.token.Token;
 import com.jantuomi.tunkki.exception.ExceptionManager;
-import com.jantuomi.tunkki.exception.TunkkiError;
+import com.jantuomi.tunkki.exception.types.TunkkiError;
+import com.jantuomi.tunkki.exception.types.TypeTunkkiError;
 
 import java.util.Arrays;
 import java.util.List;
@@ -26,9 +27,8 @@ public class AdditionNode extends BinaryOperatorNode {
         if (result != null) {
             return result;
         } else {
-            ExceptionManager.raise(TunkkiError.ExceptionType.TypeError, source.getLine(),
-                    operand1.getType().toString(), operand2.getType().toString());
-            return null;
+            throw new TypeTunkkiError(source.getLine(),
+                operand1.getType().toString(), operand2.getType().toString());
         }
 
     }

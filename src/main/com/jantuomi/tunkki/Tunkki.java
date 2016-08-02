@@ -7,7 +7,7 @@ import com.jantuomi.tunkki.core.parser.ast.ASTNode;
 import com.jantuomi.tunkki.core.runtime.Interpreter;
 import com.jantuomi.tunkki.core.parser.tokenizer.Tokenizer;
 import com.jantuomi.tunkki.core.parser.tokenizer.token.Token;
-import com.jantuomi.tunkki.exception.TunkkiError;
+import com.jantuomi.tunkki.exception.types.TunkkiError;
 import com.jantuomi.tunkki.repl.Repl;
 import com.jantuomi.tunkki.utils.Utilities;
 import org.kohsuke.args4j.CmdLineException;

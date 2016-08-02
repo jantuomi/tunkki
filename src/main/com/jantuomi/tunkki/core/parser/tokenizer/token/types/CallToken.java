@@ -3,7 +3,7 @@ package com.jantuomi.tunkki.core.parser.tokenizer.token.types;
 import com.jantuomi.tunkki.core.parser.ast.ASTNode;
 import com.jantuomi.tunkki.core.parser.ast.CallNode;
 import com.jantuomi.tunkki.core.parser.tokenizer.token.Token;
-import com.jantuomi.tunkki.exception.TunkkiError;
+import com.jantuomi.tunkki.exception.types.TunkkiError;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -2,7 +2,7 @@ package com.jantuomi.tunkki.core.parser.tokenizer.token.types;
 
 import com.jantuomi.tunkki.core.parser.ast.ASTNode;
 import com.jantuomi.tunkki.core.parser.ast.MultiplicationNode;
-import com.jantuomi.tunkki.exception.TunkkiError;
+import com.jantuomi.tunkki.exception.types.TunkkiError;
 
 /**
  * Created by jan on 15.6.2016.

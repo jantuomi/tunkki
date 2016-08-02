@@ -3,7 +3,8 @@ package com.jantuomi.tunkki.core.parser.ast;
 import com.jantuomi.tunkki.core.parser.datatype.Datatype;
 import com.jantuomi.tunkki.core.runtime.State;
 import com.jantuomi.tunkki.core.parser.tokenizer.token.Token;
-import com.jantuomi.tunkki.exception.TunkkiError;
+import com.jantuomi.tunkki.exception.types.ExpectedDifferentTokenTunkkiError;
+import com.jantuomi.tunkki.exception.types.TunkkiError;
 
 import java.util.Arrays;
 import java.util.List;
@@ -23,7 +24,7 @@ public class DeclareAssignNode extends BinaryOperatorNode {
             var = (SymbolNode) lhs;
         }
         catch (Exception ex) {
-            throw new TunkkiError(TunkkiError.ExceptionType.ExpectedDifferentTokenError, getLine(), getText());
+            throw new ExpectedDifferentTokenTunkkiError(getLine(), getText());
         }
 
         State.getInstance().addSymbolToScope(var.getName());

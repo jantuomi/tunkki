@@ -4,7 +4,8 @@ import com.jantuomi.tunkki.core.parser.datatype.BooleanDatatype;
 import com.jantuomi.tunkki.core.parser.datatype.Datatype;
 import com.jantuomi.tunkki.core.parser.datatype.ListDatatype;
 import com.jantuomi.tunkki.core.parser.datatype.StringDatatype;
-import com.jantuomi.tunkki.exception.TunkkiError;
+import com.jantuomi.tunkki.exception.types.FunctionArgumentTunkkiError;
+import com.jantuomi.tunkki.exception.types.TunkkiError;
 
 import java.util.Arrays;
 import java.util.List;
@@ -20,7 +21,7 @@ public class ContainsBuiltinFunction extends BuiltinFunction {
     @Override
     public Datatype evaluate(List<Datatype> params) throws TunkkiError {
         if (params.size() != 2) {
-            throw new TunkkiError(TunkkiError.ExceptionType.FunctionArgumentError, -1, getName(), Datatype.toString(params));
+            throw new FunctionArgumentTunkkiError(-1, getName(), Datatype.toString(params));
         }
 
         if (params.get(0).getType() == Datatype.Type.List) {
@@ -29,7 +30,7 @@ public class ContainsBuiltinFunction extends BuiltinFunction {
         else if (params.get(0).getType() == Datatype.Type.String) {
             return evaluateOnString(params);
         }
-        throw new TunkkiError(TunkkiError.ExceptionType.FunctionArgumentError, -1, getName(), Datatype.toString(params));
+        throw new FunctionArgumentTunkkiError(-1, getName(), Datatype.toString(params));
     }
 
     private Datatype evaluateOnList(List<Datatype> params) throws TunkkiError {
@@ -46,7 +47,7 @@ public class ContainsBuiltinFunction extends BuiltinFunction {
 
     private Datatype evaluateOnString(List<Datatype> params) throws TunkkiError {
         if (params.get(1).getType() != Datatype.Type.String) {
-            throw new TunkkiError(TunkkiError.ExceptionType.FunctionArgumentError, -1, getName(), Datatype.toString(params));
+            throw new FunctionArgumentTunkkiError(-1, getName(), Datatype.toString(params));
         }
 
         StringDatatype string = (StringDatatype) params.get(0);

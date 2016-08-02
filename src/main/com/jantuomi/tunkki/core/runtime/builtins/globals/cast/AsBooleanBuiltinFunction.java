@@ -2,7 +2,8 @@ package com.jantuomi.tunkki.core.runtime.builtins.globals.cast;
 
 import com.jantuomi.tunkki.core.parser.datatype.*;
 import com.jantuomi.tunkki.core.runtime.builtins.globals.BuiltinFunction;
-import com.jantuomi.tunkki.exception.TunkkiError;
+import com.jantuomi.tunkki.exception.types.CastTunkkiError;
+import com.jantuomi.tunkki.exception.types.TunkkiError;
 
 import java.util.Arrays;
 import java.util.List;
@@ -35,7 +36,7 @@ public class AsBooleanBuiltinFunction extends BuiltinFunction {
             case Boolean:
                 return new BooleanDatatype(((BooleanDatatype) param).getData());
             default:
-                throw new TunkkiError(TunkkiError.ExceptionType.CastError, -1, "Boolean", param.toString());
+                throw new CastTunkkiError(-1, "Boolean", param.toString());
         }
 
     }

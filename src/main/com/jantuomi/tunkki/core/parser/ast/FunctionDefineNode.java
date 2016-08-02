@@ -5,7 +5,8 @@ import com.jantuomi.tunkki.core.parser.datatype.Datatype;
 import com.jantuomi.tunkki.core.runtime.Function;
 import com.jantuomi.tunkki.core.runtime.State;
 import com.jantuomi.tunkki.core.parser.tokenizer.token.Token;
-import com.jantuomi.tunkki.exception.TunkkiError;
+import com.jantuomi.tunkki.exception.types.ExpectedDifferentTokenTunkkiError;
+import com.jantuomi.tunkki.exception.types.TunkkiError;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +42,7 @@ public class FunctionDefineNode extends VarargOperatorNode {
             }
         }
         catch (Exception ex) {
-            throw new TunkkiError(TunkkiError.ExceptionType.ExpectedDifferentTokenError, getLine(), getText());
+            throw new ExpectedDifferentTokenTunkkiError(getLine(), getText());
         }
         Function function = new Function(argumentNames, (BlockBodyNode) body);
         function.setName(name);

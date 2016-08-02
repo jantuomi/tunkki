@@ -1,6 +1,6 @@
 package com.jantuomi.tunkki;
 
-import com.jantuomi.tunkki.exception.TunkkiError;
+import com.jantuomi.tunkki.exception.types.TunkkiError;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

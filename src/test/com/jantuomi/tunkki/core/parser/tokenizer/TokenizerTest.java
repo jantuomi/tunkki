@@ -2,7 +2,7 @@ package com.jantuomi.tunkki.core.parser.tokenizer;
 
 import com.jantuomi.tunkki.core.parser.tokenizer.token.Token;
 import com.jantuomi.tunkki.core.parser.tokenizer.token.types.IntegerLiteralToken;
-import com.jantuomi.tunkki.exception.TunkkiError;
+import com.jantuomi.tunkki.exception.types.TunkkiError;
 import org.junit.Test;
 
 import java.util.List;

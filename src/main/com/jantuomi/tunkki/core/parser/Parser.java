@@ -4,7 +4,8 @@ import com.jantuomi.tunkki.core.parser.ast.ASTNode;
 import com.jantuomi.tunkki.core.parser.tokenizer.token.ArgumentInfo;
 import com.jantuomi.tunkki.core.parser.tokenizer.token.Token;
 import com.jantuomi.tunkki.exception.ExceptionManager;
-import com.jantuomi.tunkki.exception.TunkkiError;
+import com.jantuomi.tunkki.exception.types.ExpectedDifferentTokenTunkkiError;
+import com.jantuomi.tunkki.exception.types.TunkkiError;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -76,9 +77,7 @@ public class Parser {
                     if (stack.size() > 0) {
                         args.add(stack.pop());
                     } else {
-                        ExceptionManager.raise(TunkkiError.ExceptionType.ExpectedDifferentTokenError, t.getLine(),
-                                t.getText());
-                        return null;
+                        throw new ExpectedDifferentTokenTunkkiError(t.getLine(), t.getText());
                     }
                 }
             }
