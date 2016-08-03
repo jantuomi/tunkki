@@ -10,7 +10,7 @@ public class TypeTunkkiError extends TunkkiError {
 
     @Override
     public String what() {
-        return "Incompatible types %s and %s.";
+        return "Incompatible type %s in context: %s.";
     }
 
     @Override
