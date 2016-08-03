@@ -65,8 +65,8 @@ public class Tokenizer {
         tokenRegexes.put(Token.Type.DeclarationToken, "^(decl)\\b");
         tokenRegexes.put(Token.Type.BranchToken, "^(if)\\b");
 
-        tokenRegexes.put(Token.Type.CallToken, "^([a-zA-Z]+\\w*)\\?[\\s|\\!]");
-        tokenRegexes.put(Token.Type.SymbolToken, "^([a-zA-Z]+\\w*)\\b");
+        tokenRegexes.put(Token.Type.CallToken, "^([a-äA-Ä]+\\w*)\\?[\\s|\\!]");
+        tokenRegexes.put(Token.Type.SymbolToken, "^([a-äA-Ä]+\\w*)\\b");
 
         discardedTokenTypes.add(Token.Type.WhitespaceToken);
         discardedTokenTypes.add(Token.Type.CommentToken);
