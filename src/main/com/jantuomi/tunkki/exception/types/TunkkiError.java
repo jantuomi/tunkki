@@ -25,16 +25,11 @@ abstract public class TunkkiError extends Exception {
         NadaError
     }
 
-    private static Map<ExceptionType, String> errorTexts = new HashMap<>();
-
-
-    private List<String> arguments;
     private int line;
     private String[] args;
 
     public TunkkiError(int line, String... args) {
         super();
-        this.arguments = Arrays.asList(args);
         this.line = line;
         this.args = args;
     }
@@ -64,9 +59,5 @@ abstract public class TunkkiError extends Exception {
     @Override
     public void printStackTrace() {
         System.err.println(completeMessage());
-    }
-
-    public List<String> getArguments() {
-        return this.arguments;
     }
 }
