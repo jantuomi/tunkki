@@ -12,7 +12,6 @@ import java.util.List;
 public class Function {
 
     private List<String> argumentNames;
-
     private BlockBodyNode body;
 
     public String getName() {

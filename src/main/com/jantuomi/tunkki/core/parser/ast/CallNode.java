@@ -17,7 +17,14 @@ public class CallNode extends SymbolNode {
     public Datatype evaluate() throws TunkkiError {
         Datatype d = super.evaluate();
         if (d.getType() == Datatype.Type.Callable) {
-            return ((CallableDatatype) d).call(evaluateParameters());
+            try {
+                Datatype r = ((CallableDatatype) d).call(evaluateParameters());
+                return r;
+            }
+            catch (TunkkiError ex) {
+                ex.setLine(getLine());
+                throw ex;
+            }
         } else {
             return d;
         }
