@@ -28,7 +28,6 @@ public class Interpreter {
             }
             catch (NullPointerException ex) {
                 continue;
-                //throw new TunkkiError(TunkkiError.ExceptionType.GeneralError, -1, "Malformed input.");
             }
 
             if (data != null) {

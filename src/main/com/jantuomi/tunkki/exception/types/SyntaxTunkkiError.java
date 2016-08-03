@@ -10,7 +10,7 @@ public class SyntaxTunkkiError extends TunkkiError {
 
     @Override
     public String what() {
-        return "Unexpected %s.";
+        return "%s";
     }
 
     @Override

@@ -3,6 +3,7 @@ package com.jantuomi.tunkki.core.parser;
 import com.jantuomi.tunkki.core.parser.ast.ASTNode;
 import com.jantuomi.tunkki.core.parser.tokenizer.token.Token;
 import com.jantuomi.tunkki.exception.types.GeneralTunkkiError;
+import com.jantuomi.tunkki.exception.types.SyntaxTunkkiError;
 import com.jantuomi.tunkki.exception.types.TunkkiError;
 
 import java.util.ArrayList;
@@ -35,7 +36,7 @@ public class ASTGenerator {
         try {
             root.print(0);
         } catch (NullPointerException ex) {
-            throw new GeneralTunkkiError(-1, "Malformed syntax tree.");
+            throw new SyntaxTunkkiError(-1, "Illegal syntax.");
         }
 
         System.out.println("### AST Tree end ###");
