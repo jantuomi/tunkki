@@ -35,7 +35,8 @@ public class IncludeBuiltinFunction extends BuiltinFunction {
             throw new TypeTunkkiError(-1, params.get(0).getType().toString(), getName());
         }
 
-        String filename = ((StringDatatype) params.get(0)).getData();
+        StringDatatype param = (StringDatatype) params.get(0);
+        String filename = param.getData();
 
         if (BuiltinManager.getInstance().BUILTIN_MODULES.contains(filename)) {
 
@@ -47,7 +48,7 @@ public class IncludeBuiltinFunction extends BuiltinFunction {
             String contents = CommandLineArgumentContainer.getInstance().readFileContents(filename);
 
             if (contents == null) {
-                return null;
+                throw new FileNotFoundTunkkiError(-1, param.toString());
             }
 
             String regex = String.format(".*include\\?\\s+\"\\s?%s\\s?\"\\s?\\!.*", Pattern.quote(filename));

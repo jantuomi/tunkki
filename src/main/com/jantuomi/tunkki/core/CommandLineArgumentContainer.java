@@ -70,7 +70,7 @@ public class CommandLineArgumentContainer {
             }
             contents = sb.toString();
         } catch (IOException e) {
-            System.err.println(String.format("Couldn't read file \"%s\".", file.toString()));
+            // System.err.println(String.format("Couldn't read file \"%s\".", file.toString()));
             return null;
         }
 
