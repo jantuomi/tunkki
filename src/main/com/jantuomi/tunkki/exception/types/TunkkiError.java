@@ -22,7 +22,8 @@ abstract public class TunkkiError extends Exception {
         GeneralError,
         CastError,
         DivisionByZeroError,
-        NadaError
+        RecursiveIncludeError,
+        OutOfBoundsError, FileNotFoundError, NadaError
     }
 
     private int line;

@@ -4,7 +4,7 @@ import com.jantuomi.tunkki.core.parser.datatype.Datatype;
 import com.jantuomi.tunkki.core.parser.datatype.IntegerDatatype;
 import com.jantuomi.tunkki.core.parser.datatype.ListDatatype;
 import com.jantuomi.tunkki.exception.types.FunctionArgumentTunkkiError;
-import com.jantuomi.tunkki.exception.types.GeneralTunkkiError;
+import com.jantuomi.tunkki.exception.types.OutOfBoundsTunkkiError;
 import com.jantuomi.tunkki.exception.types.TunkkiError;
 
 import java.util.Arrays;
@@ -39,7 +39,7 @@ public class GetBuiltinFunction extends BuiltinFunction {
             return list.getData().get(index.getData());
         }
         catch (Exception ex) {
-            throw new GeneralTunkkiError(-1, "List index out of bounds.");
+            throw new OutOfBoundsTunkkiError(-1, index.toString());
         }
     }
 

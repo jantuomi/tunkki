@@ -28,7 +28,7 @@ public class AdditionNode extends BinaryOperatorNode {
             return result;
         } else {
             throw new TypeTunkkiError(source.getLine(),
-                operand1.getType().toString(), operand2.getType().toString());
+                operand2.getType().toString(), operand1.getType().toString());
         }
 
     }

@@ -9,8 +9,7 @@ import com.jantuomi.tunkki.core.parser.datatype.VoidDatatype;
 import com.jantuomi.tunkki.core.runtime.State;
 import com.jantuomi.tunkki.core.runtime.builtins.BuiltinManager;
 import com.jantuomi.tunkki.exception.ExceptionManager;
-import com.jantuomi.tunkki.exception.types.GeneralTunkkiError;
-import com.jantuomi.tunkki.exception.types.TunkkiError;
+import com.jantuomi.tunkki.exception.types.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -28,12 +27,15 @@ public class IncludeBuiltinFunction extends BuiltinFunction {
 
     @Override
     public Datatype evaluate(List<Datatype> params) throws TunkkiError {
-        String filename;
-        if (params.size() == 1 && params.get(0).getType() == Datatype.Type.String) {
-            filename = ((StringDatatype) params.get(0)).getData();
-        } else {
-            throw new GeneralTunkkiError(-1, "Include argument must be a valid file name string.");
+        if (params.size() != 1) {
+            throw new FunctionArgumentTunkkiError(-1, getName(), Datatype.toString(params));
         }
+
+        if (params.get(0).getType() != Datatype.Type.String) {
+            throw new TypeTunkkiError(-1, params.get(0).getType().toString(), getName());
+        }
+
+        String filename = ((StringDatatype) params.get(0)).getData();
 
         if (BuiltinManager.getInstance().BUILTIN_MODULES.contains(filename)) {
 
@@ -52,7 +54,7 @@ public class IncludeBuiltinFunction extends BuiltinFunction {
             Pattern pattern = Pattern.compile(regex, Pattern.DOTALL);
             Matcher matcher = pattern.matcher(contents);
             if (matcher.matches()) {
-                throw new GeneralTunkkiError(-1, "Recursive include detected, aborting.");
+                throw new RecursiveIncludeTunkkiError(-1, filename);
             }
 
             Tunkki.getInstance().run(contents);
