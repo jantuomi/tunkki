@@ -67,6 +67,7 @@ public class Tokenizer {
 
         tokenRegexes.put(Token.Type.CallToken, "^([a-öA-Ö]+\\w*)\\?[\\s|\\!]");
         tokenRegexes.put(Token.Type.SymbolToken, "^([a-öA-Ö]+\\w*)\\b");
+        tokenRegexes.put(Token.Type.ObjectMemberToken, "^([a-öA-Ö]+\\w*)\\:\\b");
 
         discardedTokenTypes.add(Token.Type.WhitespaceToken);
         discardedTokenTypes.add(Token.Type.CommentToken);

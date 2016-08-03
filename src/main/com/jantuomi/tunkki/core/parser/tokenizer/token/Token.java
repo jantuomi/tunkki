@@ -30,7 +30,7 @@ abstract public class Token {
 
     abstract public ASTNode generateNode() throws TunkkiError;
 
-    /* Token types, ordered by precedence */
+    /* Token types */
     public enum Type {
         CommentToken,
 
@@ -72,16 +72,13 @@ abstract public class Token {
         NegationToken,
 
         DeclareAssignToken,
+        ObjectMemberToken,
         NotAToken
     }
 
     abstract public Token setArguments(List<Token> args);
 
     abstract public List<Token> getChildren();
-
-    public boolean is(Type type) {
-        return getTokenType() == type;
-    }
 
     public int getLine() {
         return line;
@@ -108,10 +105,6 @@ abstract public class Token {
         return rawText;
     }
 
-    public boolean isHigherPrecedenceThan(Token other) {
-        return getTokenType().ordinal() <= other.getTokenType().ordinal();
-    }
-
     public Token(Type type, String text, String rawText) {
         initialize(type, text, rawText);
     }
@@ -135,9 +128,6 @@ abstract public class Token {
     }
 
     public static Token makeToken(String string, Map<Type, String> regexes, int line) throws TunkkiError {
-        Type type = Type.NotAToken;
-        String text = Character.toString(string.charAt(0));
-
         for (Type t : regexes.keySet()) {
             String regex = regexes.get(t);
             Token found = matchToken(string, t, regex, line);
@@ -201,14 +191,5 @@ abstract public class Token {
                 getTokenType().toString().replace("Token", ""),
                 getText() == null ? "" : " " + getText()
         ));
-    }
-
-    public String toFormattedString() {
-        String textRepr = text;
-        return String.format("%-40s %s", getTokenType(), textRepr);
-    }
-
-    public boolean isSameType(Token other) {
-        return type == other.type;
     }
 }
