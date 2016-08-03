@@ -62,6 +62,8 @@ public class TokenFactory {
                 return new CallToken(text, rawText);
             case CallEndToken:
                 return new CallEndToken();
+            case ObjectMemberToken:
+                return new ObjectMemberToken(text, rawText);
             case BranchToken:
                 return new BranchToken();
             case NegationToken:

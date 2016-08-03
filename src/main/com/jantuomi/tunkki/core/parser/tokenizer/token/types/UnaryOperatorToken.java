@@ -10,6 +10,9 @@ import java.util.List;
  * Created by jan on 28.6.2016.
  */
 abstract public class UnaryOperatorToken extends Token {
+    public UnaryOperatorToken(Type type, String text, String rawText) {
+        super(type, text, rawText);
+    }
     public UnaryOperatorToken(Type type, String text) {
         super(type, text);
     }
