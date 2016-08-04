@@ -49,7 +49,7 @@ abstract public class Token {
         NotEqualsToken,
 
         OpenParenToken,
-        CallEndToken,
+        BlockEndToken,
 
         FunctionDefineToken,
         DeclarationToken,
@@ -65,7 +65,6 @@ abstract public class Token {
         SymbolToken,
         CallToken,
 
-        EndBlockToken,
         FunctionBodyToken,
         NegationToken,
 

@@ -2,7 +2,6 @@ package com.jantuomi.tunkki.core.parser.tokenizer;
 
 
 import com.jantuomi.tunkki.core.parser.tokenizer.token.Token;
-import com.jantuomi.tunkki.exception.ExceptionManager;
 import com.jantuomi.tunkki.exception.types.IllegalTokenTunkkiError;
 import com.jantuomi.tunkki.exception.types.TunkkiError;
 
@@ -56,10 +55,9 @@ public class Tokenizer {
         tokenRegexes.put(Token.Type.EqualsToken, "^(\\=\\=)");
         tokenRegexes.put(Token.Type.NotEqualsToken, "^(\\!\\=)");
         tokenRegexes.put(Token.Type.OpenParenToken, "^(\\()");
-        tokenRegexes.put(Token.Type.CallEndToken, "^(\\!)");
-        tokenRegexes.put(Token.Type.FunctionDefineToken, "^(func)\\b");
-        tokenRegexes.put(Token.Type.FunctionBodyToken, "^(as)\\b");
-        tokenRegexes.put(Token.Type.EndBlockToken, "^(end)\\b");
+        tokenRegexes.put(Token.Type.BlockEndToken, "^(\\!)");
+        tokenRegexes.put(Token.Type.FunctionDefineToken, "^(\\@)");
+        tokenRegexes.put(Token.Type.FunctionBodyToken, "^(\\|)");
         tokenRegexes.put(Token.Type.NegationToken, "^(not)\\b");
         tokenRegexes.put(Token.Type.DeclarationToken, "^(decl)\\b");
 

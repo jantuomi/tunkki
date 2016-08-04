@@ -12,8 +12,8 @@ import java.util.List;
  * Created by jan on 16.6.2016.
  */
 public class BlockBodyToken extends VarargOperatorToken {
-    public BlockBodyToken(String keyword) {
-        super(Type.FunctionBodyToken, keyword);
+    public BlockBodyToken() {
+        super(Type.FunctionBodyToken, "|");
     }
 
     @Override
@@ -30,6 +30,6 @@ public class BlockBodyToken extends VarargOperatorToken {
 
     @Override
     public Type getTerminatorTokenType() {
-        return Type.EndBlockToken;
+        return Type.BlockEndToken;
     }
 }

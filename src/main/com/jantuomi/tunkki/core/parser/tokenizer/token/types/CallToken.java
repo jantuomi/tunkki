@@ -35,6 +35,6 @@ public class CallToken extends VarargOperatorToken {
 
     @Override
     public Type getTerminatorTokenType() {
-        return Type.CallEndToken;
+        return Type.BlockEndToken;
     }
 }

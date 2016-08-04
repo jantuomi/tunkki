@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class FunctionDefineToken extends VarargOperatorToken {
     public FunctionDefineToken() {
-        super(Type.FunctionDefineToken, "func");
+        super(Type.FunctionDefineToken, "@");
     }
 
     @Override

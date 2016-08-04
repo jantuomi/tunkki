@@ -7,7 +7,7 @@ import com.jantuomi.tunkki.core.parser.ast.ASTNode;
  */
 public class EndBlockToken extends TerminalToken {
     public EndBlockToken() {
-        super(Type.EndBlockToken, "end");
+        super(Type.BlockEndToken, "!");
     }
 
     @Override

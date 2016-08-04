@@ -44,10 +44,8 @@ public class TokenFactory {
                 return new DivisionToken();
             case FunctionDefineToken:
                 return new FunctionDefineToken();
-            case EndBlockToken:
-                return new EndBlockToken();
             case FunctionBodyToken:
-                return new BlockBodyToken("as");
+                return new BlockBodyToken();
             case DeclarationToken:
                 return new VariableDeclareToken();
             case AssignmentToken:
@@ -58,8 +56,8 @@ public class TokenFactory {
                 return new SymbolToken(text);
             case CallToken:
                 return new CallToken(text, rawText);
-            case CallEndToken:
-                return new CallEndToken();
+            case BlockEndToken:
+                return new BlockEndToken();
             case ObjectMemberToken:
                 return new ObjectMemberToken(text, rawText);
             case NegationToken:
