@@ -48,8 +48,6 @@ public class TokenFactory {
                 return new EndBlockToken();
             case FunctionBodyToken:
                 return new BlockBodyToken("as");
-            case BranchBodyToken:
-                return new BlockBodyToken("then");
             case DeclarationToken:
                 return new VariableDeclareToken();
             case AssignmentToken:
@@ -64,8 +62,6 @@ public class TokenFactory {
                 return new CallEndToken();
             case ObjectMemberToken:
                 return new ObjectMemberToken(text, rawText);
-            case BranchToken:
-                return new BranchToken();
             case NegationToken:
                 return new NegationToken();
             default:

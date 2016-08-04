@@ -62,13 +62,11 @@ abstract public class Token {
         WhitespaceToken,
         NewlineToken,
 
-        BranchToken,
         SymbolToken,
         CallToken,
 
         EndBlockToken,
         FunctionBodyToken,
-        BranchBodyToken,
         NegationToken,
 
         DeclareAssignToken,

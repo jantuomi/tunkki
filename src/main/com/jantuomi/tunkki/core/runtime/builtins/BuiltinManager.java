@@ -43,10 +43,11 @@ public class BuiltinManager {
         builtins.add(new ContainsBuiltinFunction());
         builtins.add(new GetBuiltinFunction());
         builtins.add(new EqualsBuiltinFunction());
+        builtins.add(new IfBuiltinFunction());
     }
 
     private List<Function> getFunctionsFromMathModule() {
-        return Arrays.asList(new PowerBuiltinFunction());
+        return Collections.singletonList(new PowerBuiltinFunction());
     }
 
     public List<Function> getFunctionsFromModule(String name) throws TunkkiError {
@@ -56,10 +57,6 @@ public class BuiltinManager {
         else {
             throw new IncludeTunkkiError(-1, name);
         }
-    }
-
-    public void addBuiltin(BuiltinFunction func) {
-        builtins.add(func);
     }
 
     public List<BuiltinFunction> getBuiltins() {

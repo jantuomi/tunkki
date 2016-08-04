@@ -59,11 +59,9 @@ public class Tokenizer {
         tokenRegexes.put(Token.Type.CallEndToken, "^(\\!)");
         tokenRegexes.put(Token.Type.FunctionDefineToken, "^(func)\\b");
         tokenRegexes.put(Token.Type.FunctionBodyToken, "^(as)\\b");
-        tokenRegexes.put(Token.Type.BranchBodyToken, "^(then)\\b");
         tokenRegexes.put(Token.Type.EndBlockToken, "^(end)\\b");
         tokenRegexes.put(Token.Type.NegationToken, "^(not)\\b");
         tokenRegexes.put(Token.Type.DeclarationToken, "^(decl)\\b");
-        tokenRegexes.put(Token.Type.BranchToken, "^(if)\\b");
 
         tokenRegexes.put(Token.Type.CallToken, "^([a-öA-Ö]+\\w*)\\?[\\s|\\!]");
         tokenRegexes.put(Token.Type.ObjectMemberToken, "^([a-öA-Ö]+)\\:");
