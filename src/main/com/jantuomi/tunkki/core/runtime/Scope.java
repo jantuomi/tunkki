@@ -3,10 +3,12 @@ package com.jantuomi.tunkki.core.runtime;
 import com.jantuomi.tunkki.core.parser.datatype.CallableDatatype;
 import com.jantuomi.tunkki.core.parser.datatype.Datatype;
 import com.jantuomi.tunkki.exception.types.TunkkiError;
+import com.jantuomi.tunkki.exception.types.UndeclaredSymbolTunkkiError;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by jan on 20.6.2016.
@@ -16,6 +18,14 @@ public class Scope {
 
     private Map<String, Datatype> variables = new HashMap<>();
     private Map<String, Function> functions = new HashMap<>();
+
+    public Set<String> getVariableNames() {
+        return variables.keySet();
+    }
+
+    public Set<String> getFunctionNames() {
+        return functions.keySet();
+    }
 
     public void addVariable(String symbol) {
         variables.put(symbol, null);
@@ -27,8 +37,7 @@ public class Scope {
 
     public Datatype resolveSymbol(String symbol, List<Datatype> params) throws TunkkiError {
         if (functions.containsKey(symbol)) {
-            Datatype r = functions.get(symbol).evaluate(params);
-            return r;
+            return functions.get(symbol).evaluate(params);
         }
         if (variables.containsKey(symbol)) {
             return variables.get(symbol);
@@ -37,7 +46,7 @@ public class Scope {
             return parent.resolveSymbol(symbol, params);
         }
         else {
-            return null;
+            throw new UndeclaredSymbolTunkkiError(-1, symbol);
         }
     }
 

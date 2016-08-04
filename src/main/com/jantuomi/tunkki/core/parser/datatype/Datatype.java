@@ -18,7 +18,8 @@ abstract public class Datatype<T> {
         Boolean,
         Nada,
         Void,
-        Callable
+        Callable,
+        Object
     }
 
     abstract public Type getType();

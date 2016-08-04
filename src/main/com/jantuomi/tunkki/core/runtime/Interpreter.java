@@ -2,6 +2,7 @@ package com.jantuomi.tunkki.core.runtime;
 
 import com.jantuomi.tunkki.core.parser.ast.ASTNode;
 import com.jantuomi.tunkki.core.parser.datatype.Datatype;
+import com.jantuomi.tunkki.exception.types.SyntaxTunkkiError;
 import com.jantuomi.tunkki.exception.types.TunkkiError;
 
 import java.util.List;
@@ -23,12 +24,11 @@ public class Interpreter {
         String output = "";
         Datatype data;
         for (ASTNode node : sequence) {
-            try {
-                 data = node.evaluate();
+            if (node == null) {
+                throw new SyntaxTunkkiError(-1, "null node");
             }
-            catch (NullPointerException ex) {
-                continue;
-            }
+
+            data = node.evaluate();
 
             if (data != null) {
                 output = data.toString();
