@@ -18,11 +18,6 @@ public class ConcatBuiltinFunction extends BuiltinFunction {
     }
 
     @Override
-    public String getName() {
-        return "concat";
-    }
-
-    @Override
     public Datatype evaluate(List<Datatype> params) throws TunkkiError {
         StringBuilder sb = new StringBuilder();
         for (Datatype d : params) {

@@ -21,7 +21,7 @@ public class PowerBuiltinFunction extends BuiltinFunction {
     @Override
     public Datatype evaluate(List<Datatype> params) throws TunkkiError {
         if (params.size() != 2) {
-            throw new FunctionArgumentTunkkiError(-1, getName(), Datatype.toString(params));
+            throw new FunctionArgumentTunkkiError(-1, Datatype.toString(params));
         }
 
         Datatype lhs = params.get(0);
@@ -35,7 +35,7 @@ public class PowerBuiltinFunction extends BuiltinFunction {
             return new DoubleDatatype(result);
         }
         catch (Exception ex) {
-            throw new FunctionArgumentTunkkiError(-1, getName(), Datatype.toString(params));
+            throw new FunctionArgumentTunkkiError(-1, Datatype.toString(params));
         }
     }
 
@@ -47,13 +47,8 @@ public class PowerBuiltinFunction extends BuiltinFunction {
             number = ((DoubleDatatype) dt).getData();
         }
         else {
-            throw new FunctionArgumentTunkkiError(-1, getName(), Datatype.toString(params));
+            throw new FunctionArgumentTunkkiError(-1, Datatype.toString(params));
         }
         return number;
-    }
-
-    @Override
-    public String getName() {
-        return "pow";
     }
 }

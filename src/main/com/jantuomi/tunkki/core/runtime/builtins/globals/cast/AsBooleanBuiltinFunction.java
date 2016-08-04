@@ -19,11 +19,6 @@ public class AsBooleanBuiltinFunction extends BuiltinFunction {
     }
 
     @Override
-    public String getName() {
-        return "as_bool";
-    }
-
-    @Override
     public BooleanDatatype evaluate(List<Datatype> params) throws TunkkiError {
         if (params.size() != 1) {
             return null;

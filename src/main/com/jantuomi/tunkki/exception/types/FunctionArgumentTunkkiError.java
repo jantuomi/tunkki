@@ -10,7 +10,7 @@ public class FunctionArgumentTunkkiError extends TunkkiError {
 
     @Override
     public String what() {
-        return "The parameter list given to function %s is either of wrong length or the parameters are of wrong type. Actual: %s";
+        return "The parameter list given to function is either of wrong length or the parameters are of wrong type. Actual: %s";
     }
 
     @Override

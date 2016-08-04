@@ -19,11 +19,6 @@ public class InputBuiltinFunction extends BuiltinFunction {
     }
 
     @Override
-    public String getName() {
-        return "input";
-    }
-
-    @Override
     public Datatype evaluate(List<Datatype> params) throws TunkkiError {
         if (params.size() > 0) {
             Datatype param = params.get(0);

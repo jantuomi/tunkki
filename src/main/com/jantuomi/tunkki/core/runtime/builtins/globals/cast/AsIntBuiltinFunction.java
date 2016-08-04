@@ -19,11 +19,6 @@ public class AsIntBuiltinFunction extends BuiltinFunction {
     }
 
     @Override
-    public String getName() {
-        return "as_int";
-    }
-
-    @Override
     public IntegerDatatype evaluate(List<Datatype> params) throws TunkkiError {
         if (params.size() != 1) {
             return null;

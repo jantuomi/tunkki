@@ -18,11 +18,6 @@ public class OutputBuiltinFunction extends BuiltinFunction {
     }
 
     @Override
-    public String getName() {
-        return "output";
-    }
-
-    @Override
     public Datatype evaluate(List<Datatype> params) throws TunkkiError {
         Datatype param = params.get(0);
         System.out.println(param.getData().toString());

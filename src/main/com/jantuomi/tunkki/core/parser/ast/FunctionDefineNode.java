@@ -16,14 +16,8 @@ import java.util.List;
  */
 public class FunctionDefineNode extends VarargOperatorNode {
 
-    private String name;
-
     public void setBody(ASTNode body) {
         this.body = body;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     private ASTNode body;
@@ -45,8 +39,6 @@ public class FunctionDefineNode extends VarargOperatorNode {
             throw new ExpectedDifferentTokenTunkkiError(getLine(), getText());
         }
         Function function = new Function(argumentNames, (BlockBodyNode) body);
-        function.setName(name);
-        State.getInstance().addFunctionToScope(name, function);
 
         CallableDatatype c = new CallableDatatype();
         c.setData(function);
@@ -60,7 +52,7 @@ public class FunctionDefineNode extends VarargOperatorNode {
             System.out.print("\t");
         }
 
-        System.out.println(String.format("Function %s", name));
+        System.out.println(String.format("Function"));
 
         for (int i = 0; i < indent + 1; i++) {
             System.out.print("\t");

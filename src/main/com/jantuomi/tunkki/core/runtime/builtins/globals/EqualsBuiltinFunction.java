@@ -20,7 +20,7 @@ public class EqualsBuiltinFunction extends BuiltinFunction {
     @Override
     public Datatype evaluate(List<Datatype> params) throws TunkkiError {
         if (params.size() != 2) {
-            throw new FunctionArgumentTunkkiError(-1, getName(), Datatype.toString(params));
+            throw new FunctionArgumentTunkkiError(-1, Datatype.toString(params));
         }
 
         Datatype lhs = params.get(0);
@@ -32,10 +32,5 @@ public class EqualsBuiltinFunction extends BuiltinFunction {
         } else {
             throw new TypeTunkkiError(-1, lhs.getType().toString(), rhs.getType().toString());
         }
-    }
-
-    @Override
-    public String getName() {
-        return "eq";
     }
 }

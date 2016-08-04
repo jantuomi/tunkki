@@ -17,7 +17,7 @@ public class CallableDatatype extends Datatype<Function> {
 
     @Override
     public String toString() {
-        return String.format("Callable %s", getData().getName());
+        return "Callable";
     }
 
     public Datatype call(List<Datatype> params) throws TunkkiError {

@@ -17,14 +17,9 @@ public class Scope {
     private Scope parent = null;
 
     private Map<String, Datatype> variables = new HashMap<>();
-    private Map<String, Function> functions = new HashMap<>();
 
     public Set<String> getVariableNames() {
         return variables.keySet();
-    }
-
-    public Set<String> getFunctionNames() {
-        return functions.keySet();
     }
 
     public void addVariable(String symbol) {
@@ -35,10 +30,12 @@ public class Scope {
         variables.replace(symbol, value);
     }
 
+    public void addAndSetVariable(String symbol, Datatype value) {
+        addVariable(symbol);
+        setVariableValue(symbol, value);
+    }
+
     public Datatype resolveSymbol(String symbol, List<Datatype> params) throws TunkkiError {
-        if (functions.containsKey(symbol)) {
-            return functions.get(symbol).evaluate(params);
-        }
         if (variables.containsKey(symbol)) {
             return variables.get(symbol);
         }
@@ -50,30 +47,7 @@ public class Scope {
         }
     }
 
-    public CallableDatatype getCallable(String symbol) {
-        if (functions.containsKey(symbol)) {
-            Function f = functions.get(symbol);
-            CallableDatatype c = new CallableDatatype();
-            c.setData(f);
-            return c;
-        }
-        else if (parent != null) {
-            return parent.getCallable(symbol);
-        }
-        else {
-            return null;
-        }
-    }
-
     public void setParent(Scope parent) {
         this.parent = parent;
-    }
-
-    public void addFunction(String symbol, Function func) {
-        functions.put(symbol, func);
-    }
-
-    public boolean isFunction(String symbol) {
-        return functions.containsKey(symbol);
     }
 }

@@ -20,9 +20,4 @@ public class ListBuiltinFunction extends BuiltinFunction {
         ListDatatype data = new ListDatatype(params);
         return data;
     }
-
-    @Override
-    public String getName() {
-        return "list";
-    }
 }

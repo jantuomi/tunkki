@@ -21,15 +21,15 @@ public class GetBuiltinFunction extends BuiltinFunction {
     @Override
     public Datatype evaluate(List<Datatype> params) throws TunkkiError {
         if (params.size() != 2) {
-            throw new FunctionArgumentTunkkiError(-1, getName(), params.toString());
+            throw new FunctionArgumentTunkkiError(-1, params.toString());
         }
 
         if (params.get(0).getType() != Datatype.Type.List) {
-            throw new FunctionArgumentTunkkiError(-1, getName(), Datatype.toString(params));
+            throw new FunctionArgumentTunkkiError(-1, Datatype.toString(params));
         }
 
         if (params.get(1).getType() != Datatype.Type.Integer) {
-            throw new FunctionArgumentTunkkiError(-1, getName(), Datatype.toString(params));
+            throw new FunctionArgumentTunkkiError(-1, Datatype.toString(params));
         }
 
         ListDatatype list = (ListDatatype) params.get(0);
@@ -41,10 +41,5 @@ public class GetBuiltinFunction extends BuiltinFunction {
         catch (Exception ex) {
             throw new OutOfBoundsTunkkiError(-1, index.toString());
         }
-    }
-
-    @Override
-    public String getName() {
-        return "get";
     }
 }

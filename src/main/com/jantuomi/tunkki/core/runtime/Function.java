@@ -1,6 +1,7 @@
 package com.jantuomi.tunkki.core.runtime;
 
 import com.jantuomi.tunkki.core.parser.ast.BlockBodyNode;
+import com.jantuomi.tunkki.core.parser.datatype.CallableDatatype;
 import com.jantuomi.tunkki.core.parser.datatype.Datatype;
 import com.jantuomi.tunkki.exception.types.TunkkiError;
 
@@ -13,16 +14,6 @@ public class Function {
 
     private List<String> argumentNames;
     private BlockBodyNode body;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    private String name;
 
     public Function(List<String> argumentNames, BlockBodyNode body) {
         this.argumentNames = argumentNames;
@@ -46,6 +37,12 @@ public class Function {
         State.getInstance().popScope();
 
         return returnValue;
+    }
+
+    public CallableDatatype makeCallable() {
+        CallableDatatype c = new CallableDatatype();
+        c.setData(this);
+        return c;
     }
 
 }

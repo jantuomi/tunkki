@@ -1,5 +1,6 @@
 package com.jantuomi.tunkki.core.runtime;
 
+import com.jantuomi.tunkki.core.parser.datatype.CallableDatatype;
 import com.jantuomi.tunkki.core.parser.datatype.Datatype;
 import com.jantuomi.tunkki.core.parser.datatype.NadaDatatype;
 import com.jantuomi.tunkki.core.runtime.builtins.BuiltinManager;
@@ -7,6 +8,7 @@ import com.jantuomi.tunkki.exception.types.TunkkiError;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.Stack;
 
 /**
@@ -25,8 +27,10 @@ public class State {
         /* Push global scope onto the stack */
         Scope globalScope = new Scope();
 
-        for (Function builtin : BuiltinManager.getInstance().getBuiltins()) {
-            globalScope.addFunction(builtin.getName(), builtin);
+        Map<String, CallableDatatype> builtins = BuiltinManager.getInstance().getBuiltins();
+        for (String builtin : builtins.keySet()) {
+            globalScope.addVariable(builtin);
+            globalScope.setVariableValue(builtin, builtins.get(builtin));
         }
 
         /* Add nada to the scope */
@@ -49,10 +53,6 @@ public class State {
         return scopes.peek().resolveSymbol(symbol, parameters);
     }
 
-    public boolean isFunction(String symbol) {
-        return scopes.peek().isFunction(symbol);
-    }
-
     public Scope createScope() {
         Scope scope = new Scope();
         if (scopes.size() > 0) {
@@ -68,9 +68,6 @@ public class State {
         scopes.peek().addVariable(symbol);
     }
 
-    public void addFunctionToScope(String symbol, Function func) {
-        scopes.peek().addFunction(symbol, func);
-    }
 
     public void setSymbolValueToScope(String symbol, Datatype value) {
         scopes.peek().setVariableValue(symbol, value);
@@ -78,9 +75,5 @@ public class State {
 
     public Scope popScope() {
         return scopes.pop();
-    }
-
-    public Datatype makeFunctionReference(String name) {
-        return scopes.peek().getCallable(name);
     }
 }

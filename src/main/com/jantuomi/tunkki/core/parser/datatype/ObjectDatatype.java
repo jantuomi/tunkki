@@ -20,7 +20,6 @@ public class ObjectDatatype extends Datatype<Scope> {
     public String toString() {
         String sb = "Object [";
         sb += String.join(", ", getData().getVariableNames());
-        sb += String.join(", ", getData().getFunctionNames());
         sb += "]";
         return sb;
     }

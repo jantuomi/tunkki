@@ -45,12 +45,8 @@ public class SymbolNode extends ASTNode {
 
         Datatype returnValue;
         try {
-            if (State.getInstance().isFunction(name)) {
-                returnValue = State.getInstance().makeFunctionReference(name);
-            } else {
-                List<Datatype> paramValues = evaluateParameters();
-                returnValue = State.getInstance().evaluateSymbol(name, paramValues);
-            }
+            List<Datatype> paramValues = evaluateParameters();
+            returnValue = State.getInstance().evaluateSymbol(name, paramValues);
 
         }
         /* If a TunkkiError is caught, pass it on with line information */

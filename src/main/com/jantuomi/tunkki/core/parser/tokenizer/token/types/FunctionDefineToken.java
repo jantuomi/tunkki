@@ -24,11 +24,8 @@ public class FunctionDefineToken extends VarargOperatorToken {
         if (args.size() == 0) {
             throw new ExpectedDifferentTokenTunkkiError(getLine(), getText());
         }
-
-        node.setName(args.get(0).getText());
-
         List<ASTNode> funcArgs = new ArrayList<>();
-        for (int i = 1; i < args.size() - 1; i++) {
+        for (int i = 0; i < args.size() - 1; i++) {
             funcArgs.add(args.get(i).generateNode());
         }
         node.setArgs(funcArgs);

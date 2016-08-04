@@ -21,7 +21,7 @@ public class ContainsBuiltinFunction extends BuiltinFunction {
     @Override
     public Datatype evaluate(List<Datatype> params) throws TunkkiError {
         if (params.size() != 2) {
-            throw new FunctionArgumentTunkkiError(-1, getName(), Datatype.toString(params));
+            throw new FunctionArgumentTunkkiError(-1, Datatype.toString(params));
         }
 
         if (params.get(0).getType() == Datatype.Type.List) {
@@ -30,7 +30,7 @@ public class ContainsBuiltinFunction extends BuiltinFunction {
         else if (params.get(0).getType() == Datatype.Type.String) {
             return evaluateOnString(params);
         }
-        throw new FunctionArgumentTunkkiError(-1, getName(), Datatype.toString(params));
+        throw new FunctionArgumentTunkkiError(-1, Datatype.toString(params));
     }
 
     private Datatype evaluateOnList(List<Datatype> params) throws TunkkiError {
@@ -47,7 +47,7 @@ public class ContainsBuiltinFunction extends BuiltinFunction {
 
     private Datatype evaluateOnString(List<Datatype> params) throws TunkkiError {
         if (params.get(1).getType() != Datatype.Type.String) {
-            throw new FunctionArgumentTunkkiError(-1, getName(), Datatype.toString(params));
+            throw new FunctionArgumentTunkkiError(-1, Datatype.toString(params));
         }
 
         StringDatatype string = (StringDatatype) params.get(0);
@@ -56,10 +56,5 @@ public class ContainsBuiltinFunction extends BuiltinFunction {
         return new BooleanDatatype(
                 string.getData().contains(comp.getData())
         );
-    }
-
-    @Override
-    public String getName() {
-        return "contains";
     }
 }

@@ -22,13 +22,13 @@ public class IfBuiltinFunction extends BuiltinFunction {
     @Override
     public Datatype evaluate(List<Datatype> params) throws TunkkiError {
         if (params.size() != 2) {
-            throw new FunctionArgumentTunkkiError(-1, getName(), Datatype.toString(params));
+            throw new FunctionArgumentTunkkiError(-1, Datatype.toString(params));
         }
 
         Datatype lhs = params.get(0);
         Datatype rhs = params.get(1);
         if (lhs.getType() != Datatype.Type.Boolean || rhs.getType() != Datatype.Type.Callable) {
-            throw new FunctionArgumentTunkkiError(-1, getName(), Datatype.toString(params));
+            throw new FunctionArgumentTunkkiError(-1, Datatype.toString(params));
         }
 
         BooleanDatatype cond = (BooleanDatatype) lhs;
@@ -37,10 +37,5 @@ public class IfBuiltinFunction extends BuiltinFunction {
             branch.call(Collections.emptyList());
         }
         return new VoidDatatype();
-    }
-
-    @Override
-    public String getName() {
-        return "if";
     }
 }
