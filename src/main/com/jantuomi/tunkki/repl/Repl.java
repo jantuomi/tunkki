@@ -2,6 +2,7 @@ package com.jantuomi.tunkki.repl;
 
 import com.jantuomi.tunkki.Tunkki;
 import com.jantuomi.tunkki.exception.types.TunkkiError;
+import com.jantuomi.tunkki.utils.IO;
 import jline.console.*;
 
 import java.io.IOException;
@@ -21,19 +22,15 @@ public class Repl {
     public void run() throws IOException, InterruptedException {
         showWelcomeText();
 
-        ConsoleReader reader = new ConsoleReader();
-        reader.setBellEnabled(false);
-        reader.setExpandEvents(false);
-
         String line;
         String command = "";
         PrintWriter out = new PrintWriter(System.out);
         boolean isMultilineInput = false;
         while (true)  {
             if (isMultilineInput) {
-                line = readLine(reader, "... ");
+                line = IO.getInstance().readLine("... ");
             } else {
-                line = readLine(reader, "tunkki> ");
+                line = IO.getInstance().readLine("tunkki> ");
             }
 
             if (line.endsWith("\\")) {
@@ -54,13 +51,6 @@ public class Repl {
 
             out.flush();
         }
-    }
-
-    private String readLine(ConsoleReader reader, String promptMessage)
-            throws IOException {
-        System.out.print(promptMessage);
-        String line = reader.readLine();
-        return line.trim();
     }
 
     private void showWelcomeText() {
