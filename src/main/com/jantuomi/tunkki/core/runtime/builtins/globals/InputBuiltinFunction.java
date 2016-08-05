@@ -35,6 +35,5 @@ public class InputBuiltinFunction extends BuiltinFunction {
             e.printStackTrace();
             return new NadaDatatype();
         }
-
     }
 }

@@ -24,7 +24,6 @@ public class Repl {
 
         String line;
         String command = "";
-        PrintWriter out = new PrintWriter(System.out);
         boolean isMultilineInput = false;
         while (true)  {
             if (isMultilineInput) {
@@ -49,7 +48,7 @@ public class Repl {
                 }
             }
 
-            out.flush();
+            IO.getInstance().flush();
         }
     }
 
