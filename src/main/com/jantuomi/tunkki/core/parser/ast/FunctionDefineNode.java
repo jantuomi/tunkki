@@ -2,8 +2,7 @@ package com.jantuomi.tunkki.core.parser.ast;
 
 import com.jantuomi.tunkki.core.parser.datatype.CallableDatatype;
 import com.jantuomi.tunkki.core.parser.datatype.Datatype;
-import com.jantuomi.tunkki.core.runtime.Function;
-import com.jantuomi.tunkki.core.runtime.State;
+import com.jantuomi.tunkki.core.runtime.UserDefinedFunction;
 import com.jantuomi.tunkki.core.parser.tokenizer.token.Token;
 import com.jantuomi.tunkki.exception.types.ExpectedDifferentTokenTunkkiError;
 import com.jantuomi.tunkki.exception.types.TunkkiError;
@@ -38,7 +37,7 @@ public class FunctionDefineNode extends VarargOperatorNode {
         catch (Exception ex) {
             throw new ExpectedDifferentTokenTunkkiError(getLine(), getText());
         }
-        Function function = new Function(argumentNames, (BlockBodyNode) body);
+        UserDefinedFunction function = new UserDefinedFunction(argumentNames, (BlockBodyNode) body);
 
         CallableDatatype c = new CallableDatatype();
         c.setData(function);
@@ -52,7 +51,7 @@ public class FunctionDefineNode extends VarargOperatorNode {
             System.out.print("\t");
         }
 
-        System.out.println(String.format("Function"));
+        System.out.println(String.format("UserDefinedFunction"));
 
         for (int i = 0; i < indent + 1; i++) {
             System.out.print("\t");

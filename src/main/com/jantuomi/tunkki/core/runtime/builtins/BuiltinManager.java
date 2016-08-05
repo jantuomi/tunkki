@@ -1,7 +1,6 @@
 package com.jantuomi.tunkki.core.runtime.builtins;
 
 import com.jantuomi.tunkki.core.parser.datatype.CallableDatatype;
-import com.jantuomi.tunkki.core.runtime.Function;
 import com.jantuomi.tunkki.core.runtime.builtins.globals.*;
 import com.jantuomi.tunkki.core.runtime.builtins.globals.cast.AsBooleanBuiltinFunction;
 import com.jantuomi.tunkki.core.runtime.builtins.globals.cast.AsIntBuiltinFunction;

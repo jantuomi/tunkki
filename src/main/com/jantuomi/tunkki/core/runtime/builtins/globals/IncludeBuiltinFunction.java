@@ -12,6 +12,7 @@ import com.jantuomi.tunkki.exception.types.*;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -26,13 +27,7 @@ public class IncludeBuiltinFunction extends BuiltinFunction {
 
     @Override
     public Datatype evaluate(List<Datatype> params) throws TunkkiError {
-        if (params.size() != 1) {
-            throw new FunctionArgumentTunkkiError(-1, Datatype.toString(params));
-        }
-
-        if (params.get(0).getType() != Datatype.Type.String) {
-            throw new TypeTunkkiError(-1, params.get(0).getType().toString(), "include");
-        }
+        super.evaluate(params);
 
         StringDatatype param = (StringDatatype) params.get(0);
         String filename = param.getData();
@@ -66,5 +61,17 @@ public class IncludeBuiltinFunction extends BuiltinFunction {
         }
 
         return new VoidDatatype();
+    }
+
+    @Override
+    public boolean hasVariableArgumentList() {
+        return false;
+    }
+
+    @Override
+    public List<Set<Datatype.Type>> getArgumentTypes() {
+        return Arrays.asList(
+                createAcceptableTypeSet(Datatype.Type.String)
+        );
     }
 }

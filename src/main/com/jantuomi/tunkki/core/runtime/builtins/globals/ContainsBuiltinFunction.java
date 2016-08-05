@@ -9,6 +9,7 @@ import com.jantuomi.tunkki.exception.types.TunkkiError;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by jan on 27.7.2016.
@@ -20,9 +21,7 @@ public class ContainsBuiltinFunction extends BuiltinFunction {
 
     @Override
     public Datatype evaluate(List<Datatype> params) throws TunkkiError {
-        if (params.size() != 2) {
-            throw new FunctionArgumentTunkkiError(-1, Datatype.toString(params));
-        }
+        super.evaluate(params);
 
         if (params.get(0).getType() == Datatype.Type.List) {
             return evaluateOnList(params);
@@ -31,6 +30,19 @@ public class ContainsBuiltinFunction extends BuiltinFunction {
             return evaluateOnString(params);
         }
         throw new FunctionArgumentTunkkiError(-1, Datatype.toString(params));
+    }
+
+    @Override
+    public boolean hasVariableArgumentList() {
+        return false;
+    }
+
+    @Override
+    public List<Set<Datatype.Type>> getArgumentTypes() {
+        return Arrays.asList(
+                createAcceptableTypeSet(Datatype.Type.List, Datatype.Type.String),
+                createAcceptableTypeSet()
+        );
     }
 
     private Datatype evaluateOnList(List<Datatype> params) throws TunkkiError {

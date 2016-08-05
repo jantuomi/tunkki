@@ -18,31 +18,31 @@ public class NadaDatatype extends Datatype<Integer> {
     }
 
     @Override
-    public Datatype<Integer> add(Datatype<Integer> other) throws TunkkiError {
+    public Datatype add(Datatype other) throws TunkkiError {
         doOperation();
         return null;
     }
 
     @Override
-    public Datatype<Integer> subtract(Datatype<Integer> other) throws TunkkiError {
+    public Datatype subtract(Datatype other) throws TunkkiError {
         doOperation();
         return null;
     }
 
     @Override
-    public Datatype<Integer> multiply(Datatype<Integer> other) throws TunkkiError {
+    public Datatype multiply(Datatype other) throws TunkkiError {
         doOperation();
         return null;
     }
 
     @Override
-    public Datatype<Integer> divide(Datatype<Integer> other) throws TunkkiError {
+    public Datatype divide(Datatype other) throws TunkkiError {
         doOperation();
         return null;
     }
 
     @Override
-    public BooleanDatatype equals(Datatype<Integer> other) throws TunkkiError {
+    public BooleanDatatype equals(Datatype other) throws TunkkiError {
         if (other.getType() == Type.Nada) {
             return new BooleanDatatype(true);
         }

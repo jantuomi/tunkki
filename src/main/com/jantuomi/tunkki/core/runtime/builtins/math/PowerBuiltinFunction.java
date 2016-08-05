@@ -9,6 +9,7 @@ import com.jantuomi.tunkki.exception.types.TunkkiError;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by jan on 2.8.2016.
@@ -39,6 +40,11 @@ public class PowerBuiltinFunction extends BuiltinFunction {
         }
     }
 
+    @Override
+    public boolean hasVariableArgumentList() {
+        return false;
+    }
+
     private double getDoubleValue(List<Datatype> params, Datatype dt) throws TunkkiError {
         double number;
         if (dt.getType() == Datatype.Type.Integer) {
@@ -50,5 +56,13 @@ public class PowerBuiltinFunction extends BuiltinFunction {
             throw new FunctionArgumentTunkkiError(-1, Datatype.toString(params));
         }
         return number;
+    }
+
+    @Override
+    public List<Set<Datatype.Type>> getArgumentTypes() {
+        return Arrays.asList(
+                createAcceptableTypeSet(Datatype.Type.Integer, Datatype.Type.Double),
+                createAcceptableTypeSet(Datatype.Type.Integer, Datatype.Type.Double)
+        );
     }
 }

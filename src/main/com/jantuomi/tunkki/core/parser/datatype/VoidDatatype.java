@@ -18,27 +18,27 @@ public class VoidDatatype extends Datatype<Integer> {
     }
 
     @Override
-    public Datatype<Integer> add(Datatype<Integer> other) {
+    public Datatype add(Datatype other) {
         return null;
     }
 
     @Override
-    public Datatype<Integer> subtract(Datatype<Integer> other) {
+    public Datatype subtract(Datatype other) {
         return null;
     }
 
     @Override
-    public Datatype<Integer> multiply(Datatype<Integer> other) throws TunkkiError {
+    public Datatype multiply(Datatype other) throws TunkkiError {
         return null;
     }
 
     @Override
-    public Datatype<Integer> divide(Datatype<Integer> other) throws TunkkiError {
+    public Datatype divide(Datatype other) throws TunkkiError {
         return null;
     }
 
     @Override
-    public BooleanDatatype equals(Datatype<Integer> other) throws TunkkiError {
+    public BooleanDatatype equals(Datatype other) throws TunkkiError {
         return new BooleanDatatype(false);
     }
 }

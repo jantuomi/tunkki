@@ -37,11 +37,11 @@ abstract public class Datatype<T> {
     @Override
     abstract public String toString();
 
-    abstract public Datatype<T> add(Datatype<T> other) throws TunkkiError;
-    public abstract Datatype<T> subtract(Datatype<T> other) throws TunkkiError;
-    public abstract Datatype<T> multiply(Datatype<T> other) throws TunkkiError;
-    public abstract Datatype<T> divide(Datatype<T> other) throws TunkkiError;
-    public abstract BooleanDatatype equals(Datatype<T> other) throws TunkkiError;
+    abstract public Datatype add(Datatype other) throws TunkkiError;
+    public abstract Datatype subtract(Datatype other) throws TunkkiError;
+    public abstract Datatype multiply(Datatype other) throws TunkkiError;
+    public abstract Datatype divide(Datatype other) throws TunkkiError;
+    public abstract BooleanDatatype equals(Datatype other) throws TunkkiError;
 
     public static String toString(List<Datatype> variables) {
         String result = "[";

@@ -23,29 +23,29 @@ public class StringDatatype extends Datatype<String> {
     }
 
     @Override
-    public Datatype<String> add(Datatype<String> other) {
+    public Datatype add(Datatype other) {
         return new StringDatatype(
                 getData() + other.getData()
         );
     }
 
     @Override
-    public Datatype<String> subtract(Datatype<String> other) throws TunkkiError {
+    public Datatype subtract(Datatype other) throws TunkkiError {
         return null;
     }
 
     @Override
-    public Datatype<String> multiply(Datatype<String> other) throws TunkkiError {
+    public Datatype multiply(Datatype other) throws TunkkiError {
         return null;
     }
 
     @Override
-    public Datatype<String> divide(Datatype<String> other) throws TunkkiError {
+    public Datatype divide(Datatype other) throws TunkkiError {
         return null;
     }
 
     @Override
-    public BooleanDatatype equals(Datatype<String> other) throws TunkkiError {
+    public BooleanDatatype equals(Datatype other) throws TunkkiError {
         switch (other.getType()) {
             case String:
                 return new BooleanDatatype(getData().equals(other.getData()));

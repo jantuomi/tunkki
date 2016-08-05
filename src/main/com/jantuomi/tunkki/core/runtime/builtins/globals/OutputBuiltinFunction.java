@@ -7,6 +7,7 @@ import com.jantuomi.tunkki.utils.IO;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by jan on 21.6.2016.
@@ -23,5 +24,17 @@ public class OutputBuiltinFunction extends BuiltinFunction {
         Datatype param = params.get(0);
         IO.getInstance().printLine(param.getData().toString());
         return new VoidDatatype();
+    }
+
+    @Override
+    public boolean hasVariableArgumentList() {
+        return false;
+    }
+
+    @Override
+    public List<Set<Datatype.Type>> getArgumentTypes() {
+        return Arrays.asList(
+                createAcceptableTypeSet(Datatype.Type.String)
+        );
     }
 }

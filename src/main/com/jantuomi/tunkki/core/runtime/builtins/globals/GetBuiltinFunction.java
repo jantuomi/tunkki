@@ -9,6 +9,7 @@ import com.jantuomi.tunkki.exception.types.TunkkiError;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by jan on 28.7.2016.
@@ -41,5 +42,18 @@ public class GetBuiltinFunction extends BuiltinFunction {
         catch (Exception ex) {
             throw new OutOfBoundsTunkkiError(-1, index.toString());
         }
+    }
+
+    @Override
+    public boolean hasVariableArgumentList() {
+        return false;
+    }
+
+    @Override
+    public List<Set<Datatype.Type>> getArgumentTypes() {
+        return Arrays.asList(
+                createAcceptableTypeSet(Datatype.Type.List),
+                createAcceptableTypeSet(Datatype.Type.Integer)
+        );
     }
 }

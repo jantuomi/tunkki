@@ -7,9 +7,7 @@ import com.jantuomi.tunkki.exception.types.TunkkiError;
 import com.jantuomi.tunkki.utils.IO;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * Created by jan on 21.6.2016.
@@ -23,10 +21,11 @@ public class InputBuiltinFunction extends BuiltinFunction {
 
     @Override
     public Datatype evaluate(List<Datatype> params) throws TunkkiError {
-        if (params.size() > 0) {
-            Datatype param = params.get(0);
-            System.out.print(param.getData().toString());
-        }
+        super.evaluate(params);
+
+        Datatype param = params.get(0);
+        System.out.print(param.getData().toString());
+
         String in;
         try {
             in = IO.getInstance().readLine("");
@@ -35,5 +34,17 @@ public class InputBuiltinFunction extends BuiltinFunction {
             e.printStackTrace();
             return new NadaDatatype();
         }
+    }
+
+    @Override
+    public boolean hasVariableArgumentList() {
+        return false;
+    }
+
+    @Override
+    public List<Set<Datatype.Type>> getArgumentTypes() {
+        return Collections.singletonList(
+                createAcceptableTypeSet(Datatype.Type.String)
+        );
     }
 }

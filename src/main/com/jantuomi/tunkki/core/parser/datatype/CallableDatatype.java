@@ -1,6 +1,7 @@
 package com.jantuomi.tunkki.core.parser.datatype;
 
 import com.jantuomi.tunkki.core.runtime.Function;
+import com.jantuomi.tunkki.core.runtime.UserDefinedFunction;
 import com.jantuomi.tunkki.exception.types.TunkkiError;
 
 import java.util.List;
@@ -25,27 +26,27 @@ public class CallableDatatype extends Datatype<Function> {
     }
 
     @Override
-    public Datatype<Function> add(Datatype<Function> other) throws TunkkiError {
+    public Datatype add(Datatype other) throws TunkkiError {
         return null;
     }
 
     @Override
-    public Datatype<Function> subtract(Datatype<Function> other) throws TunkkiError {
+    public Datatype subtract(Datatype other) throws TunkkiError {
         return null;
     }
 
     @Override
-    public Datatype<Function> multiply(Datatype<Function> other) throws TunkkiError {
+    public Datatype multiply(Datatype other) throws TunkkiError {
         return null;
     }
 
     @Override
-    public Datatype<Function> divide(Datatype<Function> other) throws TunkkiError {
+    public Datatype divide(Datatype other) throws TunkkiError {
         return null;
     }
 
     @Override
-    public BooleanDatatype equals(Datatype<Function> other) throws TunkkiError {
+    public BooleanDatatype equals(Datatype other) throws TunkkiError {
         switch (other.getType()) {
             case Nada:
                 return new BooleanDatatype(false);

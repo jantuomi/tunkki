@@ -7,7 +7,9 @@ import com.jantuomi.tunkki.exception.types.TunkkiError;
 import com.jantuomi.tunkki.exception.types.TypeTunkkiError;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by jan on 31.7.2016.
@@ -19,9 +21,7 @@ public class EqualsBuiltinFunction extends BuiltinFunction {
 
     @Override
     public Datatype evaluate(List<Datatype> params) throws TunkkiError {
-        if (params.size() != 2) {
-            throw new FunctionArgumentTunkkiError(-1, Datatype.toString(params));
-        }
+        super.evaluate(params);
 
         Datatype lhs = params.get(0);
         Datatype rhs = params.get(1);
@@ -32,5 +32,20 @@ public class EqualsBuiltinFunction extends BuiltinFunction {
         } else {
             throw new TypeTunkkiError(-1, lhs.getType().toString(), rhs.getType().toString());
         }
+    }
+
+    @Override
+    public boolean hasVariableArgumentList() {
+        return false;
+    }
+
+    @Override
+    public boolean hasDynamicallyTypedArguments() {
+        return true;
+    }
+
+    @Override
+    public List<Set<Datatype.Type>> getArgumentTypes() {
+        return Collections.emptyList();
     }
 }

@@ -25,17 +25,17 @@ public class ListDatatype extends Datatype<List<Datatype>> {
     }
 
     @Override
-    public BooleanDatatype equals(Datatype<List<Datatype>> other) throws TunkkiError {
+    public BooleanDatatype equals(Datatype other) throws TunkkiError {
         switch (other.getType()) {
             case List:
                 boolean found = false;
                 for (int i = 0; i < getData().size(); i++) {
-                    if (!getData().get(i).equals(other.getData().get(i)).getData()) {
+                    if (!getData().get(i).equals(((ListDatatype) other).getData().get(i)).getData()) {
                         found = true;
                         break;
                     }
-                    return new BooleanDatatype(found);
                 }
+                return new BooleanDatatype(found);
             case Nada:
                 return new BooleanDatatype(false);
         }

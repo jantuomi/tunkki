@@ -23,27 +23,27 @@ public class BooleanDatatype extends Datatype<Boolean> {
     }
 
     @Override
-    public Datatype<Boolean> add(Datatype<Boolean> other) throws TunkkiError {
+    public Datatype add(Datatype other) throws TunkkiError {
         return null;
     }
 
     @Override
-    public Datatype<Boolean> subtract(Datatype<Boolean> other) throws TunkkiError {
+    public Datatype subtract(Datatype other) throws TunkkiError {
         return null;
     }
 
     @Override
-    public Datatype<Boolean> multiply(Datatype<Boolean> other) throws TunkkiError {
+    public Datatype multiply(Datatype other) throws TunkkiError {
         return null;
     }
 
     @Override
-    public Datatype<Boolean> divide(Datatype<Boolean> other) throws TunkkiError {
+    public Datatype divide(Datatype other) throws TunkkiError {
         return null;
     }
 
     @Override
-    public BooleanDatatype equals(Datatype<Boolean> other) throws TunkkiError {
+    public BooleanDatatype equals(Datatype other) throws TunkkiError {
         switch (other.getType()) {
             case Boolean:
                 return new BooleanDatatype(getData().equals(other.getData()));
