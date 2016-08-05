@@ -8,6 +8,7 @@ import com.jantuomi.tunkki.exception.types.TunkkiError;
 import com.jantuomi.tunkki.exception.types.UndeclaredSymbolTunkkiError;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -45,8 +46,7 @@ public class SymbolNode extends ASTNode {
 
         Datatype returnValue;
         try {
-            List<Datatype> paramValues = evaluateParameters();
-            returnValue = State.getInstance().evaluateSymbol(name, paramValues);
+            returnValue = State.getInstance().evaluateSymbol(name, Collections.emptyList());
 
         }
         /* If a TunkkiError is caught, pass it on with line information */
