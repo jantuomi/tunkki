@@ -22,7 +22,7 @@ public class OutputBuiltinFunction extends BuiltinFunction {
     @Override
     public Datatype evaluate(List<Datatype> params) throws TunkkiError {
         Datatype param = params.get(0);
-        IO.getInstance().printLine(param.getData().toString());
+        IO.getInstance().printLine(param.toString());
         return new VoidDatatype();
     }
 
