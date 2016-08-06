@@ -1,8 +1,9 @@
-package com.jantuomi.tunkki.core.runtime.builtins.globals;
+package com.jantuomi.tunkki.core.runtime.builtins.globals.io;
 
 import com.jantuomi.tunkki.core.parser.datatype.Datatype;
 import com.jantuomi.tunkki.core.parser.datatype.NadaDatatype;
 import com.jantuomi.tunkki.core.parser.datatype.StringDatatype;
+import com.jantuomi.tunkki.core.runtime.builtins.globals.BuiltinFunction;
 import com.jantuomi.tunkki.exception.types.TunkkiError;
 import com.jantuomi.tunkki.utils.IO;
 

@@ -4,6 +4,8 @@ import com.jantuomi.tunkki.core.parser.datatype.CallableDatatype;
 import com.jantuomi.tunkki.core.runtime.builtins.globals.*;
 import com.jantuomi.tunkki.core.runtime.builtins.globals.cast.AsBooleanBuiltinFunction;
 import com.jantuomi.tunkki.core.runtime.builtins.globals.cast.AsIntBuiltinFunction;
+import com.jantuomi.tunkki.core.runtime.builtins.globals.io.InputBuiltinFunction;
+import com.jantuomi.tunkki.core.runtime.builtins.globals.io.OutputBuiltinFunction;
 import com.jantuomi.tunkki.core.runtime.builtins.math.PowerBuiltinFunction;
 import com.jantuomi.tunkki.exception.types.IncludeTunkkiError;
 import com.jantuomi.tunkki.exception.types.TunkkiError;
@@ -23,7 +25,7 @@ public class BuiltinManager {
     private Map<String, CallableDatatype> builtins = new HashMap<>();
 
     public final Set<String> BUILTIN_MODULES = new HashSet<>(Arrays.asList(
-            "math"
+            "math", "io", "cast"
     ));
 
     private BuiltinManager() {
@@ -31,11 +33,7 @@ public class BuiltinManager {
     }
 
     private void initializeGlobals() {
-        builtins.put("output", new OutputBuiltinFunction().makeCallable());
-        builtins.put("input", new InputBuiltinFunction().makeCallable());
         builtins.put("concat", new ConcatBuiltinFunction().makeCallable());
-        builtins.put("as_int", new AsIntBuiltinFunction().makeCallable());
-        builtins.put("as_bool", new AsBooleanBuiltinFunction().makeCallable());
         builtins.put("include", new IncludeBuiltinFunction().makeCallable());
         builtins.put("list", new ListBuiltinFunction().makeCallable());
         builtins.put("contains", new ContainsBuiltinFunction().makeCallable());
@@ -46,13 +44,33 @@ public class BuiltinManager {
 
     private Map<String, CallableDatatype> getFunctionsFromMathModule() {
         Map<String, CallableDatatype> map = new HashMap<>();
-        map.put("math", new PowerBuiltinFunction().makeCallable());
+        map.put("pow", new PowerBuiltinFunction().makeCallable());
+        return map;
+    }
+
+    private Map<String, CallableDatatype> getFunctionsFromIOModule() {
+        Map<String, CallableDatatype> map = new HashMap<>();
+        map.put("input", new InputBuiltinFunction().makeCallable());
+        map.put("output", new OutputBuiltinFunction().makeCallable());
+        return map;
+    }
+
+    private Map<String, CallableDatatype> getFunctionsFromCastModule() {
+        Map<String, CallableDatatype> map = new HashMap<>();
+        builtins.put("as_int", new AsIntBuiltinFunction().makeCallable());
+        builtins.put("as_bool", new AsBooleanBuiltinFunction().makeCallable());
         return map;
     }
 
     public Map<String, CallableDatatype> getFunctionsFromModule(String name) throws TunkkiError {
-        if (name.equals("math")) {
+        if ("math".equals(name)) {
             return getFunctionsFromMathModule();
+        }
+        else if ("io".equals(name)) {
+            return getFunctionsFromIOModule();
+        }
+        else if ("cast".equals(name)) {
+            return getFunctionsFromCastModule();
         }
         else {
             throw new IncludeTunkkiError(-1, name);
