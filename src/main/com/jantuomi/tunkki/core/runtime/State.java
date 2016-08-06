@@ -40,17 +40,8 @@ public class State {
         scopes.push(globalScope);
     }
 
-    private Datatype resolveSymbol(String symbol) throws TunkkiError {
-        return scopes.peek().resolveSymbol(symbol, Arrays.asList());
-    }
-
-    public Datatype evaluateSymbol(String symbol) throws TunkkiError {
-        Datatype d = resolveSymbol(symbol);
-        return d;
-    }
-
-    public Datatype evaluateSymbol(String symbol, List<Datatype> parameters) throws TunkkiError {
-        return scopes.peek().resolveSymbol(symbol, parameters);
+    public Datatype resolveSymbol(String symbol) throws TunkkiError {
+        return scopes.peek().resolveSymbol(symbol);
     }
 
     public Scope createScope() {

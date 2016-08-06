@@ -1,5 +1,6 @@
 package com.jantuomi.tunkki.core.parser.ast;
 
+import com.jantuomi.tunkki.core.parser.datatype.CallableDatatype;
 import com.jantuomi.tunkki.core.parser.datatype.Datatype;
 import com.jantuomi.tunkki.core.parser.datatype.ObjectDatatype;
 import com.jantuomi.tunkki.core.parser.tokenizer.token.Token;
@@ -7,8 +8,6 @@ import com.jantuomi.tunkki.core.runtime.State;
 import com.jantuomi.tunkki.exception.types.NotAnObjectTunkkiError;
 import com.jantuomi.tunkki.exception.types.TunkkiError;
 import com.jantuomi.tunkki.exception.types.UndeclaredSymbolTunkkiError;
-
-import java.util.Collections;
 
 /**
  * Created by jan on 3.8.2016.
@@ -22,7 +21,7 @@ public class ObjectMemberNode extends UnaryOperatorNode {
     public Datatype evaluate() throws TunkkiError {
         Datatype d;
         try {
-            d = State.getInstance().evaluateSymbol(getText());
+            d = State.getInstance().resolveSymbol(getText());
         } catch (TunkkiError ex) {
             ex.setLine(getLine());
             throw ex;
@@ -36,14 +35,14 @@ public class ObjectMemberNode extends UnaryOperatorNode {
         ASTNode member = getOperand();
         if (member instanceof CallNode) {
             CallNode cn = (CallNode) member;
-            Datatype res = od.getData().resolveSymbol(cn.getName(), cn.evaluateParameters());
-            if (res != null) {
-                return res;
+            Datatype callable = od.getData().resolveSymbol(cn.getName());
+            if (callable != null) {
+                return ((CallableDatatype) callable).call(cn.evaluateParameters());
             }
         }
         else if (member instanceof SymbolNode) {
             SymbolNode sn = (SymbolNode) member;
-            Datatype res = od.getData().resolveSymbol(sn.getName(), Collections.emptyList());
+            Datatype res = od.getData().resolveSymbol(sn.getName());
             if (res != null) {
                 return res;
             }

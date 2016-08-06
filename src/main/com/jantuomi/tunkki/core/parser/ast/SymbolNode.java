@@ -3,12 +3,10 @@ package com.jantuomi.tunkki.core.parser.ast;
 import com.jantuomi.tunkki.core.parser.datatype.Datatype;
 import com.jantuomi.tunkki.core.runtime.State;
 import com.jantuomi.tunkki.core.parser.tokenizer.token.Token;
-import com.jantuomi.tunkki.exception.ExceptionManager;
 import com.jantuomi.tunkki.exception.types.TunkkiError;
 import com.jantuomi.tunkki.exception.types.UndeclaredSymbolTunkkiError;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -46,7 +44,7 @@ public class SymbolNode extends ASTNode {
 
         Datatype returnValue;
         try {
-            returnValue = State.getInstance().evaluateSymbol(name, Collections.emptyList());
+            returnValue = State.getInstance().resolveSymbol(name);
 
         }
         /* If a TunkkiError is caught, pass it on with line information */

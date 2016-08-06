@@ -35,12 +35,12 @@ public class Scope {
         setVariableValue(symbol, value);
     }
 
-    public Datatype resolveSymbol(String symbol, List<Datatype> params) throws TunkkiError {
+    public Datatype resolveSymbol(String symbol) throws TunkkiError {
         if (variables.containsKey(symbol)) {
             return variables.get(symbol);
         }
         else if (parent != null) {
-            return parent.resolveSymbol(symbol, params);
+            return parent.resolveSymbol(symbol);
         }
         else {
             throw new UndeclaredSymbolTunkkiError(-1, symbol);
