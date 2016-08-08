@@ -3,8 +3,8 @@ package com.jantuomi.tunkki.core.parser;
 import com.jantuomi.tunkki.core.parser.ast.ASTNode;
 import com.jantuomi.tunkki.core.parser.tokenizer.token.ArgumentInfo;
 import com.jantuomi.tunkki.core.parser.tokenizer.token.Token;
-import com.jantuomi.tunkki.exception.ExceptionManager;
 import com.jantuomi.tunkki.exception.types.ExpectedDifferentTokenTunkkiError;
+import com.jantuomi.tunkki.exception.types.MissingTerminatorTokenTunkkiError;
 import com.jantuomi.tunkki.exception.types.TunkkiError;
 
 import java.util.ArrayList;
@@ -51,15 +51,17 @@ public class Parser {
             This branch is executed if the token has a variable list of arguments
              */
             if (argumentInfo.getVarargs()) {
+                boolean foundTerminatorToken = false;
                 while (stack.size() > 0) {
                     Token arg = stack.pop();
-                    if (arg.getTokenType() != argumentInfo.getTerminator()) {
-                        args.add(arg);
-                    }
-                    else {
-                        args.add(arg);
+                    args.add(arg);
+                    if (arg.getTokenType() == argumentInfo.getTerminator()) {
+                        foundTerminatorToken = true;
                         break;
                     }
+                }
+                if (!foundTerminatorToken) {
+                    throw new MissingTerminatorTokenTunkkiError(t.getLine(), t.getText());
                 }
             }
             /*
