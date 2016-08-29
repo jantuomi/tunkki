@@ -19,7 +19,8 @@ abstract public class Datatype<T> {
         Nada,
         Void,
         Callable,
-        Object
+        Object,
+        ObjectPrototype
     }
 
     abstract public Type getType();

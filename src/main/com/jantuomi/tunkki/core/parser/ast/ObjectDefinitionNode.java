@@ -2,7 +2,7 @@ package com.jantuomi.tunkki.core.parser.ast;
 
 import com.jantuomi.tunkki.core.parser.datatype.CallableDatatype;
 import com.jantuomi.tunkki.core.parser.datatype.Datatype;
-import com.jantuomi.tunkki.core.parser.datatype.ObjectDatatype;
+import com.jantuomi.tunkki.core.parser.datatype.ObjectPrototypeDatatype;
 import com.jantuomi.tunkki.core.parser.tokenizer.token.Token;
 import com.jantuomi.tunkki.core.runtime.Function;
 import com.jantuomi.tunkki.core.runtime.State;
@@ -29,14 +29,15 @@ public class ObjectDefinitionNode extends NullaryOperatorNode {
 
     @Override
     public Datatype evaluate() throws TunkkiError {
-        ObjectDatatype obj = new ObjectDatatype();
+        ObjectPrototypeDatatype prototype = new ObjectPrototypeDatatype();
 
         State state = new State();
         constructor.call(Collections.emptyList());
         Function func = constructor.getData();
         func.setState(state);
 
-        obj.setData(func.getState().getGlobalScope());
-        return obj;
+        prototype.setData(func);
+        State.getGlobalState().addSymbolToScope(name);
+        return prototype;
     }
 }
