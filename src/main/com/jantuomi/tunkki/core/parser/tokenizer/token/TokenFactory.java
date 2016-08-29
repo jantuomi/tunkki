@@ -56,8 +56,8 @@ public class TokenFactory {
                 return new SymbolToken(text);
             case CallToken:
                 return new CallToken(text, rawText);
-            case ObjectDefinitionToken:
-                return new ObjectDefinitionToken();
+            case ObjectPrototypeToken:
+                return new ObjectPrototypeToken();
             case BlockEndToken:
                 return new BlockEndToken();
             case ObjectMemberToken:

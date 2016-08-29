@@ -13,8 +13,8 @@ import java.util.Collections;
 /**
  * Created by jan on 8.8.2016.
  */
-public class ObjectDefinitionNode extends NullaryOperatorNode {
-    public ObjectDefinitionNode(Token token, String name, CallableDatatype constructor) {
+public class ObjectPrototypeNode extends NullaryOperatorNode {
+    public ObjectPrototypeNode(Token token, String name, CallableDatatype constructor) {
         super(token);
         this.name = name;
         this.constructor = constructor;

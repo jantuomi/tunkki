@@ -2,7 +2,7 @@ package com.jantuomi.tunkki.core.parser.tokenizer.token.types;
 
 import com.jantuomi.tunkki.core.parser.ast.ASTNode;
 import com.jantuomi.tunkki.core.parser.ast.FunctionDefineNode;
-import com.jantuomi.tunkki.core.parser.ast.ObjectDefinitionNode;
+import com.jantuomi.tunkki.core.parser.ast.ObjectPrototypeNode;
 import com.jantuomi.tunkki.core.parser.ast.SymbolNode;
 import com.jantuomi.tunkki.core.parser.datatype.CallableDatatype;
 import com.jantuomi.tunkki.core.parser.tokenizer.token.Token;
@@ -12,9 +12,9 @@ import com.jantuomi.tunkki.exception.types.TunkkiError;
 /**
  * Created by jan on 8.8.2016.
  */
-public class ObjectDefinitionToken extends VarargOperatorToken {
-    public ObjectDefinitionToken() {
-        super(Type.ObjectDefinitionToken, "obj");
+public class ObjectPrototypeToken extends VarargOperatorToken {
+    public ObjectPrototypeToken() {
+        super(Type.ObjectPrototypeToken, "obj");
     }
 
     @Override
@@ -44,7 +44,7 @@ public class ObjectDefinitionToken extends VarargOperatorToken {
 
         FunctionDefineNode constructor = (FunctionDefineNode) funcArg.generateNode();
         CallableDatatype constructorCallable = (CallableDatatype) constructor.evaluate();
-        ObjectDefinitionNode node = new ObjectDefinitionNode(this, name, constructorCallable);
+        ObjectPrototypeNode node = new ObjectPrototypeNode(this, name, constructorCallable);
         node.setName(name);
         return node;
     }

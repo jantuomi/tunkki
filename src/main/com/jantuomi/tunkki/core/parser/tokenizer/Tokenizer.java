@@ -61,7 +61,7 @@ public class Tokenizer {
         tokenRegexes.put(Token.Type.NegationToken, "^(not)\\b");
         tokenRegexes.put(Token.Type.DeclarationToken, "^(decl)\\b");
 
-        tokenRegexes.put(Token.Type.ObjectDefinitionToken, "^(obj)\\b");
+        tokenRegexes.put(Token.Type.ObjectPrototypeToken, "^(obj)\\b");
         tokenRegexes.put(Token.Type.CallToken, "^([a-öA-Ö]+\\w*)\\?[\\s|\\!]");
         tokenRegexes.put(Token.Type.ObjectMemberToken, "^([a-öA-Ö]+)\\:");
         tokenRegexes.put(Token.Type.SymbolToken, "^([a-öA-Ö]+\\w*)\\b");
