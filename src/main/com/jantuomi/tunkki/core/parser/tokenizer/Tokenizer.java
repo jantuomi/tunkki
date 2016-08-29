@@ -57,11 +57,12 @@ public class Tokenizer {
         tokenRegexes.put(Token.Type.OpenParenToken, "^(\\()");
         tokenRegexes.put(Token.Type.BlockEndToken, "^(\\!)");
         tokenRegexes.put(Token.Type.FunctionDefineToken, "^(\\@)");
-        tokenRegexes.put(Token.Type.FunctionBodyToken, "^(\\|)");
+        tokenRegexes.put(Token.Type.FunctionBodyToken, "^(\\|)\\s*");
         tokenRegexes.put(Token.Type.NegationToken, "^(not)\\b");
         tokenRegexes.put(Token.Type.DeclarationToken, "^(decl)\\b");
 
         tokenRegexes.put(Token.Type.ObjectPrototypeToken, "^(obj)\\b");
+        tokenRegexes.put(Token.Type.ObjectInstantiationToken, "^(new)\\b");
         tokenRegexes.put(Token.Type.CallToken, "^([a-öA-Ö]+\\w*)\\?[\\s|\\!]");
         tokenRegexes.put(Token.Type.ObjectMemberToken, "^([a-öA-Ö]+)\\:");
         tokenRegexes.put(Token.Type.SymbolToken, "^([a-öA-Ö]+\\w*)\\b");

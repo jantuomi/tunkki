@@ -27,7 +27,8 @@ abstract public class TunkkiError extends Exception {
         FileNotFoundError,
         NotAnObjectError,
         MissingTerminatorTokenError,
-        NadaError
+        NadaError,
+        NotAPrototypeError
     }
 
     private int line;

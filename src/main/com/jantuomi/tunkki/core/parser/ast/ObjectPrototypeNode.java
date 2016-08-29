@@ -38,6 +38,7 @@ public class ObjectPrototypeNode extends NullaryOperatorNode {
 
         prototype.setData(func);
         State.getGlobalState().addSymbolToScope(name);
+        State.getGlobalState().setSymbolValueToScope(name, prototype);
         return prototype;
     }
 }

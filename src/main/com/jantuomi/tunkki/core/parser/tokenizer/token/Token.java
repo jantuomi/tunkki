@@ -71,6 +71,7 @@ abstract public class Token {
         DeclareAssignToken,
         ObjectMemberToken,
         ObjectPrototypeToken,
+        ObjectInstantiationToken,
         NotAToken
     }
 

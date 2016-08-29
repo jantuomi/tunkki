@@ -62,6 +62,8 @@ public class TokenFactory {
                 return new BlockEndToken();
             case ObjectMemberToken:
                 return new ObjectMemberToken(text, rawText);
+            case ObjectInstantiationToken:
+                return new ObjectInstantiationToken();
             case NegationToken:
                 return new NegationToken();
             default:
