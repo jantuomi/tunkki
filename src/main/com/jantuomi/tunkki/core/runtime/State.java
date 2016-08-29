@@ -66,10 +66,13 @@ public class State {
         return scopes.get(0);
     }
 
-    public void addSymbolToScope(String symbol) {
-        scopes.peek().addVariable(symbol);
+    public Scope getTopmostScope() {
+        return scopes.peek();
     }
 
+    public void addSymbolToScope(String symbol) {
+        getTopmostScope().addVariable(symbol);
+    }
 
     public void setSymbolValueToScope(String symbol, Datatype value) {
         scopes.peek().setVariableValue(symbol, value);

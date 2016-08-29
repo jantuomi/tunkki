@@ -57,8 +57,8 @@ public class BuiltinManager {
 
     private Map<String, CallableDatatype> getFunctionsFromCastModule() {
         Map<String, CallableDatatype> map = new HashMap<>();
-        builtins.put("as_int", new AsIntBuiltinFunction().makeCallable());
-        builtins.put("as_bool", new AsBooleanBuiltinFunction().makeCallable());
+        map.put("as_int", new AsIntBuiltinFunction().makeCallable());
+        map.put("as_bool", new AsBooleanBuiltinFunction().makeCallable());
         return map;
     }
 
