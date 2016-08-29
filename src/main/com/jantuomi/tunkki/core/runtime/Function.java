@@ -41,6 +41,8 @@ abstract public class Function {
             throw new FunctionArgumentTunkkiError(-1, Datatype.toString(params));
         }
 
+        getState().popScope();
+
         return null;
     }
 
