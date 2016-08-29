@@ -63,7 +63,7 @@ public class Tokenizer {
 
         tokenRegexes.put(Token.Type.ObjectPrototypeToken, "^(obj)\\b");
         tokenRegexes.put(Token.Type.ObjectInstantiationToken, "^(new)\\b");
-        tokenRegexes.put(Token.Type.CallToken, "^([a-öA-Ö]+\\w*)\\?[\\s|\\!]");
+        tokenRegexes.put(Token.Type.CallToken, "^([\\_|[a-öA-Ö]]?\\w*)\\?");
         tokenRegexes.put(Token.Type.ObjectMemberToken, "^([a-öA-Ö]+)\\:");
         tokenRegexes.put(Token.Type.SymbolToken, "^([a-öA-Ö]+\\w*)\\b");
 
