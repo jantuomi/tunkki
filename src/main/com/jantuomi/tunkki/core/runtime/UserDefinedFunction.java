@@ -1,9 +1,7 @@
 package com.jantuomi.tunkki.core.runtime;
 
 import com.jantuomi.tunkki.core.parser.ast.BlockBodyNode;
-import com.jantuomi.tunkki.core.parser.datatype.CallableDatatype;
 import com.jantuomi.tunkki.core.parser.datatype.Datatype;
-import com.jantuomi.tunkki.exception.types.FunctionArgumentTunkkiError;
 import com.jantuomi.tunkki.exception.types.TunkkiError;
 
 import java.util.*;
@@ -12,7 +10,6 @@ import java.util.*;
  * Created by jan on 20.6.2016.
  */
 public class UserDefinedFunction extends Function {
-
 
     public UserDefinedFunction(List<String> argumentNames, BlockBodyNode body) {
         super(argumentNames, body);
@@ -24,12 +21,12 @@ public class UserDefinedFunction extends Function {
         super.evaluate(params);
 
         for (int i = 0; i < argumentNames.size(); i++) {
-            State.getInstance().addSymbolToScope(argumentNames.get(i));
-            State.getInstance().setSymbolValueToScope(argumentNames.get(i), params.get(i));
+            State.getGlobalState().addSymbolToScope(argumentNames.get(i));
+            State.getGlobalState().setSymbolValueToScope(argumentNames.get(i), params.get(i));
         }
 
         Datatype returnValue = body.evaluate();
-        State.getInstance().popScope();
+        State.getGlobalState().popScope();
 
         return returnValue;
     }

@@ -15,13 +15,27 @@ abstract public class Function {
     protected List<String> argumentNames;
     protected BlockBodyNode body;
 
+    private State state = null;
+
+    public void setState(State state) {
+        this.state = state;
+    }
+
+    public State getState() {
+        if (this.state != null) {
+            return this.state;
+        } else {
+            return State.getGlobalState();
+        }
+    }
+
     public Function(List<String> argumentNames, BlockBodyNode body) {
         this.argumentNames = argumentNames;
         this.body = body;
     }
 
     public Datatype evaluate(List<Datatype> params) throws TunkkiError {
-        State.getInstance().createScope();
+        Scope scope = getState().createScope();
 
         if (!checkArgumentListValidity(params)) {
             throw new FunctionArgumentTunkkiError(-1, Datatype.toString(params));

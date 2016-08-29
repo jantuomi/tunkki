@@ -17,30 +17,22 @@ import java.util.Stack;
 public class Parser {
     private static final Parser instance = new Parser();
 
-    private List<Token> tokens;
-    private List<ASTNode> statementSequence;
-
     public static Parser getInstance() {
         return instance;
     }
 
-    private Parser() {
-
-    }
+    private Parser() {}
 
     private Stack<Token> stack;
 
     public List<Token> parse(List<Token> tokens) throws TunkkiError {
-        this.tokens = tokens;
         this.stack = new Stack<>();
 
         List<Token> args;
         List<Token> output = new ArrayList<>();
         for (Token t : tokens) {
+            /* Skip newline tokens */
             if (t.getTokenType() == Token.Type.NewlineToken) {
-//                if (stack.size() > 0) {
-//                    output.add(stack.pop());
-//                }
                 continue;
             }
 
@@ -88,6 +80,7 @@ public class Parser {
             stack.push(result);
         }
 
+        /* When the token list is empty, pop all remaining tokens from the stack */
         while (stack.size() > 0) {
             output.add(stack.pop());
         }

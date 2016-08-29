@@ -20,7 +20,7 @@ public class AssignmentNode extends BinaryOperatorNode {
     public Datatype evaluate() throws TunkkiError {
         SymbolNode symbol = (SymbolNode) lhs;
         Datatype rValue = rhs.evaluate();
-        State.getInstance().setSymbolValueToScope(
+        State.getGlobalState().setSymbolValueToScope(
                 symbol.getName(),
                 rValue
         );

@@ -27,10 +27,10 @@ public class DeclareAssignNode extends BinaryOperatorNode {
             throw new ExpectedDifferentTokenTunkkiError(getLine(), getText());
         }
 
-        State.getInstance().addSymbolToScope(var.getName());
+        State.getGlobalState().addSymbolToScope(var.getName());
 
         Datatype rValue = rhs.evaluate();
-        State.getInstance().setSymbolValueToScope(
+        State.getGlobalState().setSymbolValueToScope(
                 var.getName(),
                 rValue
         );

@@ -21,7 +21,7 @@ public class ObjectMemberNode extends UnaryOperatorNode {
     public Datatype evaluate() throws TunkkiError {
         Datatype d;
         try {
-            d = State.getInstance().resolveSymbol(getText());
+            d = State.getGlobalState().resolveSymbol(getText());
         } catch (TunkkiError ex) {
             ex.setLine(getLine());
             throw ex;

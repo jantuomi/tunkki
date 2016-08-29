@@ -6,8 +6,6 @@ import com.jantuomi.tunkki.core.parser.datatype.NadaDatatype;
 import com.jantuomi.tunkki.core.runtime.builtins.BuiltinManager;
 import com.jantuomi.tunkki.exception.types.TunkkiError;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 import java.util.Stack;
 
@@ -15,15 +13,24 @@ import java.util.Stack;
  * Created by jan on 11.6.2016.
  */
 public class State {
-    private static final State instance = new State();
+    private static final State globalState = new State();
 
-    public static State getInstance() {
-        return instance;
+    public static State getGlobalState() {
+        return globalState;
     }
 
     private Stack<Scope> scopes = new Stack<>();
 
-    private State() {
+    static {
+        globalState.replaceBaseScopeWithGlobal();
+    }
+
+    public State() {
+        Scope baseScope = new Scope();
+        scopes.push(baseScope);
+    }
+
+    public void replaceBaseScopeWithGlobal() {
         /* Push global scope onto the stack */
         Scope globalScope = new Scope();
 
@@ -37,7 +44,7 @@ public class State {
         globalScope.addVariable("nada");
         globalScope.setVariableValue("nada", new NadaDatatype());
 
-        scopes.push(globalScope);
+        scopes.set(0, globalScope);
     }
 
     public Datatype resolveSymbol(String symbol) throws TunkkiError {
@@ -53,6 +60,10 @@ public class State {
         }
         scopes.push(scope);
         return scope;
+    }
+
+    public Scope getGlobalScope() {
+        return scopes.get(0);
     }
 
     public void addSymbolToScope(String symbol) {

@@ -6,7 +6,6 @@ import com.jantuomi.tunkki.core.CommandLineArgumentContainer;
 import com.jantuomi.tunkki.core.parser.datatype.*;
 import com.jantuomi.tunkki.core.runtime.State;
 import com.jantuomi.tunkki.core.runtime.builtins.BuiltinManager;
-import com.jantuomi.tunkki.exception.ExceptionManager;
 import com.jantuomi.tunkki.exception.types.*;
 
 import java.util.Arrays;
@@ -39,8 +38,8 @@ public class IncludeBuiltinFunction extends BuiltinFunction {
             for (String funcName : funcs.keySet()) {
                 namespace.getData().addAndSetVariable(funcName, funcs.get(funcName));
             }
-            State.getInstance().addSymbolToScope(filename);
-            State.getInstance().setSymbolValueToScope(filename, namespace);
+            State.getGlobalState().addSymbolToScope(filename);
+            State.getGlobalState().setSymbolValueToScope(filename, namespace);
 
         }
         else {

@@ -44,7 +44,7 @@ public class SymbolNode extends ASTNode {
 
         Datatype returnValue;
         try {
-            returnValue = State.getInstance().resolveSymbol(name);
+            returnValue = State.getGlobalState().resolveSymbol(name);
 
         }
         /* If a TunkkiError is caught, pass it on with line information */

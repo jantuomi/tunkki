@@ -21,7 +21,7 @@ public class VariableDeclareNode extends ASTNode {
 
     @Override
     public Datatype evaluate() {
-        State.getInstance().addSymbolToScope(variable.getName());
+        State.getGlobalState().addSymbolToScope(variable.getName());
         return new StringDatatype(variable.getName());
     }
 
