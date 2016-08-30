@@ -4,7 +4,6 @@ import com.jantuomi.tunkki.core.parser.datatype.BooleanDatatype;
 import com.jantuomi.tunkki.core.parser.datatype.CallableDatatype;
 import com.jantuomi.tunkki.core.parser.datatype.Datatype;
 import com.jantuomi.tunkki.core.parser.datatype.VoidDatatype;
-import com.jantuomi.tunkki.core.runtime.Function;
 import com.jantuomi.tunkki.exception.types.FunctionArgumentTunkkiError;
 import com.jantuomi.tunkki.exception.types.TunkkiError;
 
@@ -22,9 +21,7 @@ public class IfBuiltinFunction extends BuiltinFunction {
     }
 
     @Override
-    public Datatype evaluate(List<Datatype> params) throws TunkkiError {
-        super.evaluate(params);
-
+    public Datatype executeBlock(List<Datatype> params) throws TunkkiError {
         if (params.size() != 2) {
             throw new FunctionArgumentTunkkiError(-1, Datatype.toString(params));
         }

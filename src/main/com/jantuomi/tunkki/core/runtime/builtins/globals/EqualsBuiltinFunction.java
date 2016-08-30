@@ -2,7 +2,6 @@ package com.jantuomi.tunkki.core.runtime.builtins.globals;
 
 import com.jantuomi.tunkki.core.parser.datatype.BooleanDatatype;
 import com.jantuomi.tunkki.core.parser.datatype.Datatype;
-import com.jantuomi.tunkki.exception.types.FunctionArgumentTunkkiError;
 import com.jantuomi.tunkki.exception.types.TunkkiError;
 import com.jantuomi.tunkki.exception.types.TypeTunkkiError;
 
@@ -20,9 +19,7 @@ public class EqualsBuiltinFunction extends BuiltinFunction {
     }
 
     @Override
-    public Datatype evaluate(List<Datatype> params) throws TunkkiError {
-        super.evaluate(params);
-
+    public Datatype executeBlock(List<Datatype> params) throws TunkkiError {
         Datatype lhs = params.get(0);
         Datatype rhs = params.get(1);
 

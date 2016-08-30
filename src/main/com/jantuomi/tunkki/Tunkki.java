@@ -34,7 +34,7 @@ public class Tunkki {
         repl.run();
     }
 
-    public void run(String input) throws TunkkiError {
+    public List<ASTNode> parseAndInterpret(String input) throws TunkkiError {
         Tokenizer tokenizer = Tokenizer.getInstance();
         List<Token> sequence = tokenizer.tokenize(input);
 
@@ -50,6 +50,10 @@ public class Tunkki {
             ASTGenerator.getInstance().printAllTrees(nodes);
         }
 
+        return nodes;
+    }
+
+    public void executeAndOutput(List<ASTNode> nodes) throws TunkkiError {
         String output = Interpreter.execute(nodes);
 
         if (output.trim().length() > 0) {

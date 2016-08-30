@@ -3,8 +3,10 @@ package com.jantuomi.tunkki.core.runtime.builtins.globals;
 
 import com.jantuomi.tunkki.Tunkki;
 import com.jantuomi.tunkki.core.CommandLineArgumentContainer;
+import com.jantuomi.tunkki.core.parser.ast.ASTNode;
+import com.jantuomi.tunkki.core.parser.ast.ObjectPrototypeNode;
 import com.jantuomi.tunkki.core.parser.datatype.*;
-import com.jantuomi.tunkki.core.runtime.State;
+import com.jantuomi.tunkki.core.runtime.ModuleContainerFunction;
 import com.jantuomi.tunkki.core.runtime.builtins.BuiltinManager;
 import com.jantuomi.tunkki.exception.types.*;
 
@@ -25,9 +27,7 @@ public class IncludeBuiltinFunction extends BuiltinFunction {
     }
 
     @Override
-    public Datatype evaluate(List<Datatype> params) throws TunkkiError {
-        super.evaluate(params);
-
+    public Datatype executeBlock(List<Datatype> params) throws TunkkiError {
         StringDatatype param = (StringDatatype) params.get(0);
         String filename = param.getData();
 
@@ -38,9 +38,7 @@ public class IncludeBuiltinFunction extends BuiltinFunction {
             for (String funcName : funcs.keySet()) {
                 namespace.getData().addAndSetVariable(funcName, funcs.get(funcName));
             }
-            State.getGlobalState().addSymbolToScope(filename);
-            State.getGlobalState().setSymbolValueToScope(filename, namespace);
-
+            return namespace;
         }
         else {
             String contents = CommandLineArgumentContainer.getInstance().readFileContents(filename);
@@ -56,10 +54,13 @@ public class IncludeBuiltinFunction extends BuiltinFunction {
                 throw new RecursiveIncludeTunkkiError(-1, filename);
             }
 
-            Tunkki.getInstance().run(contents);
+            List<ASTNode> nodes = Tunkki.getInstance().parseAndInterpret(contents);
+            ModuleContainerFunction func = new ModuleContainerFunction(nodes);
+            ObjectPrototypeDatatype proto = new ObjectPrototypeDatatype();
+            proto.setData(func);
+            ObjectDatatype namespace = proto.instantiate();
+            return namespace;
         }
-
-        return new VoidDatatype();
     }
 
     @Override

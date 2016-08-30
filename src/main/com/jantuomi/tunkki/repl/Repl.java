@@ -1,12 +1,12 @@
 package com.jantuomi.tunkki.repl;
 
 import com.jantuomi.tunkki.Tunkki;
+import com.jantuomi.tunkki.core.parser.ast.ASTNode;
 import com.jantuomi.tunkki.exception.types.TunkkiError;
 import com.jantuomi.tunkki.utils.IO;
-import jline.console.*;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.List;
 
 /**
  * Created by jan on 31.7.2016.
@@ -39,7 +39,8 @@ public class Repl {
                 try {
                     isMultilineInput = false;
                     command += line;
-                    tunkki.run(command);
+                    List<ASTNode> nodes = tunkki.parseAndInterpret(command);
+                    tunkki.executeAndOutput(nodes);
                 } catch (TunkkiError ex) {
                     ex.printStackTrace();
                     Thread.sleep(50);

@@ -4,7 +4,6 @@ import com.jantuomi.tunkki.core.parser.datatype.Datatype;
 import com.jantuomi.tunkki.core.parser.datatype.StringDatatype;
 import com.jantuomi.tunkki.exception.types.TunkkiError;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
@@ -20,9 +19,7 @@ public class ConcatBuiltinFunction extends BuiltinFunction {
     }
 
     @Override
-    public Datatype evaluate(List<Datatype> params) throws TunkkiError {
-        super.evaluate(params);
-
+    public Datatype executeBlock(List<Datatype> params) throws TunkkiError {
         StringBuilder sb = new StringBuilder();
         for (Datatype d : params) {
             sb.append(d.getData());

@@ -1,29 +1,34 @@
 package com.jantuomi.tunkki.core.runtime;
 
+import com.jantuomi.tunkki.core.parser.ast.ASTNode;
 import com.jantuomi.tunkki.core.parser.ast.BlockBodyNode;
 import com.jantuomi.tunkki.core.parser.datatype.Datatype;
+import com.jantuomi.tunkki.core.parser.datatype.VoidDatatype;
 import com.jantuomi.tunkki.exception.types.TunkkiError;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
 
 /**
- * Created by jan on 20.6.2016.
+ * Created by jan on 30.8.2016.
  */
-public class UserDefinedFunction extends Function {
+public class ModuleContainerFunction extends Function {
 
-    public UserDefinedFunction(List<String> argumentNames, BlockBodyNode body) {
-        super(argumentNames, body);
+    List<ASTNode> nodes;
+
+    public ModuleContainerFunction(List<ASTNode> nodes) {
+        super(Collections.emptyList(), null);
+        this.nodes = nodes;
     }
 
     @Override
     public Datatype executeBlock(List<Datatype> params) throws TunkkiError {
+        Datatype returnValue = new VoidDatatype();
 
-        for (int i = 0; i < argumentNames.size(); i++) {
-            State.getGlobalState().addSymbolToScope(argumentNames.get(i));
-            State.getGlobalState().setSymbolValueToScope(argumentNames.get(i), params.get(i));
+        for (ASTNode node : nodes) {
+            returnValue = node.evaluate();
         }
-
-        Datatype returnValue = body.evaluate();
 
         return returnValue;
     }
@@ -35,11 +40,11 @@ public class UserDefinedFunction extends Function {
 
     @Override
     public boolean hasDynamicallyTypedArguments() {
-        return true;
+        return false;
     }
 
     @Override
     public List<Set<Datatype.Type>> getArgumentTypes() {
-        return Collections.emptyList();
+        return null;
     }
 }

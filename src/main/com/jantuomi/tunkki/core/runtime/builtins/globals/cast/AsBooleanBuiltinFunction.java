@@ -20,9 +20,7 @@ public class AsBooleanBuiltinFunction extends BuiltinFunction {
     }
 
     @Override
-    public BooleanDatatype evaluate(List<Datatype> params) throws TunkkiError {
-        super.evaluate(params);
-
+    public BooleanDatatype executeBlock(List<Datatype> params) throws TunkkiError {
         Datatype param = params.get(0);
         switch (param.getType()) {
             case Integer:

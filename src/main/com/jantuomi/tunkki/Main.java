@@ -1,6 +1,9 @@
 package com.jantuomi.tunkki;
 
 import com.jantuomi.tunkki.core.CommandLineArgumentContainer;
+import com.jantuomi.tunkki.core.parser.ast.ASTNode;
+
+import java.util.List;
 
 public class Main {
 
@@ -18,7 +21,8 @@ public class Main {
             tunkki.repl();
         } else {
             String sourceFileContents = CommandLineArgumentContainer.getInstance().getSourceFileContents();
-            tunkki.run(sourceFileContents);
+            List<ASTNode> nodes = tunkki.parseAndInterpret(sourceFileContents);
+            tunkki.executeAndOutput(nodes);
         }
     }
 

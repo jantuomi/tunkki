@@ -20,7 +20,7 @@ public class GetBuiltinFunction extends BuiltinFunction {
     }
 
     @Override
-    public Datatype evaluate(List<Datatype> params) throws TunkkiError {
+    public Datatype executeBlock(List<Datatype> params) throws TunkkiError {
         if (params.size() != 2) {
             throw new FunctionArgumentTunkkiError(-1, params.toString());
         }

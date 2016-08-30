@@ -41,10 +41,13 @@ abstract public class Function {
             throw new FunctionArgumentTunkkiError(-1, Datatype.toString(params));
         }
 
+        Datatype returnValue = executeBlock(params);
         getState().popScope();
 
-        return null;
+        return returnValue;
     }
+
+    abstract public Datatype executeBlock(List<Datatype> params) throws TunkkiError;
 
     protected boolean checkArgumentListValidity(List<Datatype> params) throws FunctionArgumentTunkkiError {
         int argumentCount = getArgumentCount();

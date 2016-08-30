@@ -21,9 +21,7 @@ public class InputBuiltinFunction extends BuiltinFunction {
     }
 
     @Override
-    public Datatype evaluate(List<Datatype> params) throws TunkkiError {
-        super.evaluate(params);
-
+    public Datatype executeBlock(List<Datatype> params) throws TunkkiError {
         Datatype param = params.get(0);
         System.out.print(param.getData().toString());
 

@@ -20,9 +20,7 @@ public class AsIntBuiltinFunction extends BuiltinFunction {
     }
 
     @Override
-    public IntegerDatatype evaluate(List<Datatype> params) throws TunkkiError {
-        super.evaluate(params);
-
+    public IntegerDatatype executeBlock(List<Datatype> params) throws TunkkiError {
         Datatype param = params.get(0);
         int i;
         switch (param.getType()) {

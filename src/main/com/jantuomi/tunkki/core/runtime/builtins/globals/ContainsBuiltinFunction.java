@@ -20,9 +20,7 @@ public class ContainsBuiltinFunction extends BuiltinFunction {
     }
 
     @Override
-    public Datatype evaluate(List<Datatype> params) throws TunkkiError {
-        super.evaluate(params);
-
+    public Datatype executeBlock(List<Datatype> params) throws TunkkiError {
         if (params.get(0).getType() == Datatype.Type.List) {
             return evaluateOnList(params);
         }

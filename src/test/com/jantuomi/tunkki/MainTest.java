@@ -46,7 +46,7 @@ public class MainTest {
     public void testWholeProcedure() throws TunkkiError {
         String input = "- + 2 5 1";
 
-        Tunkki.getInstance().run(input);
+        Tunkki.getInstance().parseAndInterpret(input);
         assertTrue(out.toString().contains("6"));
     }
 }

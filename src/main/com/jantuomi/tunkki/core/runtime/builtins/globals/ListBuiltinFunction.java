@@ -18,7 +18,7 @@ public class ListBuiltinFunction extends BuiltinFunction {
     }
 
     @Override
-    public Datatype evaluate(List<Datatype> params) throws TunkkiError {
+    public Datatype executeBlock(List<Datatype> params) throws TunkkiError {
         ListDatatype data = new ListDatatype(params);
         return data;
     }

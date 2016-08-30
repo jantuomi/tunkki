@@ -1,7 +1,6 @@
 package com.jantuomi.tunkki.core.parser.datatype;
 
 import com.jantuomi.tunkki.core.runtime.Function;
-import com.jantuomi.tunkki.core.runtime.UserDefinedFunction;
 import com.jantuomi.tunkki.exception.types.TunkkiError;
 
 import java.util.List;
